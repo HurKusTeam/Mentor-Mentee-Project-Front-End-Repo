@@ -1,5 +1,8 @@
 <template>
-  <MentorProfileHeader/>
+  <v-main>
+    <Logreg/>
+  </v-main>
+
 </template>
 
 <script>
