@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-card class="mx-auto" max-width="1000" tile>
-      <v-parallax
+      <v-img
         height="200"
         src="https://cdn.pixabay.com/photo/2017/01/16/19/40/mountains-1985027_960_720.jpg"
-      ></v-parallax>
+      ></v-img>
 
       <v-row no-gutters>
         <v-col cols="12" sm="8" md="8">
@@ -50,5 +50,4 @@
 export default {}
 </script>
 
-<style>
-</style>
+<style></style>
