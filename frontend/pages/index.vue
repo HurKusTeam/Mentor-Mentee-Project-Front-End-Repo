@@ -1,9 +1,9 @@
 <template>
-  <MentorProfileHeader/>
+  <p>Main Page</p>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+    name: "IndexPage",
 }
 </script>
