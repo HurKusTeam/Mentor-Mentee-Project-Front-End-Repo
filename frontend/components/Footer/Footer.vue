@@ -4,11 +4,11 @@
       <v-row no gutters>
         <v-col>
           <v-img
-            src=""
-            class="ml-16 mt-10"
+            src="/Logo.jpg"
+            class="ml-16 mt-6"
             cantain
-            max-height="90"
-            max-width="90"
+            max-height="100"
+            max-width="100"
             size="10 px"
           ></v-img>
 
