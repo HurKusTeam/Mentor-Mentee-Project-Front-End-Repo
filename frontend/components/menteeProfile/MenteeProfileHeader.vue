@@ -8,73 +8,78 @@
 
       <v-row no-gutters>
         <v-col cols="12" sm="8" md="8">
-          <v-card class="pa-2" outlined tile>
-            <v-list-item>
-              <v-list-item-avatar size="100">
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  alt="John"
-                />
-              </v-list-item-avatar>
+          <v-list-item class="pa-5">
+            <v-list-item-avatar class="ml-2" size="100">
+              <img
+                src="https://www.w3schools.com/howto/img_avatar.png"
+                alt="John"
+              />
+            </v-list-item-avatar>
 
-              <v-list-item-content>
-                <v-flex>
-                  <v-list-item-title class="title">
-                    {{ name }} {{ surName }}
-                    <v-btn
-                      class="ml-2 mb-2"
-                      color="#C5D3C5"
-                      elevation="1"
-                      x-small
-                      ><v-icon>mdi-feather</v-icon></v-btn
-                    >
-                  </v-list-item-title>
+            <v-list-item-content>
+              <v-flex>
+                <v-list-item-title class="title">
+                  {{ name }} {{ surName }}
+                  <v-btn class="ml-2 mb-2" color="#C5D3C5" elevation="1" x-small
+                    ><v-icon>mdi-feather</v-icon></v-btn
+                  >
+                </v-list-item-title>
 
-                  <v-list-item-subtitle> {{ department }}</v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    <v-icon class="pa-1" size="20">mdi-school</v-icon>
-                    {{ uni }}</v-list-item-subtitle
-                  >
-                  <v-list-item-subtitle>
-                    <v-icon class="pa-1" size="20">mdi-account-school</v-icon>
-                    {{ gpa }}</v-list-item-subtitle
-                  >
-                </v-flex>
-                <v-flex>
-                  <v-list-item-subtitle>
-                    <v-icon class="pa-1" size="20">mdi-email</v-icon>
-                    {{ mail }}</v-list-item-subtitle
-                  >
-                  <v-list-item-subtitle>
-                    <v-icon class="pa-1" size="20">mdi-phone</v-icon>
-                    {{ phoneNumber }}</v-list-item-subtitle
-                  >
-                  <v-list-item-subtitle>
-                    <v-icon class="pa-1" size="20">mdi-map-marker</v-icon>
-                    {{ city }}</v-list-item-subtitle
-                  >
-                  <v-list-item-subtitle>
-                    <v-icon class="pa-1" size="20">mdi-account-plus</v-icon>
-                    {{ menteeCount }}</v-list-item-subtitle
-                  >
-                </v-flex>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
+                <v-list-item-subtitle> {{ department }}</v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  <v-icon class="pa-1" size="20">mdi-school</v-icon>
+                  {{ uni }}</v-list-item-subtitle
+                >
+                <v-list-item-subtitle>
+                  <v-icon class="pa-1" size="20">mdi-account-school</v-icon>
+                  {{ gpa }}</v-list-item-subtitle
+                >
+              </v-flex>
+              <v-flex>
+                <v-list-item-subtitle>
+                  <v-icon class="pa-1" size="20">mdi-email</v-icon>
+                  {{ mail }}</v-list-item-subtitle
+                >
+                <v-list-item-subtitle>
+                  <v-icon class="pa-1" size="20">mdi-phone</v-icon>
+                  {{ phoneNumber }}</v-list-item-subtitle
+                >
+                <v-list-item-subtitle>
+                  <v-icon class="pa-1" size="20">mdi-map-marker</v-icon>
+                  {{ city }}</v-list-item-subtitle
+                >
+                <v-list-item-subtitle>
+                  <v-icon class="pa-1" size="20">mdi-account-plus</v-icon>
+                  {{ menteeCount }}</v-list-item-subtitle
+                >
+              </v-flex>
+            </v-list-item-content>
+          </v-list-item>
         </v-col>
         <v-col cols="6" sm="4" md="4">
-          <v-card class="pa-3" outlined tile>
-            <v-layout justify-end>
-              <v-icon class="pa-1" size="20"> mdi-linkedin </v-icon>
-              <v-icon class="pa-1" size="20"> mdi-github </v-icon>
-              <v-icon class="pa-1" size="20"> mdi-facebook </v-icon>
-              <v-icon class="pa-1" size="20"> mdi-twitter </v-icon>
-              <v-icon class="pa-1" size="20"> mdi-web </v-icon>
-            </v-layout>
-            <v-layout justify-end align-end class="mt-5">
-              <v-btn v-if="isMentor()" color="">TODO</v-btn>
-            </v-layout>
-          </v-card>
+          <v-layout class="pa-3" justify-end>
+            <v-btn icon
+              ><v-icon class="pa-1" size="20"> mdi-linkedin </v-icon></v-btn
+            >
+            <v-btn icon
+              ><v-icon class="pa-1" size="20"> mdi-github </v-icon></v-btn
+            >
+            <v-btn icon
+              ><v-icon class="pa-1" size="20"> mdi-facebook </v-icon></v-btn
+            >
+            <v-btn icon
+              ><v-icon class="pa-1" size="20"> mdi-twitter </v-icon></v-btn
+            >
+            <v-btn icon
+              ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
+            >
+          </v-layout>
+          <v-layout justify-end class="mt-1">
+            <v-btn v-if="isMentor()" color="">TODO</v-btn>
+          </v-layout>
+          <v-layout justify-end class="mt-2">
+            <v-btn icon class="mb-4"><v-icon>mdi-calendar</v-icon> </v-btn>
+          </v-layout>
         </v-col>
       </v-row>
     </v-card>
