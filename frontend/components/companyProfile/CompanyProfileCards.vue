@@ -19,8 +19,8 @@
                   <v-list-item-subtitle>
                     Software Engineer
                   </v-list-item-subtitle>
-                  <v-list-item-subtitle>
-                    <v-icon class="pt-2" size="20"> mdi-email </v-icon>
+                  <v-list-item-subtitle class="pt-2">
+                    <v-icon size="20"> mdi-email </v-icon>
                     furkan_berber@gmail.com</v-list-item-subtitle
                   >
                   <v-list-item-subtitle>
