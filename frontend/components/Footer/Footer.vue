@@ -5,14 +5,14 @@
         <v-col>
           <v-img
             src="/Logo.jpg"
-            class="ml-16 mt-6"
+            class="ml-24 mt-4 mb-3"
             cantain
             max-height="100"
             max-width="100"
             size="10 px"
           ></v-img>
 
-          <p>Anasayfa|Hakkımızda|Vizyon|SSS|</p>
+          <v-btn text v-for="link in links" :key="link">{{ link }}</v-btn>
         </v-col>
         <v-col>
           <v-list color="blue">
@@ -44,6 +44,7 @@ export default {
   data() {
     return {
       icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
+      links: ['Hakkımızda', 'Vizyon', 'SSS'],
     }
   },
 }
