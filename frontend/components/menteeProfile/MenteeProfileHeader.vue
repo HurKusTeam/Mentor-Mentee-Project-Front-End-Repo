@@ -1,5 +1,5 @@
 <template>
-  <v-container class="ma-1 pa-1">
+  <v-container class="pb-0">
     <v-card class="mx-auto" max-width="1000" tile>
       <v-img
         height="200"
@@ -20,9 +20,6 @@
               <v-flex>
                 <v-list-item-title class="title">
                   {{ name }} {{ surName }}
-                  <v-btn class="ml-2 mb-2" color="#C5D3C5" elevation="1" x-small
-                    ><v-icon>mdi-feather</v-icon></v-btn
-                  >
                 </v-list-item-title>
 
                 <v-list-item-subtitle> {{ department }}</v-list-item-subtitle>
@@ -73,12 +70,6 @@
             <v-btn icon
               ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
             >
-          </v-layout>
-          <v-layout justify-end class="mt-1">
-            <v-btn v-if="isMentor()" color="">TODO</v-btn>
-          </v-layout>
-          <v-layout justify-end class="mt-2">
-            <v-btn icon class="mb-4"><v-icon>mdi-calendar</v-icon> </v-btn>
           </v-layout>
         </v-col>
       </v-row>

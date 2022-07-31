@@ -1,13 +1,9 @@
 <template>
-  <v-container>
-    <MenteeProfilePage />
-  </v-container>
+  <p>Main page</p>
 </template>
 
 <script>
-import MenteeProfilePage from './menteeProfilePage.vue'
 export default {
   name: 'IndexPage',
-  components: { MenteeProfilePage },
 }
 </script>
