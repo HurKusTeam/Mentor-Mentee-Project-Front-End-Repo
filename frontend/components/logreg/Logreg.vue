@@ -10,7 +10,7 @@
              
                 <v-window-item :value="1">
                   <v-row>
-                    <v-col cols="6" md="6" class="light-blue darken-4 text-center">
+                    <v-col cols="6" md="7" class="light-blue darken-4 text-center">
                       <v-card-text class="mt-12">
                         <h1
                           class="text-center bold"
@@ -73,7 +73,7 @@
                     </v-col>
 
 
-                    <v-col cols="12" md="6" class="pa-4 text-center secondary text-no-wrap rounded-l-xl" >
+                    <v-col cols="12" md="5" class="pa-4 text-center secondary text-no-wrap rounded-l-xl" >
                     <div style="  text-align: center; padding: 180px 0;">
                       <v-card-text class="white--text" >
                         <h3 class="text-center ">Don't Have an Account Yet?</h3>
@@ -97,13 +97,13 @@
                   <v-row >
 
 
-                    <v-col cols="12" md="6" class=" blue pa-4 text-center secondary text-no-wrap rounded-r-xl">
+                    <v-col cols="12" md="5" class=" blue pa-4 text-center secondary text-no-wrap rounded-r-xl">
                      <div style="  text-align: center; padding: 180px 0;">
                       <v-card-text class="white--text" >
                         <h3 class="text-center ">Alredy Signed up?</h3>
                         <h6
                           class="text-center"
-                        >Log in to your account so you can continue building and<br>  editing your onboarding flows</h6>
+                        >Log in to your account <br>  join mentor mentee program</h6>
                       </v-card-text>
                       <div class="text-center">
                         <v-btn tile outlined dark @click="prev">Log in</v-btn>
@@ -112,7 +112,7 @@
                     </v-col>
 
 
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" md="7">
                       <v-card-text class="mt-12">
                         <h4
                           class="text-center"
@@ -165,9 +165,9 @@
                               <v-col cols="12" sm="7">
                                 <v-checkbox
                        
-                        label="I Accept AAE"
-                        class="mt-n1"
-                        color="blue"
+                                    label="I Accept AAE"
+                                    class="mt-n1"
+                                    color="blue"
                       > </v-checkbox>
                               </v-col>
                               <v-col cols="12" sm="5">
