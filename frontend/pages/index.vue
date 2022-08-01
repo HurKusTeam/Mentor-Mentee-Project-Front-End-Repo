@@ -63,8 +63,8 @@
 </template>
 
 <script>
-import Landing from '~/components/Landing.vue';
-import Navbar from '~/components/Navbar.vue';
+import Landing from '~/components/LandingPageComp/Landing.vue';
+import Navbar from '~/components/LandingPageComp/Navbar.vue';
 
 
 
