@@ -51,8 +51,15 @@
                 </v-flex>
               </v-col>
               <v-col>
-                <v-btn v-on:click="sendConfirm(user.id)" color="green">
+                <v-btn
+                  class="mb-3"
+                  v-on:click="sendConfirm(user.id)"
+                  color="green"
+                >
                   <v-icon>mdi-check</v-icon></v-btn
+                >
+                <v-btn v-on:click="sendDeny(user.id)" color="red">
+                  <v-icon>mdi-close</v-icon></v-btn
                 >
               </v-col>
             </v-list-item>
@@ -110,6 +117,9 @@ export default {
   computed: {},
   methods: {
     sendConfirm(id) {
+      return console.log(id)
+    },
+    sendDeny(id) {
       return console.log(id)
     },
     fullName(name, surName) {
