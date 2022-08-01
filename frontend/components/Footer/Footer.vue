@@ -5,7 +5,7 @@
         <v-col>
           <v-img
             src="/Logo.png"
-            class="ml-20 mt-4 mb-3"
+            class="ml-20"
             cantain
             max-height="120"
             max-width="120"
@@ -16,11 +16,10 @@
             link
           }}</v-btn>
         </v-col>
-        <v-col>
+        <v-col class="mt-2">
           <v-list class="test">
             <v-list-item>
-              <v-icon class="mr-2">mdi-map-marker</v-icon>Universiteler Mah.
-              ODTÜ TEKNOKENT, TUSAŞ R&D Building B Block, Çankaya/Ankara
+              <v-icon class="mr-2">mdi-map-marker</v-icon>Çankaya/Ankara
             </v-list-item>
             <v-list-item>
               <v-icon class="mr-2">mdi-email</v-icon>example@hotmail.com
@@ -31,9 +30,9 @@
           </v-list>
         </v-col>
         <v-col>
-          <h1 class="mt-5">Hakkımızda</h1>
+          <h1 class="mt-6">Hakkımızda</h1>
           <v-divider></v-divider>
-          <p class="mt-10">
+          <p class="mt-6">
             Ülke ve sektörler için öğrenci yetiştirmeyi planlayan ve bu amaç
             için "Usta-Çırak" uygulamasını kullanan bir firmayız
           </p>
