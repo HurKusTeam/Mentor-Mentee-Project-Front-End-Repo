@@ -1,17 +1,15 @@
 <template>
-  <v-app>
-    <v-main>
-      <v-container>
-        <Nuxt />
-      </v-container>
-    </v-main>
-  </v-app>
+  <div>
+    <main>
+      <Nuxt/>
+    </main>
+  </div>
 </template>
 
 <script>
+
+
 export default {
+  
 }
 </script>
-
-<style>
-</style>
