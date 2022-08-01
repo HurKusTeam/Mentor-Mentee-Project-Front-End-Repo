@@ -1,15 +1,15 @@
 <template>
   <v-container>
     <v-card
-      class="mb-6 mx-auto rounded-xl"
+      class="mb-6 mx-auto rounded-lg"
       max-width="1000"
-      color="cyan"
+      color="blue"
       v-for="user in users"
       :key="user.id"
     >
       <v-row>
         <v-col>
-          <v-card color="cyan" class="pa-2 rounded-xl" outlined tile>
+          <v-card color="blue" class="pa-2 rounded-lg" outlined tile>
             <v-list-item class="pa-5">
               <v-list-item-avatar class="ml-2" size="100">
                 <img
