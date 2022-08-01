@@ -1,15 +1,15 @@
 <template>
   <v-container>
     <v-card
-      class="ma-2 mx-auto"
+      class="mb-6 mx-auto rounded-xl"
       max-width="1000"
-      color=""
+      color="cyan"
       v-for="user in users"
       :key="user.id"
     >
       <v-row>
         <v-col>
-          <v-card color="cyan" class="pa-2" outlined tile>
+          <v-card color="cyan" class="pa-2 rounded-xl" outlined tile>
             <v-list-item class="pa-5">
               <v-list-item-avatar class="ml-2" size="100">
                 <img
@@ -20,7 +20,7 @@
               <v-col>
                 <v-list-item-content>
                   <v-list-item-title class="title">
-                    {{ user.name }} {{ user.surName }}
+                    {{ fullName(user.name, user.surName) }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     <v-icon class="pa-1" size="20">mdi-school</v-icon
@@ -46,7 +46,7 @@
                     v-for="skill in user.skills"
                     :key="skill"
                   >
-                    {{ skill }}</v-list-item-action-subtitle
+                    {{ skill }},</v-list-item-action-subtitle
                   >
                 </v-flex>
               </v-col>
@@ -107,14 +107,13 @@ export default {
       ],
     }
   },
-  computed: {
-    fullName() {
-      return this.users.id
-    },
-  },
+  computed: {},
   methods: {
     sendConfirm(id) {
       return console.log(id)
+    },
+    fullName(name, surName) {
+      return name + ' ' + surName
     },
   },
 }
