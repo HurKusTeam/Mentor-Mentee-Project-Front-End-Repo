@@ -1,6 +1,6 @@
 <template>
-  <v-footer app padless>
-    <v-container class="blue">
+  <v-footer class="clr" app padless>
+    <v-container>
       <v-row no gutters>
         <v-col>
           <v-img
@@ -17,7 +17,7 @@
           }}</v-btn>
         </v-col>
         <v-col>
-          <v-list color="blue">
+          <v-list class="test">
             <v-list-item>
               <v-icon class="mr-2">mdi-map-marker</v-icon>Universiteler Mah.
               ODTÜ TEKNOKENT, TUSAŞ R&D Building B Block, Çankaya/Ankara
@@ -54,4 +54,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.clr {
+  background-color: #3b82f680 !important;
+}
+.test {
+  background-color: rgba(59, 130, 246, 0);
+}
+</style>
