@@ -1,6 +1,7 @@
 <template>
   <v-main>
     <Logreg/>
+    <MentorProfileHeader/>
   </v-main>
 
 </template>

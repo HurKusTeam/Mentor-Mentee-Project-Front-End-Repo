@@ -1,70 +1,78 @@
 <template>
-  <v-container class="red darken-2 text-center">
-      <v-row align="center" class="blue darken-2 text-center">
-          <v-col cols="12" sm="10" class="red darken-2 text-center">
-            <v-card class="elevation-6 mt-10"  >
+  <v-container class="text-center">
+      <v-row align="center" class="text-center">
+          <v-col cols="12" sm="12" class="text-center">
+            <v-card class="elevation-0 mt-10 "  >
              <v-window v-model="onboarding"
-             class="purple darken-2 text-center">
+             class="blue accent-3 text-center">
 
 
              
-                <v-window-item :value="1">
-                  <v-row>
-                    <v-col cols="6" md="7" class="light-blue darken-4 text-center">
+                <v-window-item :value="1" >
+                  <v-row cols="12">
+                    <v-col cols="12" md="7" class="blue accent-3 text-center">
                       <v-card-text class="mt-12">
-                        <h1
-                          class="text-center bold"
-                        >Login in to Your Account</h1>
-                        <h4
-                          class="text-center grey--text "
-                        >Log in to your account so you can continue builiding <br>and editing your onboarding flows</h4>
+                        <div
+                          class="white--text text-center bold text-3xl"
+                        >Hesabınıza giriş yapın.</div>
+                        <div
+                          class="text-center white--text "
+                        ><br>Usta-Çırak hesabınızla giriş yapın.</div>
                         <v-row align="center" justify="center">
                           <v-col cols="12" sm="8">
                            
-                          <v-text-field
+                          <v-text-field v-model="email"
                             label="Email"
                             outlined
                             dense
-                            color="blue"
+                            color="white"
                             autocomplete="false"
-                           class="mt-16"
+                            class="mt-16"
+                            
                           />
-                          <v-text-field
-                            label="Password"
+                          <v-text-field v-model="password"
+                            label="Şifre"
+                            :type="showPassword ? 'text' : 'password'" 
+                            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                            @click:append="showPassword = !showPassword"
+                            
                             outlined
                             dense
-                            color="blue"
-                          autocomplete="false"
-                           type="password"
+                            color="white"
+                            autocomplete="false"
+                          
                           
                           />
+
                             <v-row>
                               <v-col cols="12" sm="7">
                                 <v-checkbox
                        
-                        label="Remember Me"
+                        label="Beni Hatırla"
                         class="mt-n1"
-                        color="blue"
+                        color="white"
                       > </v-checkbox>
                               </v-col>
                               <v-col cols="12" sm="5">
-                                <span class="caption blue--text">Forgot password</span>
+                                <span class="white--text">Şifremi Unuttum</span>
                               </v-col>
                             </v-row>
-                          <v-btn color="blue" dark block tile>Log in</v-btn>
-                     
-                         <h5
-                          class="text-center  grey--text mt-4 mb-3"
-                        >Or Log in using</h5>
+
+                            <v-btn color="blue" dark block :disabled="!allEntValid" @click="createUser" >Giriş</v-btn>
+
+                            
+                         <div
+                          class="text-center  white--text mt-4 mb-3"
+                        >veya şununla giriş yapın</div>
                          <div class="d-flex  justify-space-between align-center mx-10 mb-16">
-                        <v-btn depressed outlined color="grey">
-                          <v-icon color="red">fab fa-google</v-icon>
+                        <v-btn depressed outlined color="grey" >
+                          <v-icon color="red ">mdi-google</v-icon>
                         </v-btn>
                         <v-btn depressed outlined color="grey">
-                          <v-icon color="blue">fab fa-facebook-f</v-icon>
+                          <v-icon color="blue">mdi-facebook</v-icon>
                         </v-btn>
                         <v-btn depressed outlined color="grey" class="">
-                          <v-icon color="light-blue lighten-3">mdi-google</v-icon>
+                          <v-icon color="light-blue lighten-3">mdi-twitter</v-icon>
                         </v-btn>
                          </div>
                           </v-col>
@@ -73,16 +81,16 @@
                     </v-col>
 
 
-                    <v-col cols="12" md="5" class="pa-4 text-center secondary text-no-wrap rounded-l-xl" >
+                    <v-col cols="12" md="5" class="caption blue pa-4 text-center secondary text-no-wrap rounded-l-xl" >
                     <div style="  text-align: center; padding: 180px 0;">
                       <v-card-text class="white--text" >
-                        <h3 class="text-center ">Don't Have an Account Yet?</h3>
-                        <h6
+                        <div class="text-center text-lg-h6 ">Hesabınız yok mu?</div>
+                        <div
                           class="text-center"
-                        >Let's get you all set up so you can start creating your your first<br>  onboarding experience</h6>
+                        >Hemen yeni bir hesap oluşturun.<br> Usta-Çırak olarak kayıt olun.</div>
                       </v-card-text>
                       <div class="text-center">
-                        <v-btn tile outlined dark @click="next">SIGN UP</v-btn>
+                        <v-btn tile outlined dark @click="next">Kayıt Ol</v-btn>
                       </div>
                       </div>
                     </v-col>
@@ -94,101 +102,120 @@
 
 
                 <v-window-item :value="2">
-                  <v-row >
+                  <v-row>
 
 
                     <v-col cols="12" md="5" class=" blue pa-4 text-center secondary text-no-wrap rounded-r-xl">
                      <div style="  text-align: center; padding: 180px 0;">
                       <v-card-text class="white--text" >
-                        <h3 class="text-center ">Alredy Signed up?</h3>
-                        <h6
+                        <div class="text-center text-lg-h6 ">Hesabın varmı?</div>
+                        <div
                           class="text-center"
-                        >Log in to your account <br>  join mentor mentee program</h6>
+                        >Hesabınla giriş yap <br>  Usta-Çırak programına katıl</div>
                       </v-card-text>
                       <div class="text-center">
-                        <v-btn tile outlined dark @click="prev">Log in</v-btn>
+                        <v-btn tile outlined dark @click="prev">Giriş Yap</v-btn>
                       </div>
                       </div>
                     </v-col>
 
 
-                    <v-col cols="12" md="7">
+                    <v-col cols="12" md="7" class="blue accent-3">
                       <v-card-text class="mt-12">
-                        <h4
-                          class="text-center"
-                        >Sign Up for an Account</h4>
-                        <h6
-                          class="text-center  grey--text "
-                        >Let's get you all set up so you can start creatin your <br>
-                        first onboarding experiance</h6>
+                        <div
+                          class="white--text text-center bold text-3xl"
+                        >Usta yada Çırak olarak kayıt ol</div>
+                        <div
+                          class="text-center  white--text "
+                        >Usta-Çırak-Şirket olarak Kayıt ol<br>
+                        </div>
                         <v-row align="center" justify="center">
                           <v-col cols="12" sm="8">
-                           <v-row>
+                           <v-row v-show="showName">
                            <v-col cols="12" sm="6">
                             <v-text-field
-                            label="First Name"
+                            label="İsim"
                             outlined
                             dense
-                            color="blue"
+                            color="white"
                             autocomplete="false"
                            class="mt-4"
                           />
                            </v-col>
                            <v-col cols="12" sm="6">
                             <v-text-field
-                            label="Last Name"
+                            label="Soyisim"
                             outlined
                             dense
-                            color="blue"
+                            color="white"
                             autocomplete="false"
                            class="mt-4"
                           />
                            </v-col>
                            </v-row>
-                          <v-text-field
+                            <v-row v-show="!showName">
+                           <v-col cols="12" sm="12">
+                            <v-text-field v-model="rname"
+                            label="Şirket adı"
+                            outlined
+                            dense
+                            color="white"
+                            autocomplete="false"
+                           class="mt-4"
+                          />
+                           </v-col>
+
+                           </v-row>
+                          <v-text-field v-model="remail"
                             label="Email"
                             outlined
                             dense
-                            color="blue"
+                            color="white"
                             autocomplete="false"
                           />
-                          <v-text-field
-                            label="Password"
+                          <v-text-field v-model="rpassword"
+                            label="Şifre"
                             outlined
                             dense
-                            color="blue"
-                          autocomplete="false"
-                           type="password"
+                            color="white"
+                            autocomplete="false"
+                            type="password"
                           
                           />
                             <v-row>
                               <v-col cols="12" sm="7">
                                 <v-checkbox
                        
-                                    label="I Accept AAE"
+                                    label="Okudum Onaylıyorum."
                                     class="mt-n1"
                                     color="blue"
-                      > </v-checkbox>
+                                > </v-checkbox>
                               </v-col>
                               <v-col cols="12" sm="5">
-                                <span class="caption blue--text ml-n4">Terms &Conditions</span>
+                                         <div  class="form-group red pa-4 secondary text-no-wrap rounded-pill  ">
+                                    <select  class="form-control " name="make" id="make" v-model="ropti">
+                                        <option :value="null" selected>Kayıt Türünü Seçin</option>
+                                        <option v-for="option in makes_options" :key="option.id" v-bind:value="option.id">{{option.text}}</option>
+                                    </select>
+                                </div>
                               </v-col>
+                       
                             </v-row>
-                          <v-btn color="blue" dark block tile>Sign up</v-btn>
+                          <v-btn color="blue" dark block tile @click="createReg">Kayıt Ol</v-btn>
                      
-                         <h5
+                         <div
                           class="text-center  grey--text mt-4 mb-3"
-                        >Or Sign up using</h5>
+                        >Yada kayıt olmak için</div>
 
-                         <div class="d-flex  justify-space-between align-center mx-10 mb-11">
-                        <v-btn depressed outlined color="grey">
-                          <v-icon color="red">fab fa-google</v-icon>
+                          <div class="d-flex  justify-space-between align-center mx-10 mb-16">
+                        <v-btn depressed outlined color="grey" >
+                          <v-icon color="red ">mdi-google</v-icon>
                         </v-btn>
                         <v-btn depressed outlined color="grey">
-                          <v-icon color="blue">fab fa-facebook-f</v-icon>
+                          <v-icon color="blue">mdi-facebook</v-icon>
                         </v-btn>
-                        <v-btn depressed outlined color="grey">
-                          <v-icon color="light-blue lighten-3">fab fa-twitter</v-icon>
+                        <v-btn depressed outlined color="grey" class="">
+                          <v-icon color="light-blue lighten-3">mdi-twitter</v-icon>
                         </v-btn>
                          </div>
                          
@@ -217,9 +244,41 @@
   export default {
 
     data: () => ({
-      length: 3,
-      onboarding: 1,
+        length: 3,
+        onboarding: 1,
+        showPassword: false,
+        showName:false,
+
+
+        email:null,
+        password:null,
+        remail:null,
+        rpassword:null,
+        ropti:null,
+        rname:null,
+        make: null,
+        makes_options: [
+        {
+            text: "çırak",
+            id: 0
+        },
+        {
+            text: "usta",
+            id: 1
+        },
+        {
+            text: "şirket",
+            id: 2
+        }
+        ],
+
     }),
+
+    mounted: function () {
+    this.$axios
+    .$get('/api/GetUsers')
+    .then((response) => console.log(response))
+        },
 
 
     methods: {
@@ -233,6 +292,42 @@
           ? this.length - 1
           : this.onboarding - 1
       },
+
+
+      allEntValid() {
+        if(this.email==null && this.password == null){
+            return false
+        }else{
+            return true
+        }
+      },
+
+      async createUser(){
+        let MailPW={
+            Mail:this.email,
+            Password:this.password,
+        };
+
+        await this.$axios.$post('/api/Login',MailPW).then(response=>
+        console.log(response));
+                this.$axios
+        .$get('/api/GetAdvert/2')
+        .then((response) => console.log(response))
+      }
+      },
+
+      async createReg(){
+        let Reg={
+            Password:this.rpassword,
+            UserName:this.rname,
+            Mail:this.remail,
+            Dropdown:this.ropti
+        }
+        console.log(Reg),
+        await this.$axios.$post('/api/Register',Reg).then(response=>
+        console.log(response)
+        );
+
 
     },
     
