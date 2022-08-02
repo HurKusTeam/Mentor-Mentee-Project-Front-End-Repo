@@ -274,11 +274,6 @@
 
     }),
 
-    mounted: function () {
-    this.$axios
-    .$get('/api/GetUsers')
-    .then((response) => console.log(response))
-        },
 
 
     methods: {
