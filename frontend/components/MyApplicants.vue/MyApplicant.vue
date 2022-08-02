@@ -3,13 +3,13 @@
     <v-card
       class="mb-6 mx-auto rounded-lg"
       max-width="1000"
-      color="blue"
+      color=""
       v-for="user in users"
       :key="user.id"
     >
       <v-row>
         <v-col>
-          <v-card color="blue" class="pa-2 rounded-lg" outlined tile>
+          <v-card color="" class="pa-2 rounded-lg" outlined tile>
             <v-list-item class="pa-5">
               <v-list-item-avatar class="ml-2" size="100">
                 <img
@@ -37,9 +37,12 @@
                 </v-list-item-content>
               </v-col>
               <v-col class="ml-4" cols="6">
-                <v-icon size="20">mdi-map-marker </v-icon> {{ user.location }}
-                <v-icon size="20">mdi-linkedin</v-icon> {{ user.linkedin }}
-                <v-icon size="20">mdi-github</v-icon> {{ user.gitHub }}
+                <v-flex>
+                  <v-icon size="20">mdi-map-marker </v-icon>
+                  {{ user.location }} <v-icon size="20">mdi-linkedin</v-icon>
+                  {{ user.linkedin }} <v-icon size="20">mdi-github</v-icon>
+                  {{ user.gitHub }}
+                </v-flex>
                 <v-flex class="mt-2">
                   <v-icon>mdi-star</v-icon>
                   <v-list-item-action-subtitle
