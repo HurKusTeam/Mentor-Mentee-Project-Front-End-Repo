@@ -64,7 +64,7 @@
                          <div
                           class="text-center  white--text mt-4 mb-3"
                         >veya şununla giriş yapın</div>
-                         <div class="d-flex  justify-space-between align-center mx-10 mb-16">
+                         <div class="d-flex  justify-space-between align-center mx-10 mb-20">
                         <v-btn depressed outlined color="grey" >
                           <v-icon color="red ">mdi-google</v-icon>
                         </v-btn>
@@ -207,7 +207,7 @@
                           class="text-center  grey--text mt-4 mb-3"
                         >Yada kayıt olmak için</div>
 
-                          <div class="d-flex  justify-space-between align-center mx-10 mb-16">
+                          <div class="d-flex  justify-space-between align-center mx-10 mb-14">
                         <v-btn depressed outlined color="grey" >
                           <v-icon color="red ">mdi-google</v-icon>
                         </v-btn>
