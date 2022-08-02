@@ -1,14 +1,14 @@
 <template>
   <div>
-    <MentorList />
+    <MyApplicant />
   </div>
 </template>
 
 <script>
-import MentorList from '../components/CompanyApplicants/MentorList.vue'
+import MyApplicant from '../components/MyApplicants.vue/MyApplicant.vue'
 
 export default {
   name: 'IndexPage',
-  components: { MentorList },
+  components: { MyApplicant },
 }
 </script>
