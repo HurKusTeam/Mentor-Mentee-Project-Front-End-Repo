@@ -186,15 +186,15 @@
                               <v-col cols="12" sm="7">
                                 <v-checkbox
                        
-                                    label="Okudum Onaylıyorum."
+                                    label="Kabul Ediyorum."
                                     class="mt-n1"
                                     color="blue"
                                 > </v-checkbox>
                               </v-col>
                               <v-col cols="12" sm="5">
                                          <div  class="form-group red pa-4 secondary text-no-wrap rounded-pill  ">
-                                    <select  class="form-control " name="make" id="make" v-model="ropti">
-                                        <option :value="null" selected>Kayıt Türünü Seçin</option>
+                                    <select  class="form-control" name="make" id="make" v-model="ropti">
+                                        <option :value="null" selected>Kayıt Türü</option>
                                         <option v-for="option in makes_options" :key="option.id" v-bind:value="option.id">{{option.text}}</option>
                                     </select>
                                 </div>
@@ -310,10 +310,6 @@
 
         await this.$axios.$post('/api/Login',MailPW).then(response=>
         console.log(response));
-                this.$axios
-        .$get('/api/GetAdvert/2')
-        .then((response) => console.log(response))
-      }
       },
 
       async createReg(){
@@ -325,9 +321,9 @@
         }
         console.log(Reg),
         await this.$axios.$post('/api/Register',Reg).then(response=>
-        console.log(response)
-        );
+        console.log(response));
 
+      }
 
     },
     
