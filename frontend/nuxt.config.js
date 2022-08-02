@@ -36,13 +36,22 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: '/',
+    proxy: true,
+  },
+
+  proxy: {
+    // Simple proxy
+    '/api/': {
+      target: 'http://localhost:8080',
+      pathRewrite: { '^/api/': '' },
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

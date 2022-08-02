@@ -8,7 +8,7 @@
             alt="John"
           />
         </v-list-item-avatar>
-        <v-list-item-title class="pt-3"> Ömer Furkan Berber </v-list-item-title>
+        <v-list-item-title v-if="users.length != 0" class="pt-3"> {{ this.users[2].UserName }} </v-list-item-title>
         <v-list-item-subtitle> Software Engineer </v-list-item-subtitle>
         <v-list-item-subtitle class="pt-2">
           <v-icon size="20"> mdi-email </v-icon>
@@ -24,7 +24,26 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      users: [],
+    }
+  },
+
+  mounted(){
+    this.createUser()
+  },
+
+  methods: {
+    createUser() {
+      return this.$axios.$get("/api/GetUsers").then((response) => {
+        this.users = response
+        console.log(response)
+      })
+    },
+  },
+}
 </script>
 
 <style>

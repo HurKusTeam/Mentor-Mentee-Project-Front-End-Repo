@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <v-container class="pt-2 pb-0">
-      <v-card class="mx-auto" max-width="1000" flat tile style="border: none">
+      <v-card color="transparent" class="mx-auto" max-width="1000" flat tile style="border: none">
         <v-row>
           <v-col sm="3" md="3" class="pr-1"><AdvertDetailProfile /></v-col>
           <v-col sm="6" md="6" class="pr-1 pl-1"><AdvertDetailInfo /></v-col>
@@ -13,5 +13,6 @@
 </template>
 
 <script>
-export default {}
+export default {
+}
 </script>
