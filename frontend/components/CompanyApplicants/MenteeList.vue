@@ -21,7 +21,7 @@
                       alt="John"
                   /></v-btn>
                 </v-list-item-avatar>
-                <v-col cols="4">
+                <v-col sm12 md12>
                   <v-list-item-content>
                     <v-list-item-title class="title">
                       {{ fullName(user.UserName, ' ') }}
@@ -31,16 +31,18 @@
                       >{{ user.department }}
                     </v-list-item-subtitle>
                     <v-list-item-subtitle>
-                      <v-icon class="pa-1" size="20"> mdi-phone </v-icon>
+                      <v-icon class="pa-1" size="20"> mdi-town-hall </v-icon>
                       {{ user.Universities }}</v-list-item-subtitle
                     >
                     <v-list-item-subtitle>
-                      <v-icon class="pa-1" size="20"> mdi-email </v-icon>
-                      {{ user.Mail }}</v-list-item-subtitle
+                      <v-icon class="pa-1" size="20">
+                        mdi-account-school
+                      </v-icon>
+                      {{ user.gpa }}</v-list-item-subtitle
                     >
                   </v-list-item-content>
                 </v-col>
-                <v-col cols="4" class="ml-4">
+                <v-col sm12 md12 class="ml-4" cols="6">
                   <v-flex>
                     <v-icon size="20">mdi-map-marker </v-icon>
                     {{ user.location }} <v-icon size="20">mdi-linkedin</v-icon>
@@ -57,15 +59,14 @@
                     >
                   </v-flex>
                 </v-col>
-                <v-col>
+                <v-col sm12 md12>
                   <v-btn
                     class="mb-3 mt-3"
                     v-on:click="sendConfirm(user.ID)"
-                    to="/menteeList"
                     color="green"
                   >
-                    <v-icon>mdi-clipboard-account</v-icon>
-                  </v-btn>
+                    <v-icon>mdi-account-multiple-check</v-icon></v-btn
+                  >
                 </v-col>
               </v-list-item>
             </v-card>
@@ -87,6 +88,11 @@ export default {
           UserName: 'Semih',
           surName: 'Gür',
           department: 'Yazılım',
+          Universities: 'Çankaya Üniversitesi',
+          gpa: 2.54,
+          location: 'Ankara',
+          linkedin: 'semihgur',
+          gitHub: 'github',
           skills: ['c', 'go'],
         },
       ],

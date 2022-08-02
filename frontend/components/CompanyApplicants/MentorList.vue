@@ -13,13 +13,12 @@
             <v-card class="pa-2 rounded-lg" outlined tile style="border: none">
               <v-list-item class="pa-5">
                 <v-list-item-avatar class="ml-2" size="100">
-                  <v-btn fab to="/menteeProfile">
-                    <v-img
-                      height="100"
-                      width="100"
-                      src="https://www.w3schools.com/howto/img_avatar.png"
-                      alt="John"
-                  /></v-btn>
+                  <v-img
+                    height="100"
+                    width="100"
+                    src="https://www.w3schools.com/howto/img_avatar.png"
+                    alt="John"
+                  />
                 </v-list-item-avatar>
                 <v-col cols="4">
                   <v-list-item-content>
@@ -61,7 +60,7 @@
                   <v-btn
                     class="mb-3 mt-3"
                     v-on:click="sendConfirm(user.ID)"
-                    to="/menteeList"
+                    to="/menteeListPage"
                     color="green"
                   >
                     <v-icon>mdi-clipboard-account</v-icon>

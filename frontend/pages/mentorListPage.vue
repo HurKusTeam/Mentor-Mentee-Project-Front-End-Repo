@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <MentorList />
-  </div>
+  <v-main>
+    <MentorList></MentorList>
+  </v-main>
 </template>
 
 <script>
