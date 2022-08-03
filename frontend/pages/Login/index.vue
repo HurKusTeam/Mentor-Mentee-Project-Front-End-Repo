@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <h1>Main Page</h1>
+    <Logreg/>
   </v-main>
 
 </template>
