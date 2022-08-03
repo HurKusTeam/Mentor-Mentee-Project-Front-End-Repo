@@ -36,8 +36,8 @@ export default {
   },
 
   methods: {
-    createUser() {
-      return this.$axios.$get("/api/GetUsers").then((response) => {
+    async  createUser() {
+      return await this.$axios.$get("/api/GetAllAdverts").then((response) => {
         this.users = response
         console.log(response)
       })
