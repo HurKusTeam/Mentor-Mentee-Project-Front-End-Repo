@@ -66,7 +66,7 @@
             >
           </v-flex>
         </v-col>
-        <v-col sm-4 md-4>
+        <v-col>
           <v-flex ml-12>
             <v-btn
               class="mb-3 mt-3"
