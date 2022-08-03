@@ -9,7 +9,7 @@
         :key="user.id"
       >
         <v-row>
-          <v-col>
+          <v-col sm12 md12>
             <v-card class="pa-2 rounded-lg" outlined tile style="border: none">
               <v-list-item class="pa-5">
                 <v-list-item-avatar class="ml-2" size="100">
