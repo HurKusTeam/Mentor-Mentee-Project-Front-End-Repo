@@ -1,5 +1,8 @@
 <template>
-  <p>main page</p>
+  <v-main>
+    <Logreg/>
+  </v-main>
+
 </template>
 
 <script>

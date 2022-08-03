@@ -1,9 +1,10 @@
 <template>
-  <p>main page</p>
+  <v-main>
+    <Meetings/>
+  </v-main>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
 }
 </script>
