@@ -113,7 +113,7 @@ export default {
   methods: {
     getUserData() {
       return this.$axios.$get('/api/GetUsers').then((response) => {
-        this.userDatas = response
+        this.users = response
         console.log(response)
       })
     },
