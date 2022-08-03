@@ -58,7 +58,14 @@
                               </v-col>
                             </v-row>
 
-                            <v-btn color="blue" dark block :disabled="!allEntValid" @click="createUser" >Giriş</v-btn>
+                            <v-btn color="blue" dark block @click="createUser" >Giriş</v-btn>
+                             <v-alert v-if="test" class="mt-2"
+                              dense
+                              outlined
+                              type="error"
+                            >
+                              I'm a dense alert with the <strong>outlined</strong> prop and a <strong>type</strong> of error
+                            </v-alert>
 
                             
                          <div
@@ -253,6 +260,7 @@
         ropti:null,
         rname:null,
         make: null,
+        test:false,
         makes_options: [
         {
             text: "Çırak",
@@ -320,8 +328,26 @@
             Password:this.password,
         };
 
-        await this.$axios.$post('/api/Login',MailPW).then(response=>
-        console.log(response));
+        return await this.$axios.$post('/api/Login',MailPW)
+          .then((response)=>{
+                    this.test=false
+            this.$router.push('/');
+
+            console.log(response)
+
+
+
+          } ).catch((error) => {
+    if(error.response.status === 400){
+        this.$router.push('/login');
+        this.test=true
+    }
+})
+         
+        
+        
+
+
       },
 
       async createReg(){
