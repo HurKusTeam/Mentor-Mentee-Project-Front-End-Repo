@@ -12,9 +12,23 @@
             <span>JL</span>
           </template>
           <v-row>
-            <v-col class="d-flex pa-0 pl-0 pr-1" cols="12" sm="4">
+            <v-col class="pa-0 pl-1 pr-1">
               <v-text-field
-                v-model="input"
+                :rules="titleRule"
+                v-model="title"
+                hide-details
+                dense
+                flat
+                label="Title"
+                outlined
+                @keydown.enter="comment"
+              >
+              </v-text-field>
+            </v-col>
+            <v-col class="pa-0 pl-1 pr-1">
+              <v-text-field
+                :rules="linkRule"
+                v-model="link"
                 hide-details
                 dense
                 flat
@@ -24,10 +38,12 @@
               >
               </v-text-field>
             </v-col>
-            <v-col class="d-flex pa-0 pl-1 pr-1" cols="12" sm="4">
-              <v-dialog v-model="dialog" persistent max-width="350px" align-self="center">
+          </v-row>
+          <v-row>
+            <v-col class="pa-0 pt-1 pr-1">
+              <v-dialog v-model="dialog" persistent max-width="350px">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn depressed v-bind="attrs" v-on="on"> Renkler </v-btn>
+                  <v-btn block depressed v-bind="attrs" v-on="on"> Renk seçiniz </v-btn>
                 </template>
                 <v-card>
                   <v-card-title>
@@ -53,26 +69,26 @@
               </v-dialog>
             </v-col>
 
-            <v-col class="d-flex pl-1 pa-0" cols="12" sm="4">
-              <v-btn class="mx-0" depressed @click="comment"> Ekle </v-btn>
+            <v-col class="pt-1 pa-0 pl-1">
+              <v-btn block class="mx-0" depressed @click="comment"> Ekle </v-btn>
             </v-col>
           </v-row>
         </v-timeline-item>
         <v-timeline-item
-          v-for="(year, i) in years"
+          v-for="(meeting, i) in meetings"
           :key="i"
-          :color="year.color"
+          :color="meeting.color"
           small
         >
           <template v-slot:opposite>
             <span
-              :class="`headline font-weight-bold ${year.color}--text`"
-              v-text="year.year"
+              :class="`headline font-weight-bold ${meeting.color}--text`"
+              v-text="meeting.day"
             ></span>
           </template>
           <div class="py-4">
-            <h2 :class="`headline font-weight-light mb-4 ${year.color}--text`">
-              Lorem ipsum
+            <h2 :class="`headline font-weight-light mb-4 ${meeting.color}--text`">
+              {{ meeting.title }}
             </h2>
             <div class="pb-2">
               <v-icon size="20"> mdi-calendar-range </v-icon>
@@ -82,7 +98,7 @@
               <iframe
                 max-width="350"
                 max-height="200"
-                src="https://www.youtube.com/embed/u9oSVuf-0rc"
+                :src='`${meeting.link}`'
                 allowfullscreen
               ></iframe>
             </div>
@@ -97,45 +113,55 @@
 export default {
   data: () => ({
     dialog: false,
-    years: [
+    meetings: [
       {
+        title: '',
         color: 'cyan',
-        year: '1960',
-        text: 'Lorem ipsum dolor sit amet, no nam oblique veritus. Communescaevola imperdiet nec ut, sed euismod convenire principes at. Estet nobis iisque percipit, an vim zril disputando voluptatibus, vixan salutandi sententiae.',
+        day: 'Pazartesi',
+        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
       },
       {
+        title: '',
         color: 'green',
-        year: '1970',
-        text: 'Lorem ipsum dolor sit amet, no nam oblique veritus. Communescaevola imperdiet nec ut, sed euismod convenire principes at. Estet nobis iisque percipit, an vim zril disputando voluptatibus, vixan salutandi sententiae.',
+        day: 'Salı',
+        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
       },
       {
+        title: '',
         color: 'pink',
-        year: '1980',
-        text: 'Lorem ipsum dolor sit amet, no nam oblique veritus. Communescaevola imperdiet nec ut, sed euismod convenire principes at. Estet nobis iisque percipit, an vim zril disputando voluptatibus, vixan salutandi sententiae.',
+        day: 'Çarşamba',
+        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
       },
       {
+        title: '',
         color: 'amber',
-        year: '1990',
-        text: 'Lorem ipsum dolor sit amet, no nam oblique veritus. Communescaevola imperdiet nec ut, sed euismod convenire principes at. Estet nobis iisque percipit, an vim zril disputando voluptatibus, vixan salutandi sententiae.',
+        day: 'Perşembe',
+        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
       },
       {
+        title: '',
         color: 'orange',
-        year: '2000',
-        text: 'Lorem ipsum dolor sit amet, no nam oblique veritus. Communescaevola imperdiet nec ut, sed euismod convenire principes at. Estet nobis iisque percipit, an vim zril disputando voluptatibus, vixan salutandi sententiae.',
+        day: 'Cumartesi',
+        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
       },
     ],
-    input: null,
+    titleRule: [ v => !!v || 'Title required'],
+    linkRule: [ v => !!v || 'Link required'],
+    link: null,
+    title: null,
+    color: null,
   }),
 
   methods: {
     comment() {
-      this.years.push({
-        text: this.input,
-        year: 'Salı',
+      this.meetings.push({
+        title: this.title,
+        link: this.link.substr(2, 2),
+        day: 'Salı',
         color: 'blue',
       })
-
-      this.input = null
+      this.link = null,
+      this.title = null
     },
   },
 }
