@@ -2,7 +2,7 @@
 
   <v-app class="aaa">
   <navbar/>
-      <v-container class="mb-0">
+      <v-container class="mb-0 mt-0 pt-0">
         <Nuxt />
       </v-container>
       <Footer />

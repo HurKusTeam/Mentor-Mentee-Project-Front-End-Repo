@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pt-2 pb-0">
+  <v-container class="pt-0 pb-0">
     <v-card class="mx-auto" max-width="1000" tile>
       <v-timeline class="pa-8">
         <v-timeline-item
@@ -14,7 +14,6 @@
           <v-row>
             <v-col class="pa-0 pl-1 pr-1">
               <v-text-field
-                :rules="titleRule"
                 v-model="title"
                 hide-details
                 dense
@@ -27,7 +26,6 @@
             </v-col>
             <v-col class="pa-0 pl-1 pr-1">
               <v-text-field
-                :rules="linkRule"
                 v-model="link"
                 hide-details
                 dense
@@ -51,6 +49,7 @@
                   </v-card-title>
                   <v-card-text>
                     <v-color-picker
+                      v-model="clr"
                       dot-size="25"
                       mode="hexa"
                       swatches-max-height="200"
@@ -61,7 +60,7 @@
                     <v-btn color="blue darken-1" text @click="dialog = false">
                       Kapat
                     </v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">
+                    <v-btn color="blue darken-1" text @click="dialog = false, saveColor()">
                       Kaydet
                     </v-btn>
                   </v-card-actions>
@@ -83,21 +82,22 @@
           <template v-slot:opposite>
             <span
               :class="`headline font-weight-bold ${meeting.color}--text`"
+              :style="`color: ${meeting.color}`"
               v-text="meeting.day"
             ></span>
           </template>
           <div class="py-4">
-            <h2 :class="`headline font-weight-light mb-4 ${meeting.color}--text`">
+            <h2 :class="`headline font-weight-light mb-4 ${meeting.color}--text`"
+              :style="`color: ${meeting.color}`">
               {{ meeting.title }}
             </h2>
             <div class="pb-2">
               <v-icon size="20"> mdi-calendar-range </v-icon>
-              18.02.2020
+              {{ meeting.date }}
             </div>
-            <div class="pb-2">
+            <div class="container1">
               <iframe
-                max-width="350"
-                max-height="200"
+                class="responsive-iframe"
                 :src='`${meeting.link}`'
                 allowfullscreen
               ></iframe>
@@ -119,53 +119,78 @@ export default {
         color: 'cyan',
         day: 'Pazartesi',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
+        date: new Date().toISOString().slice(0,10),
       },
       {
         title: '',
         color: 'green',
         day: 'Salı',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
+        date: new Date().toISOString().slice(0,10),
       },
       {
         title: '',
         color: 'pink',
         day: 'Çarşamba',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
+        date: new Date().toISOString().slice(0,10),
       },
       {
         title: '',
         color: 'amber',
         day: 'Perşembe',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
+        date: new Date().toISOString().slice(0,10),
       },
       {
         title: '',
-        color: 'orange',
+        color: '#FF0000FF',
         day: 'Cumartesi',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
+        date: new Date().toISOString().slice(0,10),
       },
     ],
-    titleRule: [ v => !!v || 'Title required'],
-    linkRule: [ v => !!v || 'Link required'],
     link: null,
     title: null,
+    clr: null,
     color: null,
   }),
 
   methods: {
+    saveColor(){
+      this.color = this.clr.hexa
+    },
     comment() {
       this.meetings.push({
         title: this.title,
-        link: this.link.substr(2, 2),
+        link: 'https://www.youtube.com/embed/' + this.link.split("=").pop(),
         day: 'Salı',
-        color: 'blue',
+        color: this.color,
+        date: new Date().toISOString().slice(0,10),
       })
-      this.link = null,
-      this.title = null
+      this.link = "",
+      this.title = ""
     },
   },
 }
 </script>
 
 <style>
+.container1 {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+
+/* Then style the iframe to fit in the container div with full height and width */
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>
