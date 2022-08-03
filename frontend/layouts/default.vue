@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <v-app class="aaa">
   <navbar/>
       <v-container class="mb-0">
@@ -22,19 +21,3 @@ export default {
 }
 </style>
 <style></style>
-=======
-  <div>
-    <main>
-      <Nuxt/>
-    </main>
-  </div>
-</template>
-
-<script>
-
-
-export default {
-  
-}
-</script>
->>>>>>> LandingPage
