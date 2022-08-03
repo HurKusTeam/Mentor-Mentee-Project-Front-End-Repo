@@ -10,8 +10,8 @@
              
                 <v-window-item :value="1" >
                   <v-row cols="12">
-                    <v-col cols="12" md="7" class="blue accent-3 text-center">
-                      <v-card-text class="mt-12">
+                    <v-col cols="12" md="7" class="light-blue accent-2 text-center ">
+                      <v-card-text class="mt-12 ">
                         <div
                           class="white--text text-center bold text-3xl"
                         >Hesabınıza giriş yapın.</div>
@@ -120,43 +120,21 @@
                     </v-col>
 
 
-                    <v-col cols="12" md="7" class="blue accent-3">
+                    <v-col cols="12" md="7" class="light-blue accent-2">
                       <v-card-text class="mt-12">
                         <div
                           class="white--text text-center bold text-3xl"
                         >Usta yada Çırak olarak kayıt ol</div>
                         <div
                           class="text-center  white--text "
-                        >Usta-Çırak-Şirket olarak Kayıt ol<br>
+                        >Usta-Çırak-Şirket olarak kayıt ol<br>
                         </div>
                         <v-row align="center" justify="center">
                           <v-col cols="12" sm="8">
-                           <v-row v-show="showName">
-                           <v-col cols="12" sm="6">
-                            <v-text-field
-                            label="İsim"
-                            outlined
-                            dense
-                            color="white"
-                            autocomplete="false"
-                           class="mt-4"
-                          />
-                           </v-col>
-                           <v-col cols="12" sm="6">
-                            <v-text-field
-                            label="Soyisim"
-                            outlined
-                            dense
-                            color="white"
-                            autocomplete="false"
-                           class="mt-4"
-                          />
-                           </v-col>
-                           </v-row>
-                            <v-row v-show="!showName">
+                           <v-row >
                            <v-col cols="12" sm="12">
                             <v-text-field v-model="rname"
-                            label="Şirket adı"
+                            :label="text1"
                             outlined
                             dense
                             color="white"
@@ -164,7 +142,6 @@
                            class="mt-4"
                           />
                            </v-col>
-
                            </v-row>
                           <v-text-field v-model="remail"
                             label="Email"
@@ -188,23 +165,42 @@
                        
                                     label="Kabul Ediyorum."
                                     class="mt-n1"
-                                    color="blue"
+                                    color="white"
                                 > </v-checkbox>
                               </v-col>
-                              <v-col cols="12" sm="5">
-                                         <div  class="form-group red pa-4 secondary text-no-wrap rounded-pill  ">
-                                    <select  class="form-control" name="make" id="make" v-model="ropti">
-                                        <option :value="null" selected>Kayıt Türü</option>
+
+                              <!-- <v-col cols="12" sm="5" class="d-flex">
+                                <div  class="form-group  " >
+                                    <select  class="form-control blue white--text pa-1 secondary text-no-wrap " tile dense solo outlined name="make" id="make" v-model="ropti">
+                                        <option :value="null" selected:disabled>Kayıt Türü</option>
                                         <option v-for="option in makes_options" :key="option.id" v-bind:value="option.id">{{option.text}}</option>
                                     </select>
                                 </div>
-                              </v-col>
-                       
+                              </v-col> -->
+
+
+
+                            <v-col
+                                class="d-flex"
+                                cols="12"
+                                sm="4"
+                                
+                            >
+                                <v-select
+                                
+                                v-model="ropti"
+                                :items="makes_options"
+                                label="Kayıt Türü"
+                                solo
+                                ></v-select>
+                            </v-col>
+
+
                             </v-row>
                           <v-btn color="blue" dark block tile @click="createReg">Kayıt Ol</v-btn>
                      
                          <div
-                          class="text-center  grey--text mt-4 mb-3"
+                          class="text-center  white--text mt-4 mb-3"
                         >Yada kayıt olmak için</div>
 
                           <div class="d-flex  justify-space-between align-center mx-10 mb-14">
@@ -247,9 +243,9 @@
         length: 3,
         onboarding: 1,
         showPassword: false,
-        showName:false,
-
-
+        showName:true,
+        text1:"İsim Soyisim",
+        rid:0,
         email:null,
         password:null,
         remail:null,
@@ -259,22 +255,43 @@
         make: null,
         makes_options: [
         {
-            text: "çırak",
+            text: "Çırak",
             id: 0
         },
         {
-            text: "usta",
+            text: "Usta",
             id: 1
         },
         {
-            text: "şirket",
+            text: "Şirket",
             id: 2
         }
         ],
 
     }),
 
-
+    watch: {
+        ropti: {
+       handler: function(val) {
+         console.log(val)
+           if(val==="Şirket"){
+                this.text1="Şirket Adı"
+                this.rid=2
+                console.log(this.rid);
+           }
+           else if(val==="Usta") {
+            this.text1="İsim Soyisim"
+            this.rid=1
+           }
+           else{
+            this.text1="İsim Soyisim"
+            this.rid=0
+           }
+           // call it in the context of your component object
+       },
+       deep: true
+    }
+},  
 
     methods: {
       next () {
@@ -312,7 +329,7 @@
             Password:this.rpassword,
             UserName:this.rname,
             Mail:this.remail,
-            Dropdown:this.ropti
+            Dropdown:this.rid
         }
         console.log(Reg),
         await this.$axios.$post('/api/Register',Reg).then(response=>
