@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="clr" app padless>
+  <v-footer class="clr mb-0" padless absolute app>
     <v-container>
       <v-row no gutters>
         <v-col>

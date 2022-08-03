@@ -1,11 +1,9 @@
 <template>
   <v-app class="aaa">
-    <v-main>
-      <v-container>
+      <v-container class="mb-0">
         <Nuxt />
-        <Footer />
       </v-container>
-    </v-main>
+      <Footer />
   </v-app>
 </template>
 

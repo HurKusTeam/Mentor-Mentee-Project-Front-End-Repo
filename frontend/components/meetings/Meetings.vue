@@ -25,40 +25,36 @@
               </v-text-field>
             </v-col>
             <v-col class="d-flex pa-0 pl-1 pr-1" cols="12" sm="4">
-              <v-row justify="center">
-                <v-dialog v-model="dialog" persistent max-width="350px">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn class="mx-0" depressed v-bind="attrs" v-on="on">
-                      Renk seçiniz
+              <v-dialog v-model="dialog" persistent max-width="350px" align-self="center">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn depressed v-bind="attrs" v-on="on"> Renkler </v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="text-h5">Renk seçiniz</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-color-picker
+                      dot-size="25"
+                      mode="hexa"
+                      swatches-max-height="200"
+                    ></v-color-picker>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="dialog = false">
+                      Kapat
                     </v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-title>
-                      <span class="text-h5">Renk seçiniz</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-color-picker
-                        dot-size="25"
-                        mode="hexa"
-                        swatches-max-height="200"
-                      ></v-color-picker>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="blue darken-1" text @click="dialog = false">
-                        Close
-                      </v-btn>
-                      <v-btn color="blue darken-1" text @click="dialog = false">
-                        Save
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-row>
+                    <v-btn color="blue darken-1" text @click="dialog = false">
+                      Kaydet
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-col>
 
             <v-col class="d-flex pl-1 pa-0" cols="12" sm="4">
-              <v-btn class="mx-0" depressed @click="comment"> Post </v-btn>
+              <v-btn class="mx-0" depressed @click="comment"> Ekle </v-btn>
             </v-col>
           </v-row>
         </v-timeline-item>
