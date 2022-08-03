@@ -11,18 +11,30 @@
           <template v-slot:icon>
             <span>JL</span>
           </template>
-          <v-text-field
-            v-model="input"
-            hide-details
-            flat
-            label="Leave a comment..."
-            solo
-            @keydown.enter="comment"
-          >
-            <template v-slot:append>
+          <v-row>
+            <v-col class="d-flex pa-0 pl-0 pr-1" cols="12" sm="4">
+              <v-text-field
+                v-model="input"
+                hide-details
+                dense
+                flat
+                label="Youtube link"
+                outlined
+                @keydown.enter="comment"
+              >
+              </v-text-field>
+            </v-col>
+            <v-col class="d-flex pa-0 pl-1 pr-1" cols="12" sm="4"
+              ><v-color-picker
+                dot-size="25"
+                width="100"
+              ></v-color-picker>
+            </v-col>
+
+            <v-col class="d-flex pl-1 pa-0" cols="12" sm="4">
               <v-btn class="mx-0" depressed @click="comment"> Post </v-btn>
-            </template>
-          </v-text-field>
+            </v-col>
+          </v-row>
         </v-timeline-item>
         <v-timeline-item
           v-for="(year, i) in years"
@@ -40,16 +52,17 @@
             <h2 :class="`headline font-weight-light mb-4 ${year.color}--text`">
               Lorem ipsum
             </h2>
-            <div class="pb-2 ">
-                <v-icon size="20"> mdi-calendar-range </v-icon>
-                18.02.2020/18.02.2022
+            <div class="pb-2">
+              <v-icon size="20"> mdi-calendar-range </v-icon>
+              18.02.2020
             </div>
             <div class="pb-2">
-                <v-icon size="20"> mdi-link </v-icon>
-                <a href="https://www.google.com/">Bağlantı</a>
-            </div>
-            <div>
-              {{ year.text }}
+              <iframe
+                max-width="350"
+                max-height="200"
+                src="https://www.youtube.com/embed/u9oSVuf-0rc"
+                allowfullscreen
+              ></iframe>
             </div>
           </div>
         </v-timeline-item>
@@ -90,17 +103,12 @@ export default {
     ],
     input: null,
   }),
-  computed: {
-    timeline() {
-      return this.events.slice().reverse()
-    },
-  },
 
   methods: {
     comment() {
       this.years.push({
         text: this.input,
-        year: '2022',
+        year: 'Salı',
         color: 'blue',
       })
 
