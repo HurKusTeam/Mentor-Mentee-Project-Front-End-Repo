@@ -7,7 +7,7 @@
       <div class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end">
         <nav class="hidden md:block">
           <div class="flex items-baseline space-x-10">
-            <a href="#_" class="item--link">
+            <a href="/" class="item--link">
               <span class="block">HOME</span>
             </a>
 
@@ -18,7 +18,7 @@
               <span class="block">ABOUT US</span>
             </a>
             <span class="inline-flex rounded-md shadow-sm">
-              <a href="#" class="btn btn--primary">
+              <a href="/login" class="btn btn--primary">
                 LOG IN
               </a>
             </span>
