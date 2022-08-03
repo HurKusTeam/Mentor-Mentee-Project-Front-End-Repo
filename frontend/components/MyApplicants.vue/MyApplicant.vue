@@ -112,7 +112,7 @@ export default {
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/GetUsers').then((response) => {
+      return this.$axios.$get('/api/GetAllAdverts').then((response) => {
         this.users = response
         console.log(response)
       })
