@@ -1,5 +1,5 @@
 <template>
-  <MentorProfileHeader/>
+  
 </template>
 
 <script>
