@@ -54,7 +54,7 @@
             <v-icon size="20">mdi-map-marker </v-icon>
             {{ user.location }}
             <v-icon size="20">mdi-linkedin</v-icon>
-            {{}}
+            {{ user.linkedin }}
             <v-icon size="20">mdi-github</v-icon>
             {{ user.gitHub }}
           </v-flex>
@@ -115,10 +115,8 @@ export default {
         .$get('/api/ReceivedApplications/11')
         .then((response) => {
           this.userDatas = response
-          console.log(this.userDatas)
-          console.log(this.userDatas.about[0].Linkedin)
-          console.log(response)
-          console.log(this.userDatas)
+
+          console.log('response', response)
         })
     },
     sendConfirm(id) {
