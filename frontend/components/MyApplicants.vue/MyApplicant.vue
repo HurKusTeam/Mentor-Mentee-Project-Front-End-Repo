@@ -17,7 +17,7 @@
       class="mb-6 mx-auto rounded-lg"
       max-width="1000"
       color=""
-      v-for="user in users"
+      v-for="user in userDatas.users"
       :key="user.id"
     >
       <v-list-item class="pa-5">
@@ -33,10 +33,11 @@
         <v-col sm-4 md-4>
           <v-list-item-content>
             <v-list-item-title class="title">
-              {{ fullName(user.UserName, ' ') }}
+              {{ fullName(user.UserName, user.SurName) }}
             </v-list-item-title>
             <v-list-item-subtitle>
-              <v-icon class="pa-1" size="20">mdi-school</v-icon>{{ user.Title }}
+              <v-icon class="pa-1" size="20">mdi-school</v-icon
+              >{{ user.Universities }}
             </v-list-item-subtitle>
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-town-hall </v-icon>
@@ -87,6 +88,7 @@ export default {
       userDatas: [],
       users: [
         {
+          /*
           id: 1,
           UserName: 'Semih',
           surName: 'Gür',
@@ -96,7 +98,7 @@ export default {
           location: 'Ankara',
           linkedin: 'semihgur',
           gitHub: 'github',
-          skills: ['c', 'go'],
+          skills: ['c', 'go'], */
         },
       ],
     }
@@ -107,10 +109,12 @@ export default {
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/ReceivedApplications').then((response) => {
-        this.users = response
-        console.log(response)
-      })
+      return this.$axios
+        .$get('/api/ReceivedApplications/11')
+        .then((response) => {
+          this.userDatas = response
+          console.log(response)
+        })
     },
     sendConfirm(id) {
       return console.log(id)
