@@ -36,12 +36,11 @@
               {{ fullName(user.UserName, ' ') }}
             </v-list-item-title>
             <v-list-item-subtitle>
-              <v-icon class="pa-1" size="20">mdi-school</v-icon
-              >{{ user.department }}
+              <v-icon class="pa-1" size="20">mdi-school</v-icon>{{ user.Title }}
             </v-list-item-subtitle>
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-town-hall </v-icon>
-              {{ user.Universities }}</v-list-item-subtitle
+              {{ user.uni }}</v-list-item-subtitle
             >
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-account-school </v-icon>
@@ -68,11 +67,7 @@
         </v-col>
         <v-col>
           <v-flex ml-12>
-            <v-btn
-              class="mb-3 "
-              v-on:click="sendConfirm(user.ID)"
-              color="green"
-            >
+            <v-btn class="mb-3" v-on:click="sendConfirm(user.ID)" color="green">
               <v-icon>mdi-check</v-icon></v-btn
             >
             <v-btn v-on:click="sendDeny(user.ID)" color="red">
@@ -112,7 +107,7 @@ export default {
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/GetAllAdverts').then((response) => {
+      return this.$axios.$get('/api/ReceivedApplications').then((response) => {
         this.users = response
         console.log(response)
       })
