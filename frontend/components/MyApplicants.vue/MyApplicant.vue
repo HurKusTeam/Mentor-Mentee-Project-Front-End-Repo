@@ -33,7 +33,7 @@
         <v-col sm-4 md-4>
           <v-list-item-content>
             <v-list-item-title class="title">
-              {{ fullName(user.UserName, user.SurName) }}
+              {{ fullName(user.UserName) }}
             </v-list-item-title>
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20">mdi-school</v-icon
