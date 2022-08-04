@@ -69,7 +69,7 @@
         <v-col>
           <v-flex ml-12>
             <v-btn
-              class="mb-3 mt-3"
+              class="mb-3 "
               v-on:click="sendConfirm(user.ID)"
               color="green"
             >

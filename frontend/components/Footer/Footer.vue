@@ -1,6 +1,6 @@
 <template>
-  <v-footer class="clr mb-0" padless absolute app>
-    <v-container>
+  <v-container>
+    <v-footer class="clr mb-0" height="200" padless>
       <v-row no gutters>
         <v-col>
           <v-img
@@ -38,8 +38,8 @@
           </p>
         </v-col>
       </v-row>
-    </v-container>
-  </v-footer>
+    </v-footer>
+  </v-container>
 </template>
 
 <script>
