@@ -8,7 +8,7 @@
             alt="John"
           />
         </v-list-item-avatar>
-        <v-list-item-title v-if="users.length != 0" class="pt-3"> {{ this.users[2].UserName }} </v-list-item-title>
+        <v-list-item-title v-if="users.length != 0" class="pt-3"> asdasda </v-list-item-title>
         <v-list-item-subtitle> Software Engineer </v-list-item-subtitle>
         <v-list-item-subtitle class="pt-2">
           <v-icon size="20"> mdi-email </v-icon>
@@ -37,7 +37,7 @@ export default {
 
   methods: {
     async  createUser() {
-      return await this.$axios.$get("/api/GetAllAdverts").then((response) => {
+      return await this.$axios.$get("/api/Profile1/75").then((response) => {
         this.users = response
         console.log(response)
       })
