@@ -1,15 +1,15 @@
 <template>
-  <v-container class="pb-0">
+  
     <v-card class="mx-auto" max-width="1000" tile>
       <v-img
-        height="200"
+        height="180"
         src="https://cdn.pixabay.com/photo/2017/01/16/19/40/mountains-1985027_960_720.jpg"
       ></v-img>
 
       <v-row no-gutters>
-        <v-col cols="12" sm="8" md="8">
+        <v-col cols="11" sm="11" md="7">
           <v-list-item class="pa-5">
-            <v-list-item-avatar class="ml-2" size="100">
+            <v-list-item-avatar class="ml-4" size="80">
               <img
                 src="https://www.w3schools.com/howto/img_avatar.png"
                 alt="John"
@@ -57,7 +57,7 @@
         </v-col>
       </v-row>
     </v-card>
-  </v-container>
+  
 </template>
 
 <script>

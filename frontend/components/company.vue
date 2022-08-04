@@ -2,7 +2,7 @@
     <v-card style="position: sticky; top: 0">
       <v-list-item>
         <v-list-item-content style="text-align: center">
-          <v-list-item-avatar size="100">
+          <v-list-item-avatar size="200">
             <img
               src="https://i.pinimg.com/originals/99/7b/e0/997be08fea707cddda41d010e04d6a3e.png"
               alt="Aselsan"
