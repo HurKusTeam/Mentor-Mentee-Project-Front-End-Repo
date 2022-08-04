@@ -7,7 +7,7 @@
       ></v-img>
 
       <v-row no-gutters>
-        <v-col cols="12" sm="8" md="8">
+        <v-col cols="12" sm="10" md="10">
           <v-list-item class="pa-5">
             <v-list-item-avatar class="ml-2" size="100">
               <img
@@ -17,7 +17,7 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-flex>
+              <v-col>
                 <v-list-item-title class="title">
                   {{ name }} {{ surName }}
                 </v-list-item-title>
@@ -31,8 +31,8 @@
                   <v-icon class="pa-1" size="20">mdi-account-school</v-icon>
                   {{ gpa }}</v-list-item-subtitle
                 >
-              </v-flex>
-              <v-flex>
+              </v-col>
+              <v-col>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20">mdi-email</v-icon>
                   {{ mail }}</v-list-item-subtitle
@@ -49,11 +49,11 @@
                   <v-icon class="pa-1" size="20">mdi-account-plus</v-icon>
                   {{ menteeCount }}</v-list-item-subtitle
                 >
-              </v-flex>
+              </v-col>
             </v-list-item-content>
           </v-list-item>
         </v-col>
-        <v-col cols="6" sm="4" md="4">
+        <v-col cols="6" sm="2" md="2">
           <v-layout class="pa-3" justify-end>
             <v-btn icon
               ><v-icon class="pa-1" size="20"> mdi-linkedin </v-icon></v-btn
