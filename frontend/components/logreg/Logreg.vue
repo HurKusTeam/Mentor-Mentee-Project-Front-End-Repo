@@ -331,7 +331,7 @@
         return await this.$axios.$post('/api/Login',MailPW)
           .then((response)=>{
                     this.test=false
-            this.$router.push('/');
+            this.$router.push('/addadvertcompany');
 
             console.log(response)
 

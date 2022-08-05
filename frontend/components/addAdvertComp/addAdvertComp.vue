@@ -55,6 +55,7 @@
                     >
                     <v-date-picker
                         v-model="dates"
+                        format="MMMM Do YYYY, h:mm:ss a"
                         range
                         no-title
                     ></v-date-picker>
@@ -68,7 +69,7 @@
                         label="Seçilen Tarihler"
                         prepend-icon="mdi-calendar"
                         readonly
-                    ></v-text-field>
+                    ></v-text-field >
                     -Başlangıç tarihi: {{ dates[0] }}
                     <br/>
                     <p>-Bitiş tarihi: {{ dates[1] }}</p>
@@ -120,12 +121,12 @@
     methods: {
         async createAdvert(){
         let AdvertModel={
-            Mail:this.adtitle,
-            Password:this.addescription,
+            Title:this.adtitle,
+            Description:this.addescription,
             Startdate:this.dates[0],
             Enddate:this.dates[1],
-
-        };
+        }; 
+        console.log(AdvertModel);
 
         return await this.$axios.$post('/api/AddAdvert',AdvertModel)
           .then((response)=>{
