@@ -9,7 +9,7 @@
         </template>
         <v-list>
           <v-list-item v-for="mentee in mentees" :key="mentee">
-            <v-btn>{{ mentee.name }}</v-btn>
+            <v-btn v-on:click="switcch(mentee.id)">{{ mentee.name }}</v-btn>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -103,15 +103,15 @@ export default {
     return {
       inputRules: [(v) => v.length >= 3 || 'En az 3 karakter'],
       title: '',
-      thisMentee: '',
+      thisMentee: 'w',
 
       mentees: [
         {
-          menteeId: 2,
+          id: 2,
           name: 'Ayşe',
         },
         {
-          menteeId: 1,
+          id: 1,
           name: 'Ali',
         },
       ],
@@ -123,6 +123,7 @@ export default {
           todo: 'Kitap oku',
         },
         {
+          menteeId: 1,
           id: 2,
           todo: 'Sandalye ol',
         },
@@ -149,6 +150,10 @@ export default {
   },
   components: { TodoList, TodoItem, draggable },
   methods: {
+    switcch(menteeID) {
+      console.log(menteeID)
+    },
+
     submit() {
       if (this.$refs.form.validate()) {
         console.log(this.title, 0)
@@ -157,6 +162,8 @@ export default {
     getComponentData(evt, indx) {
       console.log({
         value: evt.item.innerText,
+        id: evt.item._underlying_vm_.id,
+        menteeId: evt.item._underlying_vm_.menteeId,
         indx,
       })
     },
