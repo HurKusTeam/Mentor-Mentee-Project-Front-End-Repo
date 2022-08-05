@@ -17,7 +17,7 @@
       class="mb-6 mx-auto rounded-lg"
       max-width="1000"
       color=""
-      v-for="user in userDatas.users"
+      v-for="user in userDatas"
       :key="user.id"
     >
       <v-list-item class="pa-5">
@@ -41,7 +41,7 @@
             </v-list-item-subtitle>
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-town-hall </v-icon>
-              {{ user.uni }}</v-list-item-subtitle
+              {{ user.Major }}</v-list-item-subtitle
             >
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-account-school </v-icon>
@@ -70,7 +70,7 @@
         </v-col>
         <v-col>
           <v-flex ml-12>
-            <v-btn class="mb-3" v-on:click="sendConfirm(user.ID)" color="green">
+            <v-btn class="mb-3" href="/api/MatchMenteeMentor/124" color="green">
               <v-icon>mdi-check</v-icon></v-btn
             >
             <v-btn v-on:click="sendDeny(user.ID)" color="red">
@@ -111,13 +111,11 @@ export default {
 
   methods: {
     getUserData() {
-      return this.$axios
-        .$get('/api/ReceivedApplications/11')
-        .then((response) => {
-          this.userDatas = response
+      return this.$axios.$get('/api/MyMentors').then((response) => {
+        this.userDatas = response
 
-          console.log('response', response)
-        })
+        console.log('response', response)
+      })
     },
     sendConfirm(id) {
       return console.log(id)
