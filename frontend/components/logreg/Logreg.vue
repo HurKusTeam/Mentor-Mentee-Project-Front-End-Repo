@@ -58,13 +58,13 @@
                               </v-col>
                             </v-row>
 
-                            <v-btn color="blue" dark block @click="createUser" >Giriş</v-btn>
-                             <v-alert v-if="test" class="mt-2"
+                            <v-btn color="blue" dark block @click="loginUser" >Giriş</v-btn>
+                             <v-alert v-if="alert" class="mt-2"
                               dense
                               outlined
                               type="error"
                             >
-                              I'm a dense alert with the <strong>outlined</strong> prop and a <strong>type</strong> of error
+                            Lütfen kullanıcı adınızı yada şifrenizi kontrol edin.
                             </v-alert>
 
                             
@@ -204,7 +204,7 @@
 
 
                             </v-row>
-                          <v-btn color="blue" dark block tile @click="createReg">Kayıt Ol</v-btn>
+                          <v-btn color="blue" dark block tile @click="userReg">Kayıt Ol</v-btn>
                      
                          <div
                           class="text-center  white--text mt-4 mb-3"
@@ -259,8 +259,7 @@
         rpassword:null,
         ropti:null,
         rname:null,
-        make: null,
-        test:false,
+        alert:false,
         makes_options: [
         {
             text: "Çırak",
@@ -295,7 +294,6 @@
             this.text1="İsim Soyisim"
             this.rid=0
            }
-           // call it in the context of your component object
        },
        deep: true
     }
@@ -313,16 +311,7 @@
           : this.onboarding - 1
       },
 
-
-      allEntValid() {
-        if(this.email==null && this.password == null){
-            return false
-        }else{
-            return true
-        }
-      },
-
-      async createUser(){
+      async loginUser(){
         let MailPW={
             Mail:this.email,
             Password:this.password,
@@ -330,8 +319,8 @@
 
         return await this.$axios.$post('/api/Login',MailPW)
           .then((response)=>{
-                    this.test=false
-            this.$router.push('/addadvertcompany');
+                    this.alert=false
+            this.$router.push('/');
 
             console.log(response)
 
@@ -340,7 +329,7 @@
           } ).catch((error) => {
     if(error.response.status === 400){
         this.$router.push('/login');
-        this.test=true
+        this.alert=true
     }
 })
          
@@ -350,7 +339,7 @@
 
       },
 
-      async createReg(){
+      async userReg(){
         let Reg={
             Password:this.rpassword,
             UserName:this.rname,
@@ -359,7 +348,8 @@
         }
         console.log(Reg),
         await this.$axios.$post('/api/Register',Reg).then(response=>
-        console.log(response));
+        console.log(response))
+        this.$router.push('/');
 
       }
 
