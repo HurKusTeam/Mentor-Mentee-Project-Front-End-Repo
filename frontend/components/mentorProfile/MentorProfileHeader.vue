@@ -18,41 +18,150 @@
             <v-list-item-content>
               <v-col>
                 <v-list-item-title class="title">
-                  Osman Bahadır</v-list-item-title
-                >
-                <v-list-item-subtitle> Software Engineer </v-list-item-subtitle>
+                  {{ name }} {{ surname }}
+                </v-list-item-title>
+                <v-list-item-subtitle> {{ major }} </v-list-item-subtitle>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-school </v-icon>
-                  Muğla Sıtkı Koçman Üniversitesi</v-list-item-subtitle
-                >
+                  {{ university }}
+                </v-list-item-subtitle>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-calendar-range </v-icon>
-                  29.07.2022</v-list-item-subtitle
-                > </v-col
+                  {{ birthDate }}
+                </v-list-item-subtitle> </v-col
               ><v-col>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-email </v-icon>
-                  osman_bahadır@gmail.com</v-list-item-subtitle
-                >
+                  {{ mail }}
+                </v-list-item-subtitle>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-phone </v-icon>
-                  05553216549</v-list-item-subtitle
+                  {{ phoneNumber }}</v-list-item-subtitle
                 >
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-map-marker </v-icon>
-                  Ankara</v-list-item-subtitle
-                ></v-col
+                  {{ city }}
+                </v-list-item-subtitle></v-col
               >
             </v-list-item-content>
           </v-list-item>
         </v-col>
         <v-col cols="6" sm="2" md="2">
           <v-layout class="pa-3" justify-end>
-            <v-icon class="pa-1" size="20"> mdi-linkedin </v-icon>
-            <v-icon class="pa-1" size="20"> mdi-github </v-icon>
-            <v-icon class="pa-1" size="20"> mdi-facebook </v-icon>
-            <v-icon class="pa-1" size="20"> mdi-twitter </v-icon>
-            <v-icon class="pa-1" size="20"> mdi-web </v-icon>
+            <v-btn icon :href="`https://${linkedin}`"
+              ><v-icon class="pa-1" size="20"> mdi-linkedin </v-icon></v-btn
+            >
+            <v-btn icon :href="`https://${github}`"
+              ><v-icon class="pa-1" size="20"> mdi-github </v-icon></v-btn
+            >
+            <v-btn icon :href="`https://${facebook}`"
+              ><v-icon class="pa-1" size="20"> mdi-facebook </v-icon></v-btn
+            >
+            <v-btn icon :href="`https://${twitter}`"
+              ><v-icon class="pa-1" size="20"> mdi-twitter </v-icon></v-btn
+            >
+            <v-btn icon :href="`https://${website}`"
+              ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
+            >
+
+            <v-dialog v-model="dialog" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
+                  <v-icon class="pa-1" size="20"> mdi-pencil </v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">User Profile</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          label="Adı"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          label="Soyadı"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          label="Branş"
+                          hint="Bilgisayar Mühendisi"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-autocomplete
+                          :items="[
+                            'Hacettepe Üniversitesi ',
+                            'Orta Doğu Teknik Üniversitesi (ODTÜ)',
+                            'Koç Üniversitesi',
+                            'stanbul Teknik Üniversitesi (İTÜ)',
+                            'İstanbul Üniversitesi',
+                            'Ankara Üniversitesi',
+                            'Gazi Üniversitesi',
+                            'Ege Üniversitesi',
+                            'Sabancı Üniversitesi',
+                            'Yıldız Teknik Üniversitesi',
+                            'Boğaziçi Üniversitesi',
+                          ]"
+                          label="Okulu"
+                        ></v-autocomplete>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field label="Email*" required></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Password*"
+                          type="password"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-select
+                          :items="['0-17', '18-29', '30-54', '54+']"
+                          label="Age*"
+                          required
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-autocomplete
+                          :items="[
+                            'Skiing',
+                            'Ice hockey',
+                            'Soccer',
+                            'Basketball',
+                            'Hockey',
+                            'Reading',
+                            'Writing',
+                            'Coding',
+                            'Basejump',
+                          ]"
+                          label="Interests"
+                          multiple
+                        ></v-autocomplete>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="dialog = false">
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="dialog = false">
+                    Save
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-layout>
         </v-col>
       </v-row>
@@ -61,7 +170,28 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      dialog: false,
+    }
+  },
+  props: [
+    'name',
+    'surname',
+    'major',
+    'university',
+    'birthDate',
+    'mail',
+    'phoneNumber',
+    'city',
+    'linkedin',
+    'github',
+    'facebook',
+    'twitter',
+    'website',
+  ],
+}
 </script>
 
 <style>
