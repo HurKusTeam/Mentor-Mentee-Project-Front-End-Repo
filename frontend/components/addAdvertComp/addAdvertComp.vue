@@ -128,20 +128,19 @@
         }; 
         console.log(AdvertModel);
 
-        return await this.$axios.$post('/api/AddAdvert',AdvertModel)
+        return await this.$axios.$post('/api/AddAdvert/134',AdvertModel)
           .then((response)=>{
+            console.log(response)
+
             this.dialog=false
             this.$router.push('/');
 
-            console.log(response)
+            
 
 
 
           } ).catch((error) => {
-    if(error.response.status === 400){
-        this.$router.push('/login');
-        this.test=true
-    }
+            console.log(error)
 })
          
         
