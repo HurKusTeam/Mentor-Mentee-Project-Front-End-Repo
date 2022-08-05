@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pt-0 pb-0">
+  <v-container class="pb-0">
     <v-card class="mx-auto" max-width="1000" tile>
       <v-timeline class="pa-8">
         <v-timeline-item
@@ -115,35 +115,35 @@ export default {
     dialog: false,
     meetings: [
       {
-        title: '',
+        title: 'Video izle',
         color: 'cyan',
         day: 'Pazartesi',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
         date: new Date().toISOString().slice(0,10),
       },
       {
-        title: '',
+        title: 'Video izle',
         color: 'green',
         day: 'Salı',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
         date: new Date().toISOString().slice(0,10),
       },
       {
-        title: '',
+        title: 'Video izle',
         color: 'pink',
         day: 'Çarşamba',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
         date: new Date().toISOString().slice(0,10),
       },
       {
-        title: '',
+        title: 'Video izle',
         color: 'amber',
         day: 'Perşembe',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
         date: new Date().toISOString().slice(0,10),
       },
       {
-        title: '',
+        title: 'Video izle',
         color: '#FF0000FF',
         day: 'Cumartesi',
         link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
