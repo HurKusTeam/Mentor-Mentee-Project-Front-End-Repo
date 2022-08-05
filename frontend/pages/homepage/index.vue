@@ -3,20 +3,20 @@
     <div >
     <v-col>
     <div  >
-  <v-card class="mx-auto hover:bg-cyan-600 " max-width="2000" >
+  <v-card class="mx-auto hover:bg-cyan-600 " max-width="2200" >
        <v-btn @click = "show = true"
       class="ma-8 absolute bottom-0 left-3 ..."
       outlined
       color="indigo"
     >
-      Outlined Button
+      Mentors
        </v-btn>
     <v-btn @click = "show = false"
       class="ma-8 absolute bottom-0 left-7 ..."
       outlined
       color="indigo"
     >
-      Outlined Button
+      Company Adds
     </v-btn>
    </v-card>
 </div>
@@ -40,7 +40,23 @@ export default {
   data() {
     return {
       show: false,
+      users: [],
+      uni: null,
     }
+  },
+
+  methods: {
+    async createUser() {
+      return await this.$axios.$get('/api/IndividualMentors').then((response) => {
+        this.users = response
+        this.uni = this.users.Universities
+        console.log(response)
+      })
+    },
+  },
+
+  mounted() {
+    this.createUser()
   },
   
   

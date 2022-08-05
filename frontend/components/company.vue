@@ -1,5 +1,5 @@
 <template>
-    <v-card style="position: sticky; top: 0">
+    <v-card class="mx-auto" max-width="2000" tile>
       <v-list-item>
         <v-list-item-content style="text-align: center">
           <v-list-item-avatar size="200">
