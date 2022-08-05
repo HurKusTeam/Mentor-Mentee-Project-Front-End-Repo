@@ -1,7 +1,7 @@
 <template>
   <header class="toolbar">
     <div class="toolbar--container ">
-      <p href="#_" class="text--logo text-4xl text-gradient bg-gradient-to-r from-blue-600 via-indigo-400 to-purple-300">
+      <p href="/index" class="text--logo text-4xl text-gradient bg-gradient-to-r from-blue-600 via-indigo-400 to-purple-300">
         HÜRKUŞ
       </p>
       <div class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end">

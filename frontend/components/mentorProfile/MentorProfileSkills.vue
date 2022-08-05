@@ -19,10 +19,7 @@
                 <v-list-item>
                   <v-list-item-content class="pt-0">
                     <v-flex>
-                      <v-list-item-action-text class="pr-1">Java</v-list-item-action-text>
-                      <v-list-item-action-text class="pr-1">C#</v-list-item-action-text>
-                      <v-list-item-action-text class="pr-1">Python</v-list-item-action-text>
-                      <v-list-item-action-text class="pr-1">Go</v-list-item-action-text>
+                      <v-list-item-action-text v-for="skill in skills" :key="skill.ID" class="pr-1">{{skill.Name}}</v-list-item-action-text>
                     </v-flex>
                   </v-list-item-content>
                 </v-list-item>
@@ -38,8 +35,7 @@
                 <v-list-item>
                   <v-list-item-content class="pt-0">
                     <v-flex>
-                      <v-list-item-action-text class="pr-1">İngilizce</v-list-item-action-text>
-                      <v-list-item-action-text class="pr-1">Türkçe</v-list-item-action-text>
+                      <v-list-item-action-text v-for="language in languages" :key="language.ID" class="pr-1">{{language.Name}}</v-list-item-action-text>
                     </v-flex>
                   </v-list-item-content>
                 </v-list-item>
@@ -53,7 +49,12 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: [
+    "languages",
+    "skills"
+  ]
+}
 </script>
 
 <style>
