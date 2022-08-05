@@ -1,6 +1,6 @@
 <template>
   <div class="todo-list">
-    <div class="title">{{ title }} {{ button }}</div>
+    <div class="title">{{ title }}</div>
     <slot></slot>
   </div>
 </template>

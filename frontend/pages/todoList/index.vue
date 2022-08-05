@@ -1,8 +1,23 @@
 <template>
   <div class="app">
+    <div class="text-center mr-3">
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn color="primary" dark v-bind="attrs" v-on="on">
+            Çıraklar
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="mentee in mentees" :key="mentee">
+            <v-btn>{{ mentee }}</v-btn>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </div>
     <todo-list title="Yapılacaklar">
       <draggable
         :list="todos"
+        @add="onAdd0"
         group="todosapp"
         ghostClass="on-drag"
         animation="400"
@@ -15,20 +30,23 @@
         ></todo-item>
       </draggable>
 
-      <v-form>
+      <v-form class="mt-3" ref="form">
         <v-text-field
           v-model="title"
-          :rules="wordsRules"
           counter="25"
+          :rules="inputRules"
           hint="En fazla 25 karakter"
-          label="Eklemek istediğiniz işi yazın"
-        ></v-text-field
-      ></v-form>
-      <v-btn class="mt-2" color="green"><v-icon>mdi-plus</v-icon></v-btn>
+          label="Eklemek istediğiniz iş"
+        ></v-text-field>
+        <v-btn v-on:click="submit()" color="green"
+          ><v-icon>mdi-plus</v-icon></v-btn
+        >
+      </v-form>
     </todo-list>
     <todo-list title="Yapılıyor">
       <draggable
         :list="inProgress"
+        @add="onAdd1"
         group="todosapp"
         ghostClass="on-drag"
         animation="400"
@@ -44,6 +62,7 @@
     <todo-list title="Yapıldı">
       <draggable
         :list="completed"
+        @add="onAdd2"
         group="todosapp"
         ghostClass="on-drag"
         animation="400"
@@ -59,6 +78,7 @@
     <todo-list title="Onaylandı">
       <draggable
         :list="done"
+        @add="onAdd3"
         group="todosapp"
         ghostClass="on-drag"
         animation="400"
@@ -81,6 +101,11 @@ import draggable from 'vuedraggable'
 export default {
   data() {
     return {
+      inputRules: [(v) => v.length >= 3 || 'En az 3 karakter'],
+      title: '',
+
+      mentees: ['Ali', 'Ayşe'],
+
       todos: [
         {
           id: 1,
@@ -112,6 +137,34 @@ export default {
     }
   },
   components: { TodoList, TodoItem, draggable },
+  methods: {
+    submit() {
+      if (this.$refs.form.validate()) {
+        console.log(this.title, 0)
+      }
+    },
+    getComponentData(evt) {
+      console.log({
+        props: {
+          value: evt.title,
+        },
+      })
+    },
+
+    onAdd0: function (evt) {
+      console.log(0)
+      this.getComponentData(evt)
+    },
+    onAdd1: function (evt) {
+      console.log(1)
+    },
+    onAdd2: function (evt) {
+      console.log(2)
+    },
+    onAdd3: function (evt) {
+      console.log(3)
+    },
+  },
 }
 </script>
 
