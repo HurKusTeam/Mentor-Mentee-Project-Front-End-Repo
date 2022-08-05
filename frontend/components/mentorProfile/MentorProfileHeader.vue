@@ -72,21 +72,16 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="text-h5">User Profile</span>
+                  <span class="text-h5">Profil Düzenleme</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          label="Adı"
-                          required
-                        ></v-text-field>
+                        <v-text-field label="Adı" required></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          label="Soyadı"
-                        ></v-text-field>
+                        <v-text-field label="Soyadı"></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
@@ -113,8 +108,18 @@
                           label="Okulu"
                         ></v-autocomplete>
                       </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-text-field
+                          label="Doğum Tarihi"
+                          type="date"
+                        ></v-text-field>
+                      </v-col>
                       <v-col cols="12">
-                        <v-text-field label="Email*" required></v-text-field>
+                        <v-text-field
+                          label="Email*"
+                          hint="örnek_mail@gmail.com"
+                          required
+                        ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
@@ -123,41 +128,86 @@
                           required
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-select
-                          :items="['0-17', '18-29', '30-54', '54+']"
-                          label="Age*"
+                      <v-col cols="12" sm="3">
+                        <v-text-field
+                          label="Linkedin"
+                          hint="linkedin.com"
                           required
-                        ></v-select>
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="2">
+                        <v-text-field
+                          label="Github"
+                          hint="github.com"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="3">
+                        <v-text-field
+                          label="Facebook"
+                          hint="facebook.com"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="2">
+                        <v-text-field
+                          label="Twitter"
+                          hint="twitter.com"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="2">
+                        <v-text-field
+                          label="Website"
+                          hint="örnek.com"
+                          required
+                        ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-autocomplete
                           :items="[
-                            'Skiing',
-                            'Ice hockey',
-                            'Soccer',
-                            'Basketball',
-                            'Hockey',
-                            'Reading',
-                            'Writing',
-                            'Coding',
-                            'Basejump',
+                            'Türkçe',
+                            'İngilizce',
+                            'Çince',
+                            'Almanca',
+                            'Fransızca',
+                            'İspanyolca',
+                            'Hintçe',
+                            'Arapça',
                           ]"
-                          label="Interests"
+                          label="Dil"
+                          multiple
+                        ></v-autocomplete>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-autocomplete
+                          :items="[
+                            'Java',
+                            'C#',
+                            'C++',
+                            'Go',
+                            'Vue',
+                            'Python',
+                            'Php',
+                            'JavaScript',
+                            'R',
+                            'Flutter',
+                          ]"
+                          label="Yetenekler"
                           multiple
                         ></v-autocomplete>
                       </v-col>
                     </v-row>
                   </v-container>
-                  <small>*indicates required field</small>
+                  <small>*Doldurulması zorunlu alanlar</small>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="dialog = false">
-                    Close
+                    Kapat
                   </v-btn>
                   <v-btn color="blue darken-1" text @click="dialog = false">
-                    Save
+                    Kaydet
                   </v-btn>
                 </v-card-actions>
               </v-card>
