@@ -9,7 +9,7 @@
         </template>
         <v-list>
           <v-list-item v-for="mentee in mentees" :key="mentee">
-            <v-btn>{{ mentee }}</v-btn>
+            <v-btn>{{ mentee.name }}</v-btn>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -103,11 +103,22 @@ export default {
     return {
       inputRules: [(v) => v.length >= 3 || 'En az 3 karakter'],
       title: '',
+      thisMentee: '',
 
-      mentees: ['Ali', 'Ayşe'],
+      mentees: [
+        {
+          menteeId: 2,
+          name: 'Ayşe',
+        },
+        {
+          menteeId: 1,
+          name: 'Ali',
+        },
+      ],
 
       todos: [
         {
+          menteeId: 2,
           id: 1,
           todo: 'Kitap oku',
         },
@@ -143,26 +154,26 @@ export default {
         console.log(this.title, 0)
       }
     },
-    getComponentData(evt) {
+    getComponentData(evt, indx) {
       console.log({
-        props: {
-          value: evt.title,
-        },
+        value: evt.item.innerText,
+        indx,
       })
     },
 
     onAdd0: function (evt) {
       console.log(0)
-      this.getComponentData(evt)
+      this.getComponentData(evt, 0)
     },
     onAdd1: function (evt) {
       console.log(1)
+      this.getComponentData(evt, 1)
     },
     onAdd2: function (evt) {
-      console.log(2)
+      this.getComponentData(evt, 2)
     },
     onAdd3: function (evt) {
-      console.log(3)
+      this.getComponentData(evt, 3)
     },
   },
 }
