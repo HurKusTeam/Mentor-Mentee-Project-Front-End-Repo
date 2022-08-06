@@ -1,7 +1,18 @@
 <template>
   <div class="todo-item">
     {{ item.todo }}
-    <v-btn x-small><v-icon>mdi-account</v-icon></v-btn>
+    <v-dialog v-model="dialog" max-width="600px">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn x-small color="primary" dark v-bind="attrs" v-on="on">
+          Info
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">User Profile</span>
+        </v-card-title>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
