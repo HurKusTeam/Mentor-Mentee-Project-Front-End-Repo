@@ -22,7 +22,7 @@
               <v-col cols="4">
                 <v-list-item-content>
                   <v-list-item-title class="title">
-                    {{ fullName(user, ' ') }}
+                    {{ fullName(user, user) }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     <v-icon class="pa-1" size="20">mdi-school</v-icon
@@ -81,10 +81,11 @@ export default {
       users: [
         {
           id: 1,
-          UserName: 'Semih',
-          surName: 'Gür',
-          department: 'Yazılım',
-          skills: ['c', 'go'],
+          Name: 'Semih',
+          Surname: 'Gür',
+          Major: 'Yazılım',
+          Skills: ['c', 'go'],
+          City: 'Ankara',
         },
       ],
     }
@@ -95,7 +96,7 @@ export default {
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/MyEmployees').then((response) => {
+      return this.$axios.$get('/api/MyMentors').then((response) => {
         this.users = response
         console.log(response)
       })
