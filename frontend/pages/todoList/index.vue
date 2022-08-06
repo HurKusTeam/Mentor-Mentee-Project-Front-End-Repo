@@ -1,19 +1,5 @@
 <template>
   <div class="app">
-    <div class="text-center mr-3">
-      <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on">
-            Çıraklar
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item v-for="mentee in mentees" :key="mentee">
-            <v-btn v-on:click="switcch(mentee.id)">{{ mentee.name }}</v-btn>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </div>
     <todo-list title="Yapılacaklar">
       <draggable
         :list="todos"
@@ -150,21 +136,17 @@ export default {
   },
   components: { TodoList, TodoItem, draggable },
   methods: {
-    switcch(menteeID) {
-      console.log(menteeID)
-    },
-
     submit() {
       if (this.$refs.form.validate()) {
         console.log(this.title, 0)
       }
     },
-    getComponentData(evt, indx) {
+    getComponentData(evt, index) {
       console.log({
         value: evt.item.innerText,
         id: evt.item._underlying_vm_.id,
         menteeId: evt.item._underlying_vm_.menteeId,
-        indx,
+        index,
       })
     },
 
