@@ -1,6 +1,7 @@
 <template>
   <div class="todo-item">
     {{ item.todo }}
+    <v-btn x-small><v-icon>mdi-account</v-icon></v-btn>
   </div>
 </template>
 

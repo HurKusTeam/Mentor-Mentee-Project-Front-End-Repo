@@ -74,7 +74,8 @@
           :key="todo.id"
           :item="todo"
           class="mb-2"
-        ></todo-item>
+        >
+        </todo-item>
       </draggable>
     </todo-list>
   </div>
