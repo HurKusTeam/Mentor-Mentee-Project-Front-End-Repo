@@ -111,7 +111,7 @@ export default {
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/MyMentors').then((response) => {
+      return this.$axios.$get('/api/ReceivedApplications').then((response) => {
         this.userDatas = response
 
         console.log('response', response)
