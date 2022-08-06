@@ -2,103 +2,114 @@
   <v-container class="pb-0">
     <v-card class="mx-auto" max-width="1000" tile>
       <v-timeline class="pa-8">
-        <v-timeline-item
-          fill-dot
-          class="white--text mb-12"
-          color="orange"
-          large
-        >
+        <v-timeline-item fill-dot class="white--text mb-12" color="blue" large>
           <template v-slot:icon>
-            <span>JL</span>
+            <span>M</span>
           </template>
-          <v-row>
-            <v-col class="pa-0 pl-1 pr-1">
-              <v-text-field
-                v-model="title"
-                hide-details
-                dense
-                flat
-                label="Title"
-                outlined
-                @keydown.enter="comment"
-              >
-              </v-text-field>
-            </v-col>
-            <v-col class="pa-0 pl-1 pr-1">
-              <v-text-field
-                v-model="link"
-                hide-details
-                dense
-                flat
-                label="Youtube link"
-                outlined
-                @keydown.enter="comment"
-              >
-              </v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col class="pa-0 pt-1 pr-1">
-              <v-dialog v-model="dialog" persistent max-width="350px">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn block depressed v-bind="attrs" v-on="on"> Renk seçiniz </v-btn>
-                </template>
-                <v-card>
-                  <v-card-title>
-                    <span class="text-h5">Renk seçiniz</span>
-                  </v-card-title>
-                  <v-card-text>
-                    <v-color-picker
-                      v-model="clr"
-                      dot-size="25"
-                      mode="hexa"
-                      swatches-max-height="200"
-                    ></v-color-picker>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="dialog = false">
-                      Kapat
+          <v-form ref="form">
+            <v-row>
+              <v-col class="pa-0 pl-1 pr-1">
+                <v-text-field
+                  v-model="title"
+                  :rules="inputRule"
+                  hide-details
+                  dense
+                  flat
+                  label="Title"
+                  outlined
+                  @keydown.enter="comment"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col class="pa-0 pl-1 pr-1">
+                <v-text-field
+                  v-model="link"
+                  :rules="inputRule"
+                  hide-details
+                  dense
+                  flat
+                  label="Youtube link"
+                  outlined
+                  @keydown.enter="comment"
+                >
+                </v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col class="pa-0 pt-1 pr-1">
+                <v-dialog v-model="dialog" persistent max-width="350px">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn block depressed v-bind="attrs" v-on="on">
+                      Renk seçiniz
                     </v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false, saveColor()">
-                      Kaydet
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-col>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">Renk seçiniz</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-color-picker
+                        v-model="clr"
+                        dot-size="25"
+                        mode="hexa"
+                        swatches-max-height="200"
+                      ></v-color-picker>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="dialog = false">
+                        Kapat
+                      </v-btn>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click=";(dialog = false), saveColor()"
+                      >
+                        Kaydet
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-col>
 
-            <v-col class="pt-1 pa-0 pl-1">
-              <v-btn block class="mx-0" depressed @click="comment"> Ekle </v-btn>
-            </v-col>
-          </v-row>
+              <v-col class="pt-1 pa-0 pl-1">
+                <v-btn block class="mx-0" depressed @click="submit()">
+                  Ekle
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-form>
         </v-timeline-item>
         <v-timeline-item
           v-for="(meeting, i) in meetings"
           :key="i"
-          :color="meeting.color"
+          :color="meeting.Description"
+          :id="meeting.ID"
+          :isDeleted="meeting.IsDeleted"
+          :menteeId="meeting.MenteeID"
+          :mentorId="meeting.MentorID"
           small
         >
           <template v-slot:opposite>
             <span
-              :class="`headline font-weight-bold ${meeting.color}--text`"
-              :style="`color: ${meeting.color}`"
-              v-text="meeting.day"
+              :class="`headline font-weight-bold ${meeting.Description}--text`"
+              :style="`color: ${meeting.Description}`"
+              v-text="meeting.Date"
             ></span>
           </template>
           <div class="py-4">
-            <h2 :class="`headline font-weight-light mb-4 ${meeting.color}--text`"
-              :style="`color: ${meeting.color}`">
-              {{ meeting.title }}
+            <h2
+              :class="`headline font-weight-light mb-4 ${meeting.Description}--text`"
+              :style="`color: ${meeting.Description}`"
+            >
+              {{ meeting.Title }}
             </h2>
-            <div class="pb-2">
-              <v-icon size="20"> mdi-calendar-range </v-icon>
-              {{ meeting.date }}
-            </div>
             <div class="container1">
               <iframe
                 class="responsive-iframe"
-                :src='`${meeting.link}`'
+                :src="`https://www.youtube.com/embed/${meeting.Link.split(
+                  '='
+                ).pop()}`"
                 allowfullscreen
               ></iframe>
             </div>
@@ -111,65 +122,45 @@
 
 <script>
 export default {
-  data: () => ({
-    dialog: false,
-    meetings: [
-      {
-        title: 'Video izle',
-        color: 'cyan',
-        day: 'Pazartesi',
-        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
-        date: new Date().toISOString().slice(0,10),
-      },
-      {
-        title: 'Video izle',
-        color: 'green',
-        day: 'Salı',
-        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
-        date: new Date().toISOString().slice(0,10),
-      },
-      {
-        title: 'Video izle',
-        color: 'pink',
-        day: 'Çarşamba',
-        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
-        date: new Date().toISOString().slice(0,10),
-      },
-      {
-        title: 'Video izle',
-        color: 'amber',
-        day: 'Perşembe',
-        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
-        date: new Date().toISOString().slice(0,10),
-      },
-      {
-        title: 'Video izle',
-        color: '#FF0000FF',
-        day: 'Cumartesi',
-        link: 'https://www.youtube.com/embed/u9oSVuf-0rc',
-        date: new Date().toISOString().slice(0,10),
-      },
-    ],
-    link: null,
-    title: null,
-    clr: null,
-    color: null,
-  }),
+  data() {
+    return {
+      inputRule: [(v) => v.length >= 1 || 'Boş bırakılamaz'],
+      dialog: false,
+      meetings: [],
+      link: '',
+      title: '',
+      clr: null,
+      color: '#2196F3',
+    }
+  },
+
+  mounted() {
+    this.createUser()
+  },
 
   methods: {
-    saveColor(){
+    async createUser() {
+      return await this.$axios.$get('/api/Meetings/35').then((response) => {
+        this.meetings = response
+        console.log(response)
+      })
+    },
+    saveColor() {
       this.color = this.clr.hexa
     },
-    comment() {
-      this.meetings.push({
-        title: this.title,
-        link: 'https://www.youtube.com/embed/' + this.link.split("=").pop(),
-        day: 'Salı',
-        color: this.color,
-        date: new Date().toISOString().slice(0,10),
-      })
-      this.link = "",
-      this.title = ""
+    async submit() {
+      let values = {
+        Title: this.title,
+        Link: this.link,
+        Date: new Date().toISOString().slice(0, 10),
+        Description: this.color
+      }
+      console.log(values)
+      if (this.$refs.form.validate()) {
+        await this.$axios
+          .$post('/api/Meetings/35', values)
+          .then((response) => console.log(response))
+      }
     },
   },
 }

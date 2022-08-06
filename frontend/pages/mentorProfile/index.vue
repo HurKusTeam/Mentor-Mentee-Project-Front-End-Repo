@@ -1,11 +1,10 @@
 <template>
   <v-main>
-    <MentorProfileHeader 
-    v-if="uni != null"
+    <MentorProfileHeader
     :name="this.users.Name" 
     :surname="this.users.Surname" 
     :major="this.users.Major"
-    :university="this.uni.Name"
+    :university="this.users.Universities?.Name"
     :birthDate="this.users.BirthDate"
     :mail="this.users.Mail"
     :phoneNumber="this.users.PhoneNumber"
@@ -15,8 +14,10 @@
     :facebook="this.users.Facebook"
     :twitter="this.users.Twitter"
     :website="this.users.Website"/>
-    <MentorProfileCompanie />
-    <MentorProfileAdvert />
+    <MentorProfileCompanie
+    v-if="this.users.IsIndividual == false" />
+    <MentorProfileAdvert
+    v-if="this.users.IsIndividual" />
     <MentorProfileInfo
     :biography="this.users.Biography" />
     <MentorProfileSkills
@@ -40,9 +41,8 @@ export default {
 
   methods: {
     async createUser() {
-      return await this.$axios.$get('/api/Profile/75').then((response) => {
+      return await this.$axios.$get('/api/Profile').then((response) => {
         this.users = response
-        this.uni = this.users.Universities
         console.log(response)
       })
     },
