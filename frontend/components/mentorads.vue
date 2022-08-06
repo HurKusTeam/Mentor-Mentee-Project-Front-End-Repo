@@ -1,6 +1,9 @@
 <template>
   <v-container class="pb-0">
-    <v-card class="mx-auto" max-width="2000" tile>
+    <v-card class="mx-auto mb-5" max-width="1500" tile
+       v-for="user in users"
+       :key="user.id1"
+    >
       <v-img
         height="200"
         src="https://cdn.pixabay.com/photo/2017/01/16/19/40/mountains-1985027_960_720.jpg"
@@ -20,9 +23,9 @@
                 <v-list-item-title class="title">
                   {{ name }} {{ surname }}
                 </v-list-item-title>
-                <v-list-item-subtitle> {{ major }} </v-list-item-subtitle>
+                <v-list-item-subtitle> <v-icon class="pa-1" size="20"> mdi-school </v-icon> {{ user.Major }} </v-list-item-subtitle>
                 <v-list-item-subtitle>
-                  <v-icon class="pa-1" size="20"> mdi-school </v-icon>
+                  
                   {{ university }}
                 </v-list-item-subtitle>
                 <v-list-item-subtitle>
@@ -74,6 +77,28 @@
 
 <script>
 export default {
+data() {
+    return {
+      users: [],
+      users1: [],
+      
+    }
+
+  },
+
+  methods: {
+    async createUser() {
+      return await this.$axios.$get('/api/IndividualMentors').then((response) => {
+        this.users = response
+        
+        console.log(response)
+      })
+    },
+  },
+
+  mounted() {
+    this.createUser()
+  },
 
 }
 </script>
