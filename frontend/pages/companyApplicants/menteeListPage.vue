@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MenteeList from '../components/CompanyApplicants/MenteeList.vue'
+import MenteeList from '../../components/CompanyApplicants/MenteeList.vue'
 export default { components: { MenteeList } }
 </script>
 

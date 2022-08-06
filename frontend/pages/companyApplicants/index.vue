@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MentorList from '../components/CompanyApplicants/MentorList.vue'
+import MentorList from '../../components/CompanyApplicants/MentorList'
 
 export default {
   name: 'IndexPage',
