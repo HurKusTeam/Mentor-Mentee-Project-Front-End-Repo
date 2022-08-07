@@ -4,7 +4,7 @@
     :name="this.users.Name" 
     :surname="this.users.Surname" 
     :major="this.users.Major"
-    :university="this.users.Universities?.Name"
+    :university="this.users.University"
     :birthDate="this.users.BirthDate"
     :mail="this.users.Mail"
     :phoneNumber="this.users.PhoneNumber"
@@ -13,9 +13,16 @@
     :github="this.users.GitHub"
     :facebook="this.users.Facebook"
     :twitter="this.users.Twitter"
-    :website="this.users.Website"/>
+    :website="this.users.Website"
+    :companyId="this.users.CompanyID"
+    :profilePhoto="this.users.ProfileImage" />
     <MentorProfileCompanie
-    v-if="this.users.IsIndividual == false" />
+    v-if="this.users.IsIndividual == false"
+    :title="this.users.Title"
+    :sector="this.users.Sector"
+    :personal="this.users.PersonalCount"
+    :sinceDate="this.users.SinceDate"
+    :desctiption="this.users.Description" />
     <MentorProfileAdvert
     v-if="this.users.IsIndividual" />
     <MentorProfileInfo
