@@ -61,14 +61,14 @@
             text
             @click="dialog = false"
           >
-            Close
+            Kapat
           </v-btn>
           <v-btn
             color="blue darken-1"
             text
-            @click="createAdvert"
+            @click="addMentor"
           >
-            Save
+            Kaydet
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -91,14 +91,14 @@
     }),
 
     methods: {
-        async createAdvert(){
-        let AdvertModel={
+        async addMentor(){
+        let companyMentor={
             Title:this.email,
             Description:this.password,
         }; 
-        console.log(AdvertModel);
+        console.log(companyMentor);
 
-        return await this.$axios.$post('/api/AddAdvert/134',AdvertModel)
+        return await this.$axios.$post('/api/AddAdvert/134',companyMentor)
           .then((response)=>{
             console.log(response)
 

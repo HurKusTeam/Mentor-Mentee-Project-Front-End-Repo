@@ -78,7 +78,7 @@
 
             </v-row>
           </v-container>
-          <small>*indicates required field</small>
+          <small>İlanınızın detayını ve tarihlerini eksiksiz girin</small>
         </v-card-text>
 
         <v-card-actions>
@@ -88,14 +88,14 @@
             text
             @click="dialog = false"
           >
-            Close
+            Kapat
           </v-btn>
           <v-btn
             color="blue darken-1"
             text
             @click="createAdvert"
           >
-            Save
+            Kaydet
           </v-btn>
         </v-card-actions>
       </v-card>

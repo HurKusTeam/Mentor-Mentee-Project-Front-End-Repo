@@ -23,6 +23,8 @@
                            
                           <v-text-field v-model="email"
                             label="Email"
+                            :rules="emailRules"
+                            required
                             outlined
                             dense
                             color="white"
@@ -152,6 +154,8 @@
                            </v-row>
                           <v-text-field v-model="remail"
                             label="Email"
+                            :rules="emailRules"
+                            required
                             outlined
                             dense
                             color="white"
@@ -260,6 +264,10 @@
         ropti:null,
         rname:null,
         alert:false,
+        emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
         makes_options: [
         {
             text: "Çırak",
@@ -319,7 +327,7 @@
 
         return await this.$axios.$post('/api/Login',MailPW)
           .then((response)=>{
-                    this.alert=false
+            this.alert=false
             this.$router.push('/');
 
             console.log(response)
