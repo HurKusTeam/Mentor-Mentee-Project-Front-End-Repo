@@ -90,7 +90,7 @@ export default {
     return {
       inputRules: [(v) => v.length >= 3 || 'En az 3 karakter'],
       title: '',
-      thisMentee: 'w',
+      thisMentee: false,
 
       mentees: [
         {
