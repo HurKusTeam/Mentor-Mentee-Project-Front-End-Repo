@@ -77,6 +77,7 @@
 export default {
   data() {
     return {
+      mentorId: this.$route.params.mentorId,
       userDatas: [],
       users: [
         {
@@ -95,15 +96,18 @@ export default {
     }
   },
   mounted() {
+    console.log(this.mentorId)
     this.getUserData()
   },
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/MatchMenteeMentor/10').then((response) => {
-        this.users = response
-        console.log(response)
-      })
+      return this.$axios
+        .$get('/api/MatchMenteeMentor/' + this.mentorId)
+        .then((response) => {
+          this.users = response
+          console.log(response)
+        })
     },
     sendConfirm(id) {
       return console.log(id)

@@ -57,8 +57,7 @@
         <v-col cols="4">
           <v-btn
             class="mb-3 mt-3"
-            v-on:click="sendConfirm(user.ID)"
-            :to="`/companyApplicants/menteeListPage/${user.User.ID}`"
+            v-on:click="sendConfirm(user.User.ID)"
             color="green"
           >
             <v-icon>mdi-clipboard-account</v-icon>
@@ -102,7 +101,11 @@ export default {
       })
     },
     sendConfirm(id) {
-      return console.log(id)
+      console.log(id)
+      this.$router.push({
+        name: 'menteeList',
+        params: { mentorId: id },
+      })
     },
     sendDeny(id) {
       return console.log(id)
