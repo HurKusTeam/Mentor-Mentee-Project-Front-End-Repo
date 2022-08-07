@@ -30,6 +30,20 @@
                 sm="6"
                 md="12"
               >
+                <v-text-field
+                  v-model="uname"
+                  
+                  :rules="nameRules"
+                  label="İsim Soyisim"
+                  required
+                ></v-text-field>
+              </v-col>
+
+              <v-col
+                cols="12"
+                sm="6"
+                md="12"
+              >
                 <v-text-field v-model="email"
                   label="Usta emailini girin"
                   :rules="emailRules"
@@ -85,20 +99,24 @@
         email: '',
         emailRules: [
         v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        v => /.+@.+\..+/.test(v) || 'Lütfen geçerli mail girin',
+      ],
+            nameRules: [
+        v => !!v || 'İsim alanı boş bırakılamaz',
       ],
 
     }),
 
     methods: {
         async addMentor(){
-        let companyMentor={
-            Title:this.email,
-            Description:this.password,
+        let RegisteringgUser={
+          Username : this.uname,
+          Mail : this.email,
+          Password : this.password
         }; 
-        console.log(companyMentor);
 
-        return await this.$axios.$post('/api/AddAdvert/134',companyMentor)
+
+        return await this.$axios.$post('/api/AddMyMentor',RegisteringgUser)
           .then((response)=>{
             console.log(response)
 
