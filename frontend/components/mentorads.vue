@@ -1,12 +1,12 @@
 <template>
   <v-container class="pb-0">
-    <v-card class="mx-auto mb-5" max-width="1500" tile
+    <v-card class="mx-auto mb-5 rounded-lg" max-width="1500" tile
        v-for="user in users"
        :key="user.id1"
     >
       <v-img
         height="200"
-        src="https://cdn.pixabay.com/photo/2017/01/16/19/40/mountains-1985027_960_720.jpg"
+        src="https://c4.wallpaperflare.com/wallpaper/500/442/354/outrun-vaporwave-hd-wallpaper-preview.jpg"
       ></v-img>
 
       <v-row no-gutters>
@@ -21,29 +21,34 @@
             <v-list-item-content>
               <v-col>
                 <v-list-item-title class="title">
-                  {{ name }} {{ surname }}
+                  {{ user.Name }} {{ user.Surname }}
+                  <v-list-item-subtitle> {{user.Major}} </v-list-item-subtitle>
                 </v-list-item-title>
-                <v-list-item-subtitle> <v-icon class="pa-1" size="20"> mdi-school </v-icon> {{ user.Major }} </v-list-item-subtitle>
-                <v-list-item-subtitle>
+               
                   
-                  {{ university }}
+                <v-list-item-subtitle>
+                  <v-icon class="pa-1" size="20"> mdi-school </v-icon>
+                  {{ user.Uni }}
                 </v-list-item-subtitle>
+
+
+
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-calendar-range </v-icon>
-                  {{ birthDate }}
+                  {{ user.Birthdate }}
                 </v-list-item-subtitle> </v-col
               ><v-col>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-email </v-icon>
-                  {{ mail }}
+                  {{ user.Mail }}
                 </v-list-item-subtitle>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-phone </v-icon>
-                  {{ phoneNumber }}</v-list-item-subtitle
+                  {{ user.Tel }}</v-list-item-subtitle
                 >
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-map-marker </v-icon>
-                  {{ city }}
+                  {{ user.City }}
                 </v-list-item-subtitle></v-col
               >
             </v-list-item-content>
@@ -51,19 +56,19 @@
         </v-col>
         <v-col cols="6" sm="2" md="2">
           <v-layout class="pa-3" justify-end>
-            <v-btn icon :href="`https://${linkedin}`"
+            <v-btn icon :href="`https://${user.Linkedin}`"
               ><v-icon class="pa-1" size="20"> mdi-linkedin </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${github}`"
+            <v-btn icon :href="`https://${user.Github}`"
               ><v-icon class="pa-1" size="20"> mdi-github </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${facebook}`"
+            <v-btn icon :href="`https://${user.Facebook}`"
               ><v-icon class="pa-1" size="20"> mdi-facebook </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${twitter}`"
+            <v-btn icon :href="`https://${user.Twitter}`"
               ><v-icon class="pa-1" size="20"> mdi-twitter </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${website}`"
+            <v-btn icon :href="`https://${user.Website}`"
               ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
             >
 
