@@ -23,7 +23,7 @@
               <v-col sm12 md12>
                 <v-list-item-content>
                   <v-list-item-title class="title">
-                    {{ fullName(user.UserName, ' ') }}
+                    {{ fullName(user.User?.Name, user.User?.Surname) }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
                     <v-icon class="pa-1" size="20">mdi-school</v-icon
@@ -31,7 +31,7 @@
                   </v-list-item-subtitle>
                   <v-list-item-subtitle>
                     <v-icon class="pa-1" size="20"> mdi-town-hall </v-icon>
-                    {{ user.Universities }}</v-list-item-subtitle
+                    {{ user.Userdefault?.Universities }}</v-list-item-subtitle
                   >
                   <v-list-item-subtitle>
                     <v-icon class="pa-1" size="20"> mdi-account-school </v-icon>
@@ -42,21 +42,23 @@
               <v-col sm12 md12 class="ml-4" cols="6">
                 <v-flex>
                   <v-icon size="20">mdi-map-marker </v-icon>
-                  {{ user.location }} <v-icon size="20">mdi-linkedin</v-icon>
-                  {{ user.linkedin }} <v-icon size="20">mdi-github</v-icon>
-                  {{ user.gitHub }}
+                  {{ user.User?.City }} <v-icon size="20">mdi-linkedin</v-icon>
+                  {{ user.About?.Linkedin }}
+                  <v-icon size="20">mdi-github</v-icon>
+                  {{ user.About?.GitHub }}
                 </v-flex>
                 <v-flex class="mt-2">
                   <v-icon>mdi-star</v-icon>
                   <v-list-item-action-subtitle
-                    v-for="skill in user.skills"
+                    v-for="skill in user.Skills"
                     :key="skill"
                   >
-                    {{ skill }},</v-list-item-action-subtitle
+                    {{ skill.Name }},</v-list-item-action-subtitle
                   >
                 </v-flex>
               </v-col>
               <v-col sm12 md12>
+                <v-card class="" flat> %{{ user.Percent }} Eşleşme </v-card>
                 <v-btn
                   class="mb-3 mt-3"
                   v-on:click="sendConfirm(user.ID)"
@@ -77,6 +79,7 @@
 export default {
   data() {
     return {
+      succses: 'red',
       mentorId: this.$route.params.mentorId,
       userDatas: [],
       users: [
