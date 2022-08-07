@@ -62,21 +62,8 @@
       </draggable>
     </todo-list>
     <todo-list title="Onaylandı">
-      <draggable
-        :list="done"
-        @add="onAdd3"
-        group="todosapp"
-        ghostClass="on-drag"
-        animation="400"
-      >
-        <todo-item
-          v-for="todo in done"
-          :key="todo.id"
-          :item="todo"
-          class="mb-2"
-        >
-        </todo-item>
-      </draggable>
+      <todo-item v-for="todo in done" :key="todo.id" :item="todo" class="mb-2">
+      </todo-item>
     </todo-list>
   </div>
 </template>

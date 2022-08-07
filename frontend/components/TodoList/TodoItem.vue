@@ -9,8 +9,25 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">User Profile</span>
+          <span class="text-h5">Detaylar</span>
         </v-card-title>
+        <v-card-text justify="center">
+          <v-row>
+            <v-col>
+              <v-textarea outlined dense label="Hakkında"> </v-textarea>
+            </v-col>
+            <v-col>
+              <v-date-picker v-model="picker"></v-date-picker>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red darken-2" text @click="dialog = false">Kapat</v-btn>
+          <v-btn color="teal darken-1" text @click="dialog = false"
+            >Kaydet</v-btn
+          >
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -20,7 +37,12 @@
 export default {
   props: ['item'],
   data() {
-    return {}
+    return {
+      dialog: false,
+      picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
+    }
   },
 }
 </script>
