@@ -1,43 +1,54 @@
 <template>
   <v-container class="pb-0">
-    <v-card class="mx-auto" max-width="1000" tile>
+    <v-card class="mx-auto mb-5 rounded-lg" max-width="1500" tile
+       v-for="user in users"
+       :key="user.id1"
+    >
       <v-img
         height="200"
-        src="https://cdn.pixabay.com/photo/2017/01/16/19/40/mountains-1985027_960_720.jpg"
+        src="https://c4.wallpaperflare.com/wallpaper/500/442/354/outrun-vaporwave-hd-wallpaper-preview.jpg"
       ></v-img>
 
       <v-row no-gutters>
         <v-col cols="12" sm="10" md="10">
           <v-list-item class="pa-5">
             <v-list-item-avatar class="ml-2" size="100">
-              <img v-if="profilePhoto" :src="`${profilePhoto}`" alt="John" />
+              <img
+                src="https://www.w3schools.com/howto/img_avatar.png"
+                alt="John"
+              />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-col>
                 <v-list-item-title class="title">
-                  {{ name }} {{ surname }}
+                  {{ user.Name }} {{ user.Surname }}
+                  <v-list-item-subtitle> {{user.Major}} </v-list-item-subtitle>
                 </v-list-item-title>
-                <v-list-item-subtitle> {{ major }} </v-list-item-subtitle>
+               
+                  
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-school </v-icon>
-                  {{ university }}
+                  {{ user.Uni }}
                 </v-list-item-subtitle>
+
+
+
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-calendar-range </v-icon>
-                  {{ birthDate }}
+                  {{ user.Birthdate }}
                 </v-list-item-subtitle> </v-col
               ><v-col>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-email </v-icon>
-                  {{ mail }}
+                  {{ user.Mail }}
                 </v-list-item-subtitle>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-phone </v-icon>
-                  {{ phoneNumber }}</v-list-item-subtitle
+                  {{ user.Tel }}</v-list-item-subtitle
                 >
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-map-marker </v-icon>
-                  {{ city }}
+                  {{ user.City }}
                 </v-list-item-subtitle></v-col
               >
             </v-list-item-content>
@@ -45,29 +56,23 @@
         </v-col>
         <v-col cols="6" sm="2" md="2">
           <v-layout class="pa-3" justify-end>
-            <v-btn icon :href="`https://${linkedin}`"
+            <v-btn icon :href="`https://${user.Linkedin}`"
               ><v-icon class="pa-1" size="20"> mdi-linkedin </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${github}`"
+            <v-btn icon :href="`https://${user.Github}`"
               ><v-icon class="pa-1" size="20"> mdi-github </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${facebook}`"
+            <v-btn icon :href="`https://${user.Facebook}`"
               ><v-icon class="pa-1" size="20"> mdi-facebook </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${twitter}`"
+            <v-btn icon :href="`https://${user.Twitter}`"
               ><v-icon class="pa-1" size="20"> mdi-twitter </v-icon></v-btn
             >
-            <v-btn icon :href="`https://${website}`"
+            <v-btn icon :href="`https://${user.Website}`"
               ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
             >
-            <v-file-input
-              hide-input
-              type="file"
-              @change="updatePhoto"
-              prepend-icon="mdi-image-edit"
-              class="ma-0 pa-0 pl-1"
-            ></v-file-input>
-            <MentorProfileEdit :company_id="companyId" />
+
+            
           </v-layout>
         </v-col>
       </v-row>
@@ -77,47 +82,32 @@
 
 <script>
 export default {
-  data() {
+data() {
     return {
-      photo: 'https://www.w3schools.com/howto/img_avatar.png',
+      users: [],
+      users1: [],
+      
     }
+
   },
-  props: [
-    'name',
-    'surname',
-    'major',
-    'university',
-    'birthDate',
-    'mail',
-    'phoneNumber',
-    'city',
-    'linkedin',
-    'github',
-    'facebook',
-    'twitter',
-    'website',
-    'companyId',
-    'profilePhoto'
-  ],
+
   methods: {
-    updatePhoto(file) {
-      return new Promise((resolve) => {
-        const reader = new FileReader()
-        if (file) {
-          reader.readAsDataURL(file)
-        }
-        reader.onload = async () => {
-          resolve(this.photo = reader.result)
-          let p = {
-              Image: this.photo,
-          }
-          await this.$axios.$post('/api/ProfileImg/', p)
-        }
+    async createUser() {
+      return await this.$axios.$get('/api/IndividualMentors').then((response) => {
+        this.users = response
+        
+        console.log(response)
       })
     },
   },
+
+  mounted() {
+    this.createUser()
+  },
+
 }
 </script>
 
 <style>
+
 </style>

@@ -30,11 +30,11 @@
             >
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-phone </v-icon>
-              numara</v-list-item-subtitle
+              {{user.PhoneNumber}}</v-list-item-subtitle
             >
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-email </v-icon>
-              mail</v-list-item-subtitle
+              {{user.Mail}}</v-list-item-subtitle
             >
           </v-list-item-content>
         </v-col>
@@ -58,8 +58,8 @@
         <v-col cols="4">
           <v-btn
             class="mb-3 mt-3"
-            to="/meetings"
             color="green"
+            v-on:click="sendConfirm(user.MenteeID)"
           >
             <v-icon>mdi-clipboard-account</v-icon>
           </v-btn>
@@ -83,7 +83,15 @@ export default {
     getUserData() {
       return this.$axios.$get('/api/MenteeList').then((response) => {
         this.users = response
-        console.log(response)
+      })
+    },
+    sendConfirm(id) {
+      console.log("asdasda")
+      console.log(id)
+
+      this.$router.push({
+        name: 'meetings',
+        params: { menteeId: id },
       })
     },
   },

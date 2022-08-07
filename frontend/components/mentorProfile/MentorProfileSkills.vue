@@ -19,7 +19,7 @@
                 <v-list-item>
                   <v-list-item-content class="pt-0">
                     <v-flex>
-                      <v-list-item-action-text v-for="skill in skills" :key="skill.ID" class="pr-1">{{skill.Name}}</v-list-item-action-text>
+                      <v-list-item-action-text v-for="(skill, i) in skills" :key="i" class="pr-1">{{skill}}</v-list-item-action-text>
                     </v-flex>
                   </v-list-item-content>
                 </v-list-item>
@@ -35,7 +35,7 @@
                 <v-list-item>
                   <v-list-item-content class="pt-0">
                     <v-flex>
-                      <v-list-item-action-text v-for="language in languages" :key="language.ID" class="pr-1">{{language.Name}}</v-list-item-action-text>
+                      <v-list-item-action-text v-for="(language, i) in languages" :key="i" class="pr-1">{{language}}</v-list-item-action-text>
                     </v-flex>
                   </v-list-item-content>
                 </v-list-item>

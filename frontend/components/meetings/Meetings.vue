@@ -131,6 +131,7 @@ export default {
       title: '',
       clr: null,
       color: '#2196F3',
+      menteeId: this.$route.params.menteeId,
     }
   },
 
@@ -140,9 +141,10 @@ export default {
 
   methods: {
     async createUser() {
-      return await this.$axios.$get('/api/Meetings/35').then((response) => {
+      return await this.$axios.$get('/api/Meetings/' + this.menteeId).then((response) => {
         this.meetings = response
         console.log(response)
+        console.log(this.menteeId)
       })
     },
     saveColor() {
@@ -158,7 +160,7 @@ export default {
       console.log(values)
       if (this.$refs.form.validate()) {
         await this.$axios
-          .$post('/api/Meetings/35', values)
+          .$post('/api/Meetings/' + this.menteeId, values)
           .then((response) => console.log(response))
       }
     },
