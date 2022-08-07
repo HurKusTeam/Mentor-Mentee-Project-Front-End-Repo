@@ -58,7 +58,7 @@
           <v-btn
             class="mb-3 mt-3"
             v-on:click="sendConfirm(user.ID)"
-            to="/companyApplicants/menteeListPage"
+            :to="`/companyApplicants/menteeListPage/${user.User.ID}`"
             color="green"
           >
             <v-icon>mdi-clipboard-account</v-icon>
@@ -77,11 +77,11 @@ export default {
       users: [
         {
           id: 1,
-          Name: 'Semih',
-          Surname: 'Gür',
-          Major: 'Yazılım',
-          Skills: ['c', 'go'],
-          City: 'Ankara',
+          Name: '',
+          Surname: '',
+          Major: '',
+          Skills: [''],
+          City: '',
           Profile: [],
           About: [],
           Mentor: [],

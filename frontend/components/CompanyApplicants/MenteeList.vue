@@ -81,15 +81,15 @@ export default {
       users: [
         {
           id: 1,
-          UserName: 'Semih',
-          surName: 'Gür',
-          department: 'Yazılım',
-          Universities: 'Çankaya Üniversitesi',
+          UserName: '',
+          surName: '',
+          department: '',
+          Universities: '',
           gpa: 2.54,
-          location: 'Ankara',
-          linkedin: 'semihgur',
-          gitHub: 'github',
-          skills: ['c', 'go'],
+          location: '',
+          linkedin: '',
+          gitHub: '',
+          skills: ['c'],
         },
       ],
     }
@@ -100,7 +100,7 @@ export default {
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/MatchMenteeMentor/109').then((response) => {
+      return this.$axios.$get('/api/MatchMenteeMentor/10').then((response) => {
         this.users = response
         console.log(response)
       })
