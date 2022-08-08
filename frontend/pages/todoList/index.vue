@@ -19,9 +19,9 @@
       <v-form class="mt-3" ref="form">
         <v-text-field
           v-model="title"
-          counter="25"
+          counter="20"
           :rules="inputRules"
-          hint="En fazla 25 karakter"
+          hint="En fazla 20 karakter"
           label="Eklemek istediğiniz iş"
         ></v-text-field>
         <v-btn v-on:click="submit()" color="green"
@@ -75,7 +75,9 @@ import draggable from 'vuedraggable'
 export default {
   data() {
     return {
-      inputRules: [(v) => v.length >= 3 || 'En az 3 karakter'],
+      inputRules: [
+        (v) => (v.length >= 3 && v.length <= 20) || 'En az 3 karakter',
+      ],
       title: '',
       thisMentee: false,
 
