@@ -140,11 +140,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click=";(dialog = false)"
-          >
+          <v-btn color="blue darken-1" text @click="dialog = false">
             Kapat
           </v-btn>
           <v-btn
@@ -187,16 +183,31 @@ export default {
       selectedUni: '',
       selectedLangs: [],
       selectedSkills: [],
+      newSkills: [],
     }
   },
   mounted() {
     this.getAllUni(), this.getAllLang(), this.getAllSkills()
   },
   methods: {
+    skillObj(){
+      this.newSkills = []
+      for(this.i = 0; this.i<this.selectedSkills.length; this.i++){
+        this.newSkills.push({
+          SkillCatalogID: this.selectedSkills[this.i],
+        })
+      }
+    },
     submit() {
+      this.skillObj()
       let data = {
         Mail: this.mail,
         Password: this.password,
+        Skills: [
+          {
+            SkillCatalogID: 5,
+          },
+        ],
         Mentors: [
           {
             Major: this.branş,
@@ -204,7 +215,7 @@ export default {
         ],
         UserProfiles: [
           {
-            Name: this.name,
+            Name: "Halil",
             Surname: this.surname,
             Biography: this.about,
             BirthDate: this.birthDate,
@@ -223,12 +234,10 @@ export default {
         ],
         Universities: [
           {
-            UniversityCatalogID: this.selectedUni
+            UniversityCatalogID: this.selectedUni,
           },
         ],
       }
-      //let formdata = new FormData()
-      //formdata.append('data', JSON.stringify(data))
       this.$axios.$post('/api/Profile', data).then((response) => {
         console.log(response)
       })
@@ -247,6 +256,12 @@ export default {
       return await this.$axios.$get('/api/GetSkills').then((response) => {
         this.skills = response
       })
+    },
+  },
+  watch: {
+    selectedSkills: {
+      handler: function (val) {
+      },
     },
   },
 }

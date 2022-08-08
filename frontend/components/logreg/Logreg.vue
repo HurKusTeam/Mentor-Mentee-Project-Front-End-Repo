@@ -305,7 +305,7 @@
        },
        deep: true
     }
-},  
+},
 
     methods: {
       next () {

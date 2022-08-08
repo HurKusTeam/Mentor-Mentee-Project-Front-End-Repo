@@ -1,5 +1,7 @@
 <template>
-  <v-footer max-height="200" class="clr mb-0" padless >
+
+  <v-footer max-height="200" class="clr mb-0" padless>
+
     <v-container>
       <v-row no gutters>
         <v-col>

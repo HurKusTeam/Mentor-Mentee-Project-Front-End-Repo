@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-card
-      class="pa-2 mb-6 mx-auto rounded-lg"
+      class="mb-6 pa-2 mx-auto rounded-lg"
       max-width="1000"
       color=""
       v-for="user in users"
-      :key="user.MenteeID"
+      :key="user.id"
     >
       <v-list-item class="pa-5">
         <v-list-item-avatar class="ml-2" size="100">
@@ -19,47 +19,46 @@
         <v-col cols="4">
           <v-list-item-content>
             <v-list-item-title class="title">
-              {{ user.Name }} {{ user.Surname }}
+              {{ fullName(user.Profile.Name, user.Profile.Surname) }}
             </v-list-item-title>
             <v-list-item-subtitle>
-              {{ user.Department }}
+              <v-icon class="pa-1" size="20">mdi-school</v-icon
+              >{{ user.Mentor.Major }}
             </v-list-item-subtitle>
             <v-list-item-subtitle>
-              <v-icon class="pa-1" size="20"> mdi-town-hall </v-icon>
-              {{ user.University }}</v-list-item-subtitle
-            >
-            <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-phone </v-icon>
-              {{user.PhoneNumber}}</v-list-item-subtitle
+              {{ user.Profile.PhoneNumber }}</v-list-item-subtitle
             >
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-email </v-icon>
-              {{user.Mail}}</v-list-item-subtitle
+              {{ user.User.Mail }}</v-list-item-subtitle
             >
           </v-list-item-content>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="4" class="ml-4">
           <v-flex>
             <v-icon size="20">mdi-map-marker </v-icon>
-            {{ user.City }} <v-icon size="20">mdi-linkedin</v-icon>
-            {{ user.Linkedin }} <v-icon size="20">mdi-github</v-icon>
-            {{ user.Github }}
+            {{ user.Profile.City }}
+            <v-icon size="20">mdi-linkedin</v-icon>
+            {{ user.About.Linkedin }}
+            <v-icon size="20">mdi-github</v-icon>
+            {{ user.About.GitHub }}
           </v-flex>
           <v-flex class="mt-2">
             <v-icon>mdi-star</v-icon>
             <v-list-item-action-subtitle
-              v-for="(skill, i) in user.Skill"
-              :key="i"
+              v-for="skill in user.Skills"
+              :key="skill"
             >
-              {{ skill }},</v-list-item-action-subtitle
+              {{ skill.Name }},</v-list-item-action-subtitle
             >
           </v-flex>
         </v-col>
         <v-col cols="4">
           <v-btn
             class="mb-3 mt-3"
+            v-on:click="sendConfirm(user.User.ID)"
             color="green"
-            v-on:click="sendConfirm(user.MenteeID)"
           >
             <v-icon>mdi-clipboard-account</v-icon>
           </v-btn>
@@ -73,24 +72,46 @@
 export default {
   data() {
     return {
-      users: [],
+      userDatas: [],
+      users: [
+        {
+          id: 1,
+          Name: '',
+          Surname: '',
+          Major: '',
+          Skills: [''],
+          City: '',
+          Profile: [],
+          About: [],
+          Mentor: [],
+          User: [],
+        },
+      ],
     }
   },
   mounted() {
     this.getUserData()
   },
+
   methods: {
-    getUserData() {
-      return this.$axios.$get('/api/MenteeList').then((response) => {
+    async getUserData() {
+      return this.$axios.$get('/api/MyMentors').then((response) => {
         this.users = response
+        console.log(response)
       })
     },
     sendConfirm(id) {
       console.log(id)
       this.$router.push({
-        name: 'meetings',
-        params: { menteeId: id },
+        name: 'menteeList',
+        params: { mentorId: id },
       })
+    },
+    sendDeny(id) {
+      return console.log(id)
+    },
+    fullName(name, surName) {
+      return name + ' ' + surName
     },
   },
 }
