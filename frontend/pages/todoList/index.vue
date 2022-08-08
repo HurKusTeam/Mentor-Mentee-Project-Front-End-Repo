@@ -47,6 +47,7 @@
           v-if="todo.Title != '???'"
           :key="todo.id"
           :item="todo.Title"
+          :id="todo.ID"
         ></todo-item>
       </draggable>
     </todo-list>
@@ -64,6 +65,7 @@
           v-if="todo.Title != '???'"
           :key="todo.id"
           :item="todo.Title"
+          :id="todo.ID"
         ></todo-item>
       </draggable>
     </todo-list>
@@ -80,6 +82,7 @@
           v-if="todo.Title != '???'"
           :key="todo.id"
           :item="todo.Title"
+          :id="todo.ID"
           class="mb-2"
         >
         </todo-item>
