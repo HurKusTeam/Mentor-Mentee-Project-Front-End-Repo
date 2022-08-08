@@ -9,7 +9,7 @@
 
                             <a @click="show = true"
                                 class="item--link text--logo text-6xl text-gradient bg-gradient-to-r from-red-700 via-indigo-400 to-purple-600 ma-8">
-                                <span class="block">MENTORS</span>
+                                <span class="block">MENTÖRLER</span>
                             </a>
 
                         </v-card-actions>
@@ -22,7 +22,7 @@
 
                             <a @click="show = false"
                                 class="item--link text--logo text-6xl text-gradient bg-gradient-to-r from-red-700 via-indigo-500 to-purple-600 ma-8 ">
-                                <span class="block">COMPANY ADDS</span>
+                                <span class="block">ŞİRKET İLANLARI</span>
                             </a>
                         </v-card-actions>
 

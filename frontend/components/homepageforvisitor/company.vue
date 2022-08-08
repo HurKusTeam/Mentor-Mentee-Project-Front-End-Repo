@@ -13,8 +13,7 @@
                             <v-list-item-subtitle> {{ user.Company.Sector }} </v-list-item-subtitle>
                             <v-list-item-subtitle class="pt-2">
                                 <v-icon size="20"> mdi-email </v-icon>
-
-                                aselsan_ik@gmail.com
+                                {{ user.User.Mail }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 <v-icon size="20"> mdi-phone </v-icon>
@@ -23,21 +22,17 @@
                             </v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
-
                 </v-col>
-
+                <v-divider vertical  inset width="4"></v-divider>
                 <v-col sm="8" md="8" class="pl-1">
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title class="pt-3" ma-8> İLAN BİLGİLERİ </v-list-item-title>
-                            <v-list-item-subtitle> {{user.Advert.Description}}
+                            <p class="text-center text-2xl font-italic"> İLAN BİLGİLERİ </p>
+                            <v-list-item-subtitle> {{ user.Advert.Description }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
-
-
                 </v-col>
-
             </v-row>
 
         </v-card>

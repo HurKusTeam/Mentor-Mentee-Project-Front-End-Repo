@@ -1,25 +1,24 @@
 <template>
   <header class="toolbar">
     <div class="toolbar--container ">
-      <p href="/index" class="text--logo text-4xl text-gradient bg-gradient-to-r from-blue-600 via-indigo-400 to-purple-300">
+      <a  href="/" class="item--link text--logo text-4xl text-gradient bg-gradient-to-r from-blue-600 via-indigo-400 to-purple-300">
         HÜRKUŞ
-      </p>
+      </a>
       <div class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end">
         <nav class="hidden md:block">
           <div class="flex items-baseline space-x-10">
             <a href="/" class="item--link">
-              <span class="block">HOME</span>
-            </a>
-
-            <a href="#_" class="item--link">
-              <span class="block">WHY HURKUS?</span>
+              <span class="block">ANA SAYFA</span>
             </a>
             <a href="#_" class="item--link">
-              <span class="block">ABOUT US</span>
+              <span class="block">NEDEN HURKUS?</span>
+            </a>
+            <a href="#_" class="item--link">
+              <span class="block">HAKKIMIZDA</span>
             </a>
             <span class="inline-flex rounded-md shadow-sm">
               <a href="/login" class="btn btn--primary">
-                LOG IN
+                GİRİŞ YAP
               </a>
             </span>
           </div>

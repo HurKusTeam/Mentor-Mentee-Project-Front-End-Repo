@@ -4,7 +4,7 @@
     <section class="py-20 bg-gray-50 shadow-inner">
       <div class="px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold tracking-tight text-accent sm:text-4xl md:text-5xl xl:text-6xl">
-          THE BEST PROGRAM
+          EN İYİ PROGRAM
         </h2>
       </div>
 
@@ -18,7 +18,7 @@
               </svg>
             </div>
             <h4 class="text-xl font-medium text-accent">
-             FAST
+             HIZLI
             </h4>
             <p class="text-base text-center text-gray-500">
               
@@ -32,7 +32,7 @@
               </svg>
             </div>
             <h4 class="text-xl font-medium text-accent">
-              THE BEST
+              EN İYİ
             </h4>
             <p class="text-base text-center text-gray-500">
              
@@ -46,7 +46,7 @@
               </svg>
             </div>
             <h4 class="text-xl font-medium text-accent">
-              RELIABLE
+              GÜVENİLİR
             </h4>
             <p class="text-base text-center text-gray-500">
               
