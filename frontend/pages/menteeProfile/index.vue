@@ -1,11 +1,10 @@
 <template>
   <v-main>
     <MenteeProfileHeader
-    v-if="uni != null"
     :name="this.users.Name" 
     :surname="this.users.Surname" 
     :major="this.users.Major"
-    :university="this.uni.Name"
+    :university="this.users.University"
     :gpa="this.users.GPA"
     :mail="this.users.Mail"
     :phoneNumber="this.users.PhoneNumber"
@@ -29,7 +28,6 @@ export default {
   data() {
     return {
       users: [],
-      uni: null,
     }
   },
 
@@ -39,9 +37,8 @@ export default {
 
   methods: {
     async createUser() {
-      return await this.$axios.$get('/api/Profile/75').then((response) => {
+      return await this.$axios.$get('/api/Profile').then((response) => {
         this.users = response
-        this.uni = this.users.Universities
         console.log(response)
       })
     },

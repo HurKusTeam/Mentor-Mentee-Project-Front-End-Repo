@@ -86,9 +86,7 @@ export default {
       })
     },
     sendConfirm(id) {
-      console.log("asdasda")
       console.log(id)
-
       this.$router.push({
         name: 'meetings',
         params: { menteeId: id },
