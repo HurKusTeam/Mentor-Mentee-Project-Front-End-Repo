@@ -1,6 +1,6 @@
 <template>
   <div class="todo-item">
-    {{ item.todo }}
+    {{ item }}{{ id }}
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn x-small color="primary" dark v-bind="attrs" v-on="on">
@@ -14,8 +14,10 @@
         <v-card-text justify="center">
           <v-col>
             <v-row>
-              <v-textarea v-model="title" outlined dense label="Hakkında"
-                >asdasd
+              <v-text-field v-model="Title" label="Title"></v-text-field>
+            </v-row>
+            <v-row>
+              <v-textarea v-model="Description" outlined dense label="Hakkında">
               </v-textarea>
             </v-row>
             <v-row justify="center">
@@ -40,7 +42,11 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="red darken-2" text @click="dialog = false">Kapat</v-btn>
-          <v-btn color="teal darken-1" text @click="dialog = false"
+          <v-btn
+            v-on:click="submit()"
+            color="teal darken-1"
+            text
+            @click="dialog = false"
             >Kaydet</v-btn
           >
         </v-card-actions>
@@ -51,15 +57,35 @@
 
 <script>
 export default {
-  props: ['item'],
+  props: ['item', 'id'],
   data() {
     return {
-      title: 'asdasdasasd',
+      Description: '',
+      Title: '',
       dialog: false,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
     }
+  },
+  methods: {
+    submit() {
+      //if (this.$refs.form.validate()) {
+      console.log(this.title, 0)
+      let todo = {
+        Title: this.Title,
+        Description: this.Description,
+        Enddate: '08-09-2022',
+      }
+      return this.$axios
+        .$post('/api/UpdateTodo/' + this.id, todo)
+        .then((response) => {
+          console.log(response)
+          console.log(todo)
+          console.log('id', this.id)
+        })
+      //}
+    },
   },
 }
 </script>

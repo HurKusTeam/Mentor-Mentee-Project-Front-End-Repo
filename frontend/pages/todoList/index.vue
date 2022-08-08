@@ -2,7 +2,7 @@
   <div class="app">
     <todo-list title="Yapılacaklar">
       <draggable
-        :list="todos"
+        :list="allTodos.Todo0"
         @add="onAdd0"
         group="todosapp"
         ghostClass="on-drag"
@@ -10,9 +10,11 @@
       >
         <todo-item
           class="mb-2"
-          v-for="todo in todos"
+          v-for="todo in allTodos.Todo0"
+          v-if="todo.Title != '???'"
           :key="todo.id"
-          :item="todo"
+          :item="todo.Title"
+          :id="todo.ID"
         ></todo-item>
       </draggable>
 
@@ -24,14 +26,16 @@
           hint="En fazla 20 karakter"
           label="Eklemek istediğiniz iş"
         ></v-text-field>
-        <v-btn v-on:click="submit()" color="green"
+        <v-btn
+          v-on:click="submit(allTodos.Mentee.ID, allTodos.Mentee.MentorID)"
+          color="green"
           ><v-icon>mdi-plus</v-icon></v-btn
         >
       </v-form>
     </todo-list>
     <todo-list title="Yapılıyor">
       <draggable
-        :list="inProgress"
+        :list="allTodos.Todo1"
         @add="onAdd1"
         group="todosapp"
         ghostClass="on-drag"
@@ -39,15 +43,16 @@
       >
         <todo-item
           class="mb-2"
-          v-for="todo in inProgress"
+          v-for="todo in allTodos.Todo1"
+          v-if="todo.Title != '???'"
           :key="todo.id"
-          :item="todo"
+          :item="todo.Title"
         ></todo-item>
       </draggable>
     </todo-list>
     <todo-list title="Yapıldı">
       <draggable
-        :list="completed"
+        :list="allTodos.Todo2"
         @add="onAdd2"
         group="todosapp"
         ghostClass="on-drag"
@@ -55,25 +60,26 @@
       >
         <todo-item
           class="mb-2"
-          v-for="todo in completed"
+          v-for="todo in allTodos.Todo2"
+          v-if="todo.Title != '???'"
           :key="todo.id"
-          :item="todo"
+          :item="todo.Title"
         ></todo-item>
       </draggable>
     </todo-list>
     <todo-list title="Onaylandı">
       <draggable
-        :list="completed"
-        @add="onAdd2"
+        :list="allTodos.Todo3"
+        @add="onAdd3"
         group="todosapp"
         ghostClass="on-drag"
         animation="400"
-        :move="checkMove"
       >
         <todo-item
-          v-for="todo in done"
+          v-for="todo in allTodos.Todo3"
+          v-if="todo.Title != '???'"
           :key="todo.id"
-          :item="todo"
+          :item="todo.Title"
           class="mb-2"
         >
         </todo-item>
@@ -109,55 +115,46 @@ export default {
         },
       ],
 
-      todos: [
-        {
-          menteeId: 2,
-          id: 1,
-          todo: 'Kitap oku',
-        },
-        {
-          menteeId: 1,
-          id: 2,
-          todo: 'Sandalye ol',
-        },
-      ],
-      inProgress: [
-        {
-          id: 3,
-          todo: 'Vue öğren',
-        },
-      ],
-      completed: [
-        {
-          id: 4,
-          todo: 'Footer yap',
-        },
-      ],
-      done: [
-        {
-          id: 5,
-          todo: 'araba',
-        },
-      ],
+      allTodos: [],
     }
   },
   components: { TodoList, TodoItem, draggable },
+  mounted() {
+    this.getUserTodo()
+  },
 
   methods: {
-    checkMove(evt) {
-      console.log(evt.draggedContext)
+    getUserTodo() {
+      return this.$axios.$get('/api/GetTodo/32/83').then((response) => {
+        this.allTodos = response
+        console.log(response)
+      })
     },
-    submit() {
+
+    submit(Menteeid, Mentorid) {
       if (this.$refs.form.validate()) {
         console.log(this.title, 0)
+        let todo = {
+          Title: this.title,
+          Menteeid: Menteeid,
+          Mentorid: Mentorid,
+        }
+        return this.$axios.$post('/api/AddTodo', todo).then((response) => {
+          console.log(response)
+          console.log(todo)
+        })
       }
     },
-    getComponentData(evt, index) {
-      console.log({
-        value: evt.item.innerText,
-        id: evt.item._underlying_vm_.id,
-        menteeId: evt.item._underlying_vm_.menteeId,
-        index,
+    async getComponentData(evt, index) {
+      let todo = {
+        ID: evt.item._underlying_vm_.ID,
+        Status: index,
+        ActionDate: '05-05-2005',
+      }
+
+      return await this.$axios.$post('/api/Dragged', todo).then((response) => {
+        console.log(response)
+        console.log(todo)
       })
     },
 
