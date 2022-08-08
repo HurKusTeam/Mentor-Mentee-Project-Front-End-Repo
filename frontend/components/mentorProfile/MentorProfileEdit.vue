@@ -183,31 +183,16 @@ export default {
       selectedUni: '',
       selectedLangs: [],
       selectedSkills: [],
-      newSkills: [],
     }
   },
   mounted() {
     this.getAllUni(), this.getAllLang(), this.getAllSkills()
   },
   methods: {
-    skillObj(){
-      this.newSkills = []
-      for(this.i = 0; this.i<this.selectedSkills.length; this.i++){
-        this.newSkills.push({
-          SkillCatalogID: this.selectedSkills[this.i],
-        })
-      }
-    },
     submit() {
-      this.skillObj()
       let data = {
         Mail: this.mail,
         Password: this.password,
-        Skills: [
-          {
-            SkillCatalogID: 5,
-          },
-        ],
         Mentors: [
           {
             Major: this.branş,
@@ -238,7 +223,20 @@ export default {
           },
         ],
       }
+      let s = {
+        Skillids: this.selectedSkills
+      }
+      let l = {
+        Langids: this.selectedLangs
+      }
+      console.log(l)
       this.$axios.$post('/api/Profile', data).then((response) => {
+        console.log(response)
+      })
+      this.$axios.$post('/api/UpdateSkill/', s).then((response) => {
+        console.log(response)
+      })
+      this.$axios.$post('/api/UpdateLang/', l).then((response) => {
         console.log(response)
       })
     },
@@ -256,12 +254,6 @@ export default {
       return await this.$axios.$get('/api/GetSkills').then((response) => {
         this.skills = response
       })
-    },
-  },
-  watch: {
-    selectedSkills: {
-      handler: function (val) {
-      },
     },
   },
 }
