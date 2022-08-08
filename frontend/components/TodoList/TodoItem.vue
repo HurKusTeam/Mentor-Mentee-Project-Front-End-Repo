@@ -12,14 +12,30 @@
           <span class="text-h5">Detaylar</span>
         </v-card-title>
         <v-card-text justify="center">
-          <v-row>
-            <v-col>
-              <v-textarea outlined dense label="Hakkında"> </v-textarea>
-            </v-col>
-            <v-col>
+          <v-col>
+            <v-row>
+              <v-textarea v-model="title" outlined dense label="Hakkında"
+                >asdasd
+              </v-textarea>
+            </v-row>
+            <v-row justify="center">
               <v-date-picker v-model="picker"></v-date-picker>
-            </v-col>
-          </v-row>
+            </v-row>
+            <v-row>
+              <v-text-field label="Yorum"></v-text-field>
+            </v-row>
+            <v-row>
+              <v-card width="533">
+                <v-list-item-avatar class="ml-2" size="35">
+                  <img
+                    src="https://www.w3schools.com/howto/img_avatar.png"
+                    alt="John"
+                  />
+                </v-list-item-avatar>
+                asdasdasdsadas
+              </v-card>
+            </v-row>
+          </v-col>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -38,11 +54,15 @@ export default {
   props: ['item'],
   data() {
     return {
+      title: 'asdasdasasd',
       dialog: false,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
     }
+  },
+  mounted() {
+    console.log(this.picker)
   },
 }
 </script>
