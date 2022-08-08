@@ -49,10 +49,11 @@ export default {
 
   methods: {
     async createUser() {
-      if(!mentorid==null){
-        return await this.$axios.$get('/api/Profile' + this.mentorid).then((response) => {
+      if(this.mentorid!=null){
+        return await this.$axios.$get('/api/Profile/' + this.mentorid).then((response) => {
         this.users = response
         console.log(response)
+        console.log(this.mentorid)
       })
 
       }
@@ -60,6 +61,7 @@ export default {
         return await this.$axios.$get('/api/Profile').then((response) => {
         this.users = response
         console.log(response)
+        
       })
 
 

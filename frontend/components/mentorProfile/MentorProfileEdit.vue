@@ -215,7 +215,7 @@ export default {
         ],
         UserProfiles: [
           {
-            Name: "Halil",
+            Name: this.name,
             Surname: this.surname,
             Biography: this.about,
             BirthDate: this.birthDate,
