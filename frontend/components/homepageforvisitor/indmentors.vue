@@ -8,7 +8,6 @@
         height="200"
         src="https://c4.wallpaperflare.com/wallpaper/500/442/354/outrun-vaporwave-hd-wallpaper-preview.jpg"
       ></v-img>
-
       <v-row no-gutters>
         <v-col cols="12" sm="10" md="10">
           <v-list-item class="pa-5">
@@ -21,17 +20,16 @@
             <v-list-item-content>
               <v-col>
                 <v-list-item-title class="title">
-                  {{ user.Name }} {{ user.Surname }}
+                 <a class="item-link" v-on:click="sendConfirm(user.ID)">
+                 {{ user.Name }} {{ user.Surname }}
+                 
+                 </a> 
                   <v-list-item-subtitle> {{user.Major}} </v-list-item-subtitle>
-                </v-list-item-title>
-               
-                  
+                </v-list-item-title>           
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-school </v-icon>
                   {{ user.Uni }}
                 </v-list-item-subtitle>
-
-
 
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20"> mdi-calendar-range </v-icon>
@@ -97,6 +95,15 @@ data() {
         this.users = response
         
         console.log(response)
+      })
+    },
+    sendConfirm(id) {
+      
+      console.log(id)
+
+      this.$router.push({
+        name: 'mentorProfile',
+        params: { mentorid: id },
       })
     },
   },

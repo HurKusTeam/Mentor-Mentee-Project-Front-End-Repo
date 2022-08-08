@@ -39,6 +39,7 @@ export default {
     return {
       users: [],
       uni: null,
+      mentorid: this.$route.params.mentorid,
     }
   },
 
@@ -48,10 +49,22 @@ export default {
 
   methods: {
     async createUser() {
-      return await this.$axios.$get('/api/Profile').then((response) => {
+      if(!mentorid==null){
+        return await this.$axios.$get('/api/Profile' + this.mentorid).then((response) => {
         this.users = response
         console.log(response)
       })
+
+      }
+      else{
+        return await this.$axios.$get('/api/Profile').then((response) => {
+        this.users = response
+        console.log(response)
+      })
+
+
+      }
+      
     },
   },
 }
