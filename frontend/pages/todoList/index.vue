@@ -62,8 +62,22 @@
       </draggable>
     </todo-list>
     <todo-list title="Onaylandı">
-      <todo-item v-for="todo in done" :key="todo.id" :item="todo" class="mb-2">
-      </todo-item>
+      <draggable
+        :list="completed"
+        @add="onAdd2"
+        group="todosapp"
+        ghostClass="on-drag"
+        animation="400"
+        :move="checkMove"
+      >
+        <todo-item
+          v-for="todo in done"
+          :key="todo.id"
+          :item="todo"
+          class="mb-2"
+        >
+        </todo-item>
+      </draggable>
     </todo-list>
   </div>
 </template>
@@ -75,6 +89,9 @@ import draggable from 'vuedraggable'
 export default {
   data() {
     return {
+      checkMove: function (evt) {
+        console.log(evt.draggedContext)
+      },
       inputRules: [
         (v) => (v.length >= 3 && v.length <= 20) || 'En az 3 karakter',
       ],
@@ -125,7 +142,11 @@ export default {
     }
   },
   components: { TodoList, TodoItem, draggable },
+
   methods: {
+    checkMove(evt) {
+      console.log(evt.draggedContext)
+    },
     submit() {
       if (this.$refs.form.validate()) {
         console.log(this.title, 0)

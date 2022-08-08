@@ -61,9 +61,6 @@ export default {
         .substr(0, 10),
     }
   },
-  mounted() {
-    console.log(this.picker)
-  },
 }
 </script>
 
