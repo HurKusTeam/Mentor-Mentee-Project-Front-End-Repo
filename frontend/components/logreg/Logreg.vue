@@ -328,7 +328,7 @@
         return await this.$axios.$post('/api/Login',MailPW)
           .then((response)=>{
             this.alert=false
-            this.$router.push('/');
+            this.$router.push('/menteeProfile');
 
             console.log(response)
 

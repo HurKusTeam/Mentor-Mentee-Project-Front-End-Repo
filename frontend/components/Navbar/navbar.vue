@@ -14,7 +14,7 @@
               <span class="block">NEDEN HURKUS?</span>
             </a>
             <a href="#_" class="item--link">
-              <span class="block">HAKKIMIZDA</span>
+              <span class="block" @click="logout">HAKKIMIZDA</span>
             </a>
             <span class="inline-flex rounded-md shadow-sm">
               <a href="/login" class="btn btn--primary">
@@ -31,8 +31,18 @@
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+
+
+    methods: {
+    logout(){
+      window.localStorage.clear()
+    },
+  }
 }
+
+
+
 </script>
 
 <style lang="postcss" scoped>
