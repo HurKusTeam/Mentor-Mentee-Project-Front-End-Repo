@@ -31,7 +31,12 @@
               >
             </v-row>
             <v-row>
-              <v-card v-for="comment in comments" :key="comment" width="533">
+              <v-card
+                class="mb-2"
+                v-for="comment in comments"
+                :key="comment"
+                width="533"
+              >
                 <v-list-item-avatar class="ml-2" size="35">
                   <img
                     src="https://www.w3schools.com/howto/img_avatar.png"
