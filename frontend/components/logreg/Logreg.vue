@@ -144,6 +144,8 @@
                            <v-col cols="12" sm="12">
                             <v-text-field v-model="rname"
                             :label="text1"
+                            :rules="nameRules"
+                            required
                             outlined
                             dense
                             color="white"
@@ -163,6 +165,7 @@
                           />
                           <v-text-field v-model="rpassword"
                             label="Şifre"
+                            required
                             outlined
                             dense
                             color="white"
@@ -175,6 +178,7 @@
                                 <v-checkbox
                        
                                     label="Kabul Ediyorum."
+                                    required
                                     class="mt-n1"
                                     color="white"
                                 > </v-checkbox>
@@ -264,22 +268,25 @@
         ropti:null,
         rname:null,
         alert:false,
+        nameRules: [
+        v => !!v || 'İsim alanı boş bırakılamaz',
+      ],
         emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        v => !!v || 'Mail alanı boş bırakılamaz',
+        v => /.+@.+\..+/.test(v) || 'Geçerli mail girin.',
       ],
         makes_options: [
         {
             text: "Çırak",
-            id: 0
+            
         },
         {
             text: "Usta",
-            id: 1
+            
         },
         {
             text: "Şirket",
-            id: 2
+            
         }
         ],
 
@@ -328,7 +335,7 @@
         return await this.$axios.$post('/api/Login',MailPW)
           .then((response)=>{
             this.alert=false
-            this.$router.push('/menteeProfile');
+            this.$router.push('/');
 
             console.log(response)
 
@@ -357,7 +364,7 @@
         console.log(Reg),
         await this.$axios.$post('/api/Register',Reg).then(response=>
         console.log(response))
-        this.$router.push('/');
+        this.$router.push('/login');
 
       }
 

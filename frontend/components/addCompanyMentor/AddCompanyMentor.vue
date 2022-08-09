@@ -98,7 +98,7 @@
         showPassword: false,
         email: '',
         emailRules: [
-        v => !!v || 'E-mail is required',
+        v => !!v || 'Mail alanı boş bırakılamaz',
         v => /.+@.+\..+/.test(v) || 'Lütfen geçerli mail girin',
       ],
             nameRules: [
