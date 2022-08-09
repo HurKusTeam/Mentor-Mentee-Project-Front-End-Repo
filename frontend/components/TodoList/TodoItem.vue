@@ -38,12 +38,9 @@
                 width="533"
               >
                 <v-list-item-avatar class="ml-2" size="35">
-                  <img
-                    src="https://www.w3schools.com/howto/img_avatar.png"
-                    alt="John"
-                  />
+                  <img :src="`${comment.Profile?.ProfileImage}`" alt="John" />
                 </v-list-item-avatar>
-                {{ comment.Description }}
+                {{ comment.Comment?.Description }}
               </v-card>
             </v-row>
           </v-col>
