@@ -1,6 +1,6 @@
 <template>
   <div class="todo-item">
-    {{ item }}{{ id }}
+    {{ item }}
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn x-small color="primary" dark v-bind="attrs" v-on="on">
@@ -18,18 +18,32 @@
               <v-text-field v-model="Title" label="Title"></v-text-field>
             </v-row>
             <v-row>
-              <v-textarea v-model="Description" outlined dense label="Hakkında">
+              <v-textarea
+                v-model="todoDescription"
+                outlined
+                dense
+                label="Hakkında"
+              >
               </v-textarea>
             </v-row>
             <v-row justify="center">
-              <v-date-picker v-model="picker"></v-date-picker>
+              <v-date-picker class="mr-5" v-model="picker"></v-date-picker>
+              <v-col>
+                <v-row><p class="text-3xl">Bitiş Tarihi</p></v-row>
+                <v-row class="text-3xl Black text.">{{ endDate }}</v-row>
+              </v-col>
             </v-row>
             <v-row>
               <v-text-field v-model="commentUser" label="Yorum"></v-text-field>
-              <v-btn small class="green" v-on:click="submitComment()"
+              <v-btn
+                small
+                class="green mt-5"
+                v-on:click="submitComment()"
+                @click="dialog = false"
                 >Gönder</v-btn
               >
             </v-row>
+
             <v-row>
               <v-card
                 class="mb-2"
@@ -63,11 +77,12 @@
 
 <script>
 export default {
-  props: ['item', 'id', 'desc'],
+  props: ['item', 'id', 'desc', 'endDate'],
   data() {
     return {
+      date: '',
       commentUser: '',
-      Description: this.desc,
+      todoDescription: this.desc,
       Title: this.item,
       dialog: false,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
@@ -103,17 +118,22 @@ export default {
     submit() {
       //if (this.$refs.form.validate()) {
       console.log(this.title, 0)
+
+      this.date = this.picker.replace(/-/g, '.')
       let todo = {
         Title: this.Title,
-        Description: this.Description,
-        Enddate: '08-09-2022',
+        Description: this.todoDescription,
+        Enddate: this.date,
       }
       return this.$axios
         .$post('/api/UpdateTodo/' + this.id, todo)
         .then((response) => {
           console.log(response)
-          console.log(todo)
-          console.log('id', this.id)
+
+          console.log('date', this.date)
+          //console.log(todo)
+          //console.log('id', this.id)
+          window.location.reload(true)
         })
       //}
     },

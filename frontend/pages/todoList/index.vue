@@ -16,6 +16,7 @@
           :item="todo.Title"
           :desc="todo.Description"
           :id="todo.ID"
+          :endDate="todo.EndDate"
         ></todo-item>
       </draggable>
 
@@ -48,7 +49,9 @@
           v-if="todo.Title != '???'"
           :key="todo.id"
           :item="todo.Title"
+          :desc="todo.Description"
           :id="todo.ID"
+          :endDate="todo.EndDate"
         ></todo-item>
       </draggable>
     </todo-list>
@@ -66,7 +69,9 @@
           v-if="todo.Title != '???'"
           :key="todo.id"
           :item="todo.Title"
+          :desc="todo.Description"
           :id="todo.ID"
+          :endDate="todo.EndDate"
         ></todo-item>
       </draggable>
     </todo-list>
@@ -84,6 +89,8 @@
           :key="todo.id"
           :item="todo.Title"
           :id="todo.ID"
+          :desc="todo.Description"
+          :endDate="todo.EndDate"
           class="mb-2"
         >
         </todo-item>
@@ -99,6 +106,7 @@ import draggable from 'vuedraggable'
 export default {
   data() {
     return {
+      ActionDate: '',
       checkMove: function (evt) {
         console.log(evt.draggedContext)
       },
@@ -146,14 +154,16 @@ export default {
         return this.$axios.$post('/api/AddTodo', todo).then((response) => {
           console.log(response)
           console.log(todo)
+          window.location.reload(true)
         })
       }
     },
     async getComponentData(evt, index) {
+      this.ActionDate = new Date().toLocaleDateString()
       let todo = {
         ID: evt.item._underlying_vm_.ID,
         Status: index,
-        ActionDate: '05-05-2005',
+        ActionDate: this.ActionDate,
       }
 
       return await this.$axios.$post('/api/Dragged', todo).then((response) => {
