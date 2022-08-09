@@ -332,10 +332,11 @@
             Password:this.password,
         };
 
-        return await this.$axios.$post('/api/Login',MailPW)
+          this.$store.dispatch("users/singin",MailPW)
           .then((response)=>{
             this.alert=false
             this.$router.push('/');
+
 
             console.log(response)
 
@@ -362,8 +363,15 @@
             Dropdown:this.rid
         }
         console.log(Reg),
-        await this.$axios.$post('/api/Register',Reg).then(response=>
-        console.log(response))
+        this.$store.dispatch("users/createUser",Reg)
+        .then(()=>{
+          this.$router.push("/")
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+
+        
         this.$router.push('/login');
 
       }
