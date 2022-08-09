@@ -30,9 +30,24 @@
               <v-date-picker class="mr-5" v-model="picker"></v-date-picker>
               <v-col>
                 <v-row><p class="text-3xl">Bitiş Tarihi</p></v-row>
-                <v-row class="text-3xl Black text.">{{ endDate }}</v-row>
+                <v-row class="red--text text-3xl Black text.">{{
+                  endDate
+                }}</v-row>
               </v-col>
             </v-row>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-2" text @click="dialog = false"
+                >Kapat</v-btn
+              >
+              <v-btn
+                v-on:click="submit()"
+                color="teal darken-1"
+                text
+                @click="dialog = false"
+                >Kaydet</v-btn
+              >
+            </v-card-actions>
             <v-row>
               <v-text-field v-model="commentUser" label="Yorum"></v-text-field>
               <v-btn
@@ -59,17 +74,6 @@
             </v-row>
           </v-col>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="red darken-2" text @click="dialog = false">Kapat</v-btn>
-          <v-btn
-            v-on:click="submit()"
-            color="teal darken-1"
-            text
-            @click="dialog = false"
-            >Kaydet</v-btn
-          >
-        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>

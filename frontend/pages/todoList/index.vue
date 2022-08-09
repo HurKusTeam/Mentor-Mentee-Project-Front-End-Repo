@@ -1,101 +1,134 @@
 <template>
-  <div class="app">
-    <todo-list title="Yapılacaklar">
-      <draggable
-        :list="allTodos.Todo0"
-        @add="onAdd0"
-        group="todosapp"
-        ghostClass="on-drag"
-        animation="400"
-      >
-        <todo-item
-          class="mb-2"
-          v-for="todo in allTodos.Todo0"
-          v-if="todo.Title != '???'"
-          :key="todo.id"
-          :item="todo.Title"
-          :desc="todo.Description"
-          :id="todo.ID"
-          :endDate="todo.EndDate"
-        ></todo-item>
-      </draggable>
+  <div>
+    <v-layout justify-center>
+      <v-card class="mt-12" max-width="500">
+        <v-row>
+          <v-col class="ml-3">
+            <v-list-item-avatar class="ml-2" size="60">
+              <img
+                src="https://www.w3schools.com/howto/img_avatar.png"
+                alt="John"
+              />
+            </v-list-item-avatar>
+            <v-list-title class="text-center">
+              {{ allTodos.UserMentee?.UserName }}
+              {{ allTodos.UserMentee?.Surname }}
+            </v-list-title>
+          </v-col>
+          <v-divider vertical></v-divider>
+          <v-col cols="6" align-self="center">
+            <p>
+              <v-icon>mdi-phone</v-icon
+              >{{ allTodos.UserProfMentee?.PhoneNumber }}05435391856
+            </p>
+            <p>
+              <v-icon>mdi-email</v-icon>
+              {{ allTodos.UserMentee?.Mail }}
+            </p>
+          </v-col>
+          <v-divider vertical></v-divider>
+          <v-col align-self="center"> %55 </v-col>
+        </v-row>
+      </v-card>
+    </v-layout>
+    <div class="app">
+      <todo-list title="Yapılacaklar">
+        <draggable
+          :list="allTodos.Todo0"
+          @add="onAdd0"
+          group="todosapp"
+          ghostClass="on-drag"
+          animation="400"
+        >
+          <todo-item
+            class="mb-2"
+            v-for="todo in allTodos.Todo0"
+            v-if="todo.Title != '???'"
+            :key="todo.id"
+            :item="todo.Title"
+            :desc="todo.Description"
+            :id="todo.ID"
+            :endDate="todo.EndDate"
+          ></todo-item>
+        </draggable>
 
-      <v-form class="mt-3" ref="form">
-        <v-text-field
-          v-model="title"
-          counter="20"
-          :rules="inputRules"
-          hint="En fazla 20 karakter"
-          label="Eklemek istediğiniz iş"
-        ></v-text-field>
-        <v-btn
-          v-on:click="submit(allTodos.Mentee.ID, allTodos.Mentee.MentorID)"
-          color="green"
-          ><v-icon>mdi-plus</v-icon></v-btn
+        <v-form class="mt-3" ref="form">
+          <v-text-field
+            v-model="title"
+            counter="20"
+            :rules="inputRules"
+            hint="En fazla 20 karakter"
+            label="Eklemek istediğiniz iş"
+          ></v-text-field>
+          <v-btn
+            v-on:click="submit(allTodos.Mentee.ID, allTodos.Mentee.MentorID)"
+            color="green"
+            ><v-icon>mdi-plus</v-icon></v-btn
+          >
+        </v-form>
+      </todo-list>
+      <todo-list title="Yapılıyor">
+        <draggable
+          :list="allTodos.Todo1"
+          @add="onAdd1"
+          group="todosapp"
+          ghostClass="on-drag"
+          animation="400"
         >
-      </v-form>
-    </todo-list>
-    <todo-list title="Yapılıyor">
-      <draggable
-        :list="allTodos.Todo1"
-        @add="onAdd1"
-        group="todosapp"
-        ghostClass="on-drag"
-        animation="400"
-      >
-        <todo-item
-          class="mb-2"
-          v-for="todo in allTodos.Todo1"
-          v-if="todo.Title != '???'"
-          :key="todo.id"
-          :item="todo.Title"
-          :desc="todo.Description"
-          :id="todo.ID"
-          :endDate="todo.EndDate"
-        ></todo-item>
-      </draggable>
-    </todo-list>
-    <todo-list title="Yapıldı">
-      <draggable
-        :list="allTodos.Todo2"
-        @add="onAdd2"
-        group="todosapp"
-        ghostClass="on-drag"
-        animation="400"
-      >
-        <todo-item
-          class="mb-2"
-          v-for="todo in allTodos.Todo2"
-          v-if="todo.Title != '???'"
-          :key="todo.id"
-          :item="todo.Title"
-          :desc="todo.Description"
-          :id="todo.ID"
-          :endDate="todo.EndDate"
-        ></todo-item>
-      </draggable>
-    </todo-list>
-    <todo-list title="Onaylandı">
-      <draggable
-        :list="allTodos.Todo3"
-        @add="onAdd3"
-        group="todosapp"
-        ghostClass="on-drag"
-        animation="400"
-      >
-        <todo-item
-          v-for="todo in allTodos.Todo3"
-          v-if="todo.Title != '???'"
-          :key="todo.id"
-          :item="todo.Title"
-          :id="todo.ID"
-          :desc="todo.Description"
-          :endDate="todo.EndDate"
-          class="mb-2"
+          <todo-item
+            class="mb-2"
+            v-for="todo in allTodos.Todo1"
+            v-if="todo.Title != '???'"
+            :key="todo.id"
+            :item="todo.Title"
+            :desc="todo.Description"
+            :id="todo.ID"
+            :endDate="todo.EndDate"
+          ></todo-item>
+        </draggable>
+      </todo-list>
+      <todo-list title="Yapıldı">
+        <draggable
+          :list="allTodos.Todo2"
+          @add="onAdd2"
+          group="todosapp"
+          ghostClass="on-drag"
+          animation="400"
         >
-        </todo-item>
-      </draggable>
-    </todo-list>
+          <todo-item
+            class="mb-2"
+            v-for="todo in allTodos.Todo2"
+            v-if="todo.Title != '???'"
+            :key="todo.id"
+            :item="todo.Title"
+            :desc="todo.Description"
+            :id="todo.ID"
+            :endDate="todo.EndDate"
+          ></todo-item>
+        </draggable>
+      </todo-list>
+      <todo-list title="Onaylandı">
+        <draggable
+          :list="allTodos.Todo3"
+          @add="onAdd3"
+          group="todosapp"
+          ghostClass="on-drag"
+          animation="400"
+        >
+          <todo-item
+            v-for="todo in allTodos.Todo3"
+            v-if="todo.Title != '???'"
+            :key="todo.id"
+            :item="todo.Title"
+            :id="todo.ID"
+            :desc="todo.Description"
+            :endDate="todo.EndDate"
+            class="mb-2"
+          >
+          </todo-item>
+        </draggable>
+      </todo-list>
+    </div>
   </div>
 </template>
 
