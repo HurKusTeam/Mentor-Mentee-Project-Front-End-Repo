@@ -128,7 +128,7 @@ export default {
 
   methods: {
     getUserTodo() {
-      return this.$axios.$get('/api/GetTodo/32/83').then((response) => {
+      return this.$axios.$get('/api/GetTodo/38/139').then((response) => {
         this.allTodos = response
         console.log(response)
       })

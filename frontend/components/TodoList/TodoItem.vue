@@ -7,11 +7,7 @@
           Info
         </v-btn>
       </template>
-      <template>
-        <v-btn x-small color="red darken-4" v-on:click="Delete()">
-          <v-icon>mdi-delete</v-icon>
-        </v-btn>
-      </template>
+
       <v-card>
         <v-card-title>
           <span class="text-h5">Detaylar</span>
@@ -29,17 +25,20 @@
               <v-date-picker v-model="picker"></v-date-picker>
             </v-row>
             <v-row>
-              <v-text-field v-model="Comment" label="Yorum"></v-text-field>
-              <v-btn class="green" v-on:click="submitComment()">Gönder</v-btn>
+              <v-text-field label="Yorum"></v-text-field>
+              <v-btn small class="green" v-on:click="submitComment()"
+                >Gönder</v-btn
+              >
             </v-row>
             <v-row>
-              <v-card width="533">
+              <v-card v-for="comment in comments" :key="comment" width="533">
                 <v-list-item-avatar class="ml-2" size="35">
                   <img
                     src="https://www.w3schools.com/howto/img_avatar.png"
                     alt="John"
                   />
                 </v-list-item-avatar>
+                <v-card-subtitle> </v-card-subtitle>
               </v-card>
             </v-row>
           </v-col>
@@ -65,28 +64,26 @@ export default {
   props: ['item', 'id'],
   data() {
     return {
-      Comment: '',
       Description: '',
       Title: '',
       dialog: false,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
+      comments: [],
     }
   },
   mounted() {
     this.getTodoComments()
   },
   methods: {
-    Delete() {
-      return this.$axios.$post('/api/DeleteTodo' + this.id)
-    },
-
     getTodoComments() {
-      return this.$axios.$get('/api/GetTodo/32/83').then((response) => {
-        this.allTodos = response
-        console.log(response)
-      })
+      return this.$axios
+        .$get('/api/TodoComments/' + this.id)
+        .then((response) => {
+          this.comment = response
+          console.log(response)
+        })
     },
 
     submitComment() {
