@@ -14,6 +14,7 @@
           v-if="todo.Title != '???'"
           :key="todo.id"
           :item="todo.Title"
+          :desc="todo.Description"
           :id="todo.ID"
         ></todo-item>
       </draggable>
@@ -128,7 +129,7 @@ export default {
 
   methods: {
     getUserTodo() {
-      return this.$axios.$get('/api/GetTodo/38/139').then((response) => {
+      return this.$axios.$get('/api/GetTodo/40/139').then((response) => {
         this.allTodos = response
         console.log(response)
       })

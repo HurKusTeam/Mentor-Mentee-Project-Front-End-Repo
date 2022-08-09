@@ -25,7 +25,7 @@
               <v-date-picker v-model="picker"></v-date-picker>
             </v-row>
             <v-row>
-              <v-text-field label="Yorum"></v-text-field>
+              <v-text-field v-model="commentUser" label="Yorum"></v-text-field>
               <v-btn small class="green" v-on:click="submitComment()"
                 >Gönder</v-btn
               >
@@ -38,7 +38,7 @@
                     alt="John"
                   />
                 </v-list-item-avatar>
-                <v-card-subtitle> </v-card-subtitle>
+                {{ comment.Description }}
               </v-card>
             </v-row>
           </v-col>
@@ -61,11 +61,12 @@
 
 <script>
 export default {
-  props: ['item', 'id'],
+  props: ['item', 'id', 'desc'],
   data() {
     return {
-      Description: '',
-      Title: '',
+      commentUser: '',
+      Description: this.desc,
+      Title: this.item,
       dialog: false,
       picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
@@ -81,14 +82,14 @@ export default {
       return this.$axios
         .$get('/api/TodoComments/' + this.id)
         .then((response) => {
-          this.comment = response
+          this.comments = response
           console.log(response)
         })
     },
 
     submitComment() {
       let comment = {
-        Description: this.Comment,
+        Description: this.commentUser,
         TodoID: this.id,
       }
       return this.$axios.$post('/api/AddComment', comment).then((response) => {
