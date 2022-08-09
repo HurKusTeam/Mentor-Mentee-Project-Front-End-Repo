@@ -50,10 +50,23 @@ export default {
 
   methods: {
     async createUser() {
-      return await this.$axios.$get('/api/Profile').then((response) => {
+      if(this.mentorid!=null){
+        return await this.$axios.$get('/api/Profile/' + this.mentorid).then((response) => {
+
         this.users = response
         console.log(response)
+        console.log(this.mentorid)
       })
+      }
+      else{
+        return await this.$axios.$get('/api/Profile').then((response) => {
+        this.users = response
+        console.log(response)
+        
+      })
+
+
+      }
     },
   },
 }
