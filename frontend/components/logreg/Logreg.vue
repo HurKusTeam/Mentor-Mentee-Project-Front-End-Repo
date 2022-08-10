@@ -327,33 +327,37 @@
       },
 
       async loginUser(){
-        let MailPW={
-            Mail:this.email,
-            Password:this.password,
-        };
+        this.$auth.loginWith('local',{
+            data:{Mail:this.email,
+            Password:this.password}
+        }).then(() => {
+          this.$router.push("/mentorProfile")
+        })
+},
 
-          this.$store.dispatch("users/singin",MailPW)
-          .then((response)=>{
-            this.alert=false
-            this.$router.push('/');
+        // let MailPW={
+        //     Mail:this.email,
+        //     Password:this.password,
+        // };
+
+          // this.$store.dispatch("users/singin",MailPW)
+          // .then((response)=>{
+          //   this.alert=false
+          //   this.$router.push('/');
 
 
-            console.log(response)
+          //   console.log(response)
 
 
 
-          } ).catch((error) => {
-    if(error.response.status === 400){
-        this.$router.push('/login');
-        this.alert=true
-    }
-})
+    //       } ).catch((error) => {
+    // if(error.response.status === 400){
+    //     this.$router.push('/login');
+    //     this.alert=true
+    // }
+
          
-        
-        
-
-
-      },
+    
 
       async userReg(){
         let Reg={
@@ -362,21 +366,13 @@
             Mail:this.remail,
             Dropdown:this.rid
         }
-        console.log(Reg),
-        this.$store.dispatch("users/createUser",Reg)
-        .then(()=>{
-          this.$router.push("/")
-        })
-        .catch(err=>{
-          console.log(err)
-        })
 
         
         this.$router.push('/login');
 
       }
 
-    },
+    }
     
 
 
