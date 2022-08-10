@@ -12,7 +12,7 @@
           <v-img
             height="100"
             width="100"
-            src="https://www.w3schools.com/howto/img_avatar.png"
+            :src="`${user.Profile?.ProfileImage}`"
             alt="John"
           />
         </v-list-item-avatar>

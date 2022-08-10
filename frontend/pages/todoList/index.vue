@@ -6,7 +6,7 @@
           <v-col class="ml-3">
             <v-list-item-avatar class="ml-2" size="60">
               <img
-                src="https://www.w3schools.com/howto/img_avatar.png"
+                :src="`${allTodos.UserProfMentee?.ProfileImage}`"
                 alt="John"
               />
             </v-list-item-avatar>
@@ -29,10 +29,14 @@
           <v-divider vertical></v-divider>
           <v-col align-self="center">
             <v-row>
-              <v-title class="pb-5 mt-2"> Başarı Oranı </v-title>
-            </v-row>
-            <v-row class="mb-2 text-center">
-              <p class="ml-6">%{{ allTodos.Percent }}</p>
+              <p class="ml-3 pt-2">Başarı Oranı</p>
+              <v-progress-circular
+                class="ml-5 mb-3"
+                :value="allTodos.Percent"
+                color="primary"
+                :size="75"
+                >{{ allTodos.Percent }}</v-progress-circular
+              >
             </v-row>
           </v-col>
         </v-row>
