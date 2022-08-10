@@ -69,9 +69,10 @@
             ></v-file-input>
 
            
-            <MentorProfileEdit v-if="mentorid==null" :company_id="companyId" />
+      
 
             <MentorProfileEdit
+            v-if="mentorid==null" :company_id="companyId"
             :name="name"
             :surname="surname"
             :branş="major"
