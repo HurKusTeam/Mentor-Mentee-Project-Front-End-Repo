@@ -27,7 +27,14 @@
             </p>
           </v-col>
           <v-divider vertical></v-divider>
-          <v-col align-self="center"> %55 </v-col>
+          <v-col align-self="center">
+            <v-row>
+              <v-title class="pb-5 mt-2"> Başarı Oranı </v-title>
+            </v-row>
+            <v-row class="mb-2 text-center">
+              <p class="ml-6">%{{ allTodos.Percent }}</p>
+            </v-row>
+          </v-col>
         </v-row>
       </v-card>
     </v-layout>
