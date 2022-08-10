@@ -10,10 +10,7 @@
         <v-col cols="12" sm="10" md="10">
           <v-list-item class="pa-5">
             <v-list-item-avatar class="ml-2" size="100">
-              <img
-                src="https://www.w3schools.com/howto/img_avatar.png"
-                alt="John"
-              />
+              <img v-if="profilePhoto" :src="`${profilePhoto}`" alt="John" />
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -70,7 +67,29 @@
             <v-btn icon :href="`https://${website}`"
               ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
             >
-            <MenteeProfileEdit/>
+            <v-file-input
+              hide-input
+              type="file"
+              @change="updatePhoto"
+              prepend-icon="mdi-image-edit"
+              class="ma-0 pa-0 pl-1"
+            ></v-file-input>
+            <MenteeProfileEdit
+              :name="name"
+              :surname="surname"
+              :branş="major"
+              :gpa="gpa"
+              :mail="mail"
+              :phone="phoneNumber"
+              :linkedin="linkedin"
+              :github="github"
+              :facebook="facebook"
+              :twitter="twitter"
+              :web="website"
+              :city="city"
+              :about="about"
+              @loading="getLoading"
+            />
           </v-layout>
         </v-col>
       </v-row>
@@ -79,29 +98,52 @@
 </template>
 
 <script>
-import MenteeProfileEdit from './MenteeProfileEdit.vue'
 export default {
-    data() {
-        return {
-            dialog: false,
-        };
+  data() {
+    return {
+      loading: true,
+      photo: 'https://www.w3schools.com/howto/img_avatar.png',
+    }
+  },
+  props: [
+    'name',
+    'surname',
+    'major',
+    'university',
+    'gpa',
+    'mail',
+    'phoneNumber',
+    'city',
+    'menteeCount',
+    'linkedin',
+    'github',
+    'facebook',
+    'twitter',
+    'website',
+    'profilePhoto',
+    'about',
+  ],
+  methods: {
+    async getLoading(e) {
+      this.$emit('loading', e)
     },
-    props: [
-        "name",
-        "surname",
-        "major",
-        "university",
-        "gpa",
-        "mail",
-        "phoneNumber",
-        "city",
-        "menteeCount",
-        "linkedin",
-        "github",
-        "facebook",
-        "twitter",
-        "website",
-    ],
-    components: { MenteeProfileEdit }
+    async updatePhoto(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader()
+        if (file) {
+          reader.readAsDataURL(file)
+        }
+        reader.onload = async () => {
+          resolve((this.photo = reader.result))
+          let p = {
+            Image: this.photo,
+          }
+          await this.$axios.$post('/api/ProfileImg/', p).then(() => {
+            this.$emit('loading', this.loading)
+          })
+        }
+      })
+    },
+  },
 }
 </script>

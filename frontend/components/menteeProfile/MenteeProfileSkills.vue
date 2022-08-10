@@ -18,8 +18,12 @@
                 >
                 <v-list-item>
                   <v-list-item-content class="pt-0">
-                    <v-flex>
-                      <v-list-item-action-text v-for="(skill, i) in skills" :key="i" class="pr-1">{{skill}}</v-list-item-action-text>
+                    <v-flex v-for="(skill, i) in skills" :key="i">
+                      <v-btn v-on:click="delteSkl(skill)">
+                        <v-list-item-action-text class="pr-1">{{
+                          skill
+                        }}</v-list-item-action-text>
+                      </v-btn>
                     </v-flex>
                   </v-list-item-content>
                 </v-list-item>
@@ -34,8 +38,12 @@
                 <v-list-item-title class="title pa-3">DİL</v-list-item-title>
                 <v-list-item>
                   <v-list-item-content class="pt-0">
-                    <v-flex>
-                      <v-list-item-action-text v-for="(language, i) in languages" :key="i" class="pr-1">{{language}}</v-list-item-action-text>
+                    <v-flex v-for="(language, i) in languages" :key="i">
+                      <v-btn v-on:click="delteLang(language)">
+                        <v-list-item-action-text class="pr-1">{{
+                          language
+                        }}</v-list-item-action-text>
+                      </v-btn>
                     </v-flex>
                   </v-list-item-content>
                 </v-list-item>
@@ -50,10 +58,30 @@
 
 <script>
 export default {
-  props: [
-    "languages",
-    "skills"
-  ]
+  data() {
+    return {
+      loading: true
+    }
+  },
+  props: ['languages', 'skills'],
+  methods: {
+    async delteSkl(skill) {
+      await this.$axios.$delete('/api/DeleteSkills/' + skill).then((response) => {
+        this.$emit('loading', this.loading)
+        this.loading = true
+        console.log(this.loading)
+      })
+    },
+    async delteLang(language) {
+      await this.$axios
+        .$delete('/api/DeleteLanguage/' + language)
+        .then((response) => {
+          this.$emit('loading', this.loading)
+          this.loading = true
+          console.log(this.loading)
+        })
+    },
+  },
 }
 </script>
 

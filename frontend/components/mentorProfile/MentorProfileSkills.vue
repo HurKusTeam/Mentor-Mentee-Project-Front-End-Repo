@@ -18,14 +18,11 @@
                 >
                 <v-list-item>
                   <v-list-item-content class="pt-0">
-                    <v-flex
-                          v-for="(skill, i) in skills"
-                          :key="i">
+                    <v-flex v-for="(skill, i) in skills" :key="i">
                       <v-btn v-on:click="delteSkl(skill)">
-                        <v-list-item-action-text
-                          class="pr-1"
-                          >{{ skill }}</v-list-item-action-text
-                        >
+                        <v-list-item-action-text class="pr-1">{{
+                          skill
+                        }}</v-list-item-action-text>
                       </v-btn>
                     </v-flex>
                   </v-list-item-content>
@@ -43,10 +40,9 @@
                   <v-list-item-content class="pt-0">
                     <v-flex v-for="(language, i) in languages" :key="i">
                       <v-btn v-on:click="delteLang(language)">
-                        <v-list-item-action-text
-                          class="pr-1"
-                          >{{ language }}</v-list-item-action-text
-                        >
+                        <v-list-item-action-text class="pr-1">{{
+                          language
+                        }}</v-list-item-action-text>
                       </v-btn>
                     </v-flex>
                   </v-list-item-content>
@@ -62,21 +58,30 @@
 
 <script>
 export default {
-  data(){
-    return{
-      name: '',
+  data() {
+    return {
+      loading: true
     }
   },
   props: ['languages', 'skills'],
-  methods:{
-    delteSkl(skill){
-      this.$axios.$delete('/api/DeleteSkills/'+ skill).then(response => console.log(response))
-
+  methods: {
+    async delteSkl(skill) {
+      await this.$axios.$delete('/api/DeleteSkills/' + skill).then((response) => {
+        this.$emit('loading', this.loading)
+        this.loading = true
+        console.log(this.loading)
+      })
     },
-    delteLang(language){
-      this.$axios.$delete('/api/DeleteLanguage/'+ language).then(response => console.log(response))
-    }
-  }
+    async delteLang(language) {
+      await this.$axios
+        .$delete('/api/DeleteLanguage/' + language)
+        .then((response) => {
+          this.$emit('loading', this.loading)
+          this.loading = true
+          console.log(this.loading)
+        })
+    },
+  },
 }
 </script>
 

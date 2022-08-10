@@ -14,132 +14,131 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Adı" required></v-text-field>
+                <v-text-field
+                  v-model="name" label="Adı"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Soyadı"></v-text-field>
+                <v-text-field v-model="surname" label="Soyadı"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
                 <v-text-field
+                  v-model="branş"
                   label="Branş"
                   hint="Bilgisayar Mühendisi"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-autocomplete
-                  :items="[
-                    'Hacettepe Üniversitesi ',
-                    'Orta Doğu Teknik Üniversitesi (ODTÜ)',
-                    'Koç Üniversitesi',
-                    'stanbul Teknik Üniversitesi (İTÜ)',
-                    'İstanbul Üniversitesi',
-                    'Ankara Üniversitesi',
-                    'Gazi Üniversitesi',
-                    'Ege Üniversitesi',
-                    'Sabancı Üniversitesi',
-                    'Yıldız Teknik Üniversitesi',
-                    'Boğaziçi Üniversitesi',
-                  ]"
+                  v-model="selectedUni"
+                  :items="unis"
+                  item-text="Name"
+                  item-value="ID"
                   label="Okulu"
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field label="Ortalama" hint="örn. 3.40"></v-text-field>
+                <v-text-field label="Ortalama"
+                  v-model="gpa"
+                  type="number"
+                  min="0"
+                  hint="örn. 3.40"></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  label="Email*"
+                  v-model="mail"
+                  label="Email"
                   hint="örnek_mail@gmail.com"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  label="Password*"
+                  v-model="password"
+                  label="Şifre"
                   type="password"
-                  required
                 ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="phone"
+                  label="Telefon Numarası"
+                  type="number"
+                  min="0"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field v-model="city" label="Şehir"></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-textarea v-model="about" label="Hakkında"></v-textarea>
               </v-col>
               <v-col cols="12" sm="3">
                 <v-text-field
+                  v-model="linkedin"
                   label="Linkedin"
                   hint="linkedin.com"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="2">
                 <v-text-field
+                  v-model="github"
                   label="Github"
                   hint="github.com"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="3">
                 <v-text-field
+                  v-model="facebook"
                   label="Facebook"
                   hint="facebook.com"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="2">
                 <v-text-field
+                  v-model="twitter"
                   label="Twitter"
                   hint="twitter.com"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="2">
                 <v-text-field
+                  v-model="web"
                   label="Website"
                   hint="örnek.com"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-autocomplete
-                  :items="[
-                    'Türkçe',
-                    'İngilizce',
-                    'Çince',
-                    'Almanca',
-                    'Fransızca',
-                    'İspanyolca',
-                    'Hintçe',
-                    'Arapça',
-                  ]"
+                  v-model="selectedLangs"
+                  :items="languages"
+                  item-text="Name"
+                  item-value="ID"
                   label="Dil"
                   multiple
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-autocomplete
-                  :items="[
-                    'Java',
-                    'C#',
-                    'C++',
-                    'Go',
-                    'Vue',
-                    'Python',
-                    'Php',
-                    'JavaScript',
-                    'R',
-                    'Flutter',
-                  ]"
+                  v-model="selectedSkills"
+                  :items="skills"
+                  item-text="Name"
+                  item-value="ID"
                   label="Yetenekler"
                   multiple
                 ></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
-          <small>*Doldurulması zorunlu alanlar</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">
             Kapat
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn
+            color="blue darken-1"
+            text
+            @click=";(dialog = false), submit()"
+          >
             Kaydet
           </v-btn>
         </v-card-actions>
@@ -149,7 +148,109 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: [
+    'name',
+    'surname',
+    'branş',
+    'gpa',
+    'mail',
+    'phone',
+    'linkedin',
+    'github',
+    'facebook',
+    'twitter',
+    'web',
+    'city',
+    'about',
+  ],
+  data() {
+    return {
+      loading: true,
+      unis: [],
+      languages: [],
+      skills: [],
+      dialog: false,
+      i: 0,
+      password: '',
+      selectedUni: '',
+      selectedLangs: [],
+      selectedSkills: [],
+    }
+  },
+  mounted() {
+    this.getAllUni(), this.getAllLang(), this.getAllSkills()
+  },
+  methods: {
+    async submit() {
+      let data = {
+        Mail: this.mail,
+        Password: this.password,
+        Mentees: [
+          {
+            Department: this.branş,
+            GPA: parseFloat(this.gpa)
+          },
+        ],
+        UserProfiles: [
+          {
+            Name: this.name,
+            Surname: this.surname,
+            Biography: this.about,
+            PhoneNumber: this.phone,
+            City: this.city,
+          },
+        ],
+        Abouts: [
+          {
+            Facebook: this.facebook,
+            Twitter: this.twitter,
+            Linkedin: this.linkedin,
+            Website: this.web,
+            GitHub: this.github,
+          },
+        ],
+        Universities: [
+          {
+            UniversityCatalogID: this.selectedUni,
+          },
+        ],
+      }
+      let s = {
+        Skillids: this.selectedSkills,
+      }
+      let l = {
+        Langids: this.selectedLangs,
+      }
+      await this.$axios.$post('/api/Profile', data).then((response) => {
+        this.$emit('loading', this.loading)
+        this.loading = true
+        console.log(response)
+      })
+      await this.$axios.$post('/api/UpdateSkill/', s).then((response) => {
+        console.log(response)
+      })
+      await this.$axios.$post('/api/UpdateLang/', l).then((response) => {
+        console.log(response)
+      })
+    },
+    async getAllUni() {
+      return await this.$axios.$get('/api/GetUniversities').then((response) => {
+        this.unis = response
+      })
+    },
+    async getAllLang() {
+      return await this.$axios.$get('/api/GetLanguages/').then((response) => {
+        this.languages = response
+      })
+    },
+    async getAllSkills() {
+      return await this.$axios.$get('/api/GetSkills').then((response) => {
+        this.skills = response
+      })
+    },
+  },
+}
 </script>
 
 <style>

@@ -60,14 +60,33 @@
             <v-btn icon :href="`https://${website}`"
               ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
             >
-            <v-file-input
+            <v-file-input v-if="mentorid==null"
               hide-input
               type="file"
               @change="updatePhoto"
               prepend-icon="mdi-image-edit"
               class="ma-0 pa-0 pl-1"
             ></v-file-input>
-            <MentorProfileEdit :company_id="companyId" />
+
+           
+            <MentorProfileEdit v-if="mentorid==null" :company_id="companyId" />
+
+            <MentorProfileEdit
+            :name="name"
+            :surname="surname"
+            :branş="major"
+            :birthDate="birthDate"
+            :mail="mail"
+            :phone="phoneNumber"
+            :linkedin="linkedin"
+            :github="github"
+            :facebook="facebook"
+            :twitter="twitter"
+            :web="website"
+            :city="city"
+            :about="biography"
+            @loading="getLoading" />
+
           </v-layout>
         </v-col>
       </v-row>
@@ -80,7 +99,15 @@ export default {
   data() {
     return {
       photo: 'https://www.w3schools.com/howto/img_avatar.png',
+
+      mentorid: this.$route.params.mentorid,
+
+      loading: true
+
     }
+  },
+  mounted(){
+    console.log(this.mentorid)
   },
   props: [
     'name',
@@ -97,10 +124,14 @@ export default {
     'twitter',
     'website',
     'companyId',
-    'profilePhoto'
+    'profilePhoto',
+    'biography'
   ],
   methods: {
-    updatePhoto(file) {
+    async getLoading(e){
+      this.$emit('loading', e)
+    },
+    async updatePhoto(file) {
       return new Promise((resolve) => {
         const reader = new FileReader()
         if (file) {
@@ -111,7 +142,9 @@ export default {
           let p = {
               Image: this.photo,
           }
-          await this.$axios.$post('/api/ProfileImg/', p)
+          await this.$axios.$post('/api/ProfileImg/', p).then(()=>{
+            this.$emit('loading', this.loading)
+          })
         }
       })
     },
