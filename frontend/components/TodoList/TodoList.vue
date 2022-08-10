@@ -1,6 +1,6 @@
 <template>
   <div class="todo-list">
-    <div class="title">{{ title }}</div>
+    <div class="titleTodo">{{ title }}</div>
     <slot></slot>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   width: 300px;
   background-color: white;
 }
-.title {
+.titleTodo {
   padding: 10px;
   font-size: 20px;
   font-weight: 600px;
