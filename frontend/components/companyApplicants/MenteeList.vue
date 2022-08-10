@@ -62,19 +62,37 @@
                   class="green--text text-xl font-weight-black"
                   v-if="user.Percent >= 70"
                 >
-                  %{{ user.Percent }} Eşleşme
+                  <v-progress-circular
+                    :value="user.Percent"
+                    color="green"
+                    :size="75"
+                    >{{ user.Percent }}</v-progress-circular
+                  >
+                  Eşleşme Oranı
                 </p>
                 <p
                   class="amber--text text-xl font-weight-black"
                   v-if="user.Percent >= 50 && user.Percent < 70"
                 >
-                  %{{ user.Percent }} Eşleşme
+                  <v-progress-circular
+                    :value="user.Percent"
+                    color="amber"
+                    :size="75"
+                    >{{ user.Percent }}</v-progress-circular
+                  >
+                  Eşleşme Oranı
                 </p>
                 <p
                   class="red--text text-xl font-weight-black"
                   v-if="user.Percent < 50"
                 >
-                  %{{ user.Percent }} Eşleşme
+                  <v-progress-circular
+                    :value="user.Percent"
+                    color="red"
+                    :size="75"
+                    >{{ user.Percent }}</v-progress-circular
+                  >
+                  Eşleşme Oranı
                 </p>
                 <v-btn
                   class="mb-3 mt-3"
@@ -112,6 +130,7 @@ export default {
           linkedin: '',
           gitHub: '',
           skills: ['c'],
+          Percent: 17,
         },
       ],
     }
