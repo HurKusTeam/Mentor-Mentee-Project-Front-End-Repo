@@ -13,46 +13,35 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="6" md="4">
+              <v-col cols="12" sm="6" md="6">
                 <v-text-field
-                  v-model="name"
-                  label="Adı"
-                  required
-                ></v-text-field>
+                  v-model="name" label="Şirket Adı"></v-text-field>
               </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field v-model="surname" label="Soyadı"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
+              <v-col cols="12" sm="6" md="6">
                 <v-text-field
-                  v-model="branş"
-                  label="Branş"
-                  hint="Bilgisayar Mühendisi"
-                  required
+                  v-model="sector"
+                  label="Sektör"
+                  hint="Yazılım"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-autocomplete
-                  v-model="selectedUni"
-                  :items="unis"
-                  item-text="Name"
-                  item-value="ID"
-                  label="Okulu"
-                ></v-autocomplete>
+                <v-text-field
+                  v-model="employee"
+                  label="Çalışan Sayısı"
+                  hint="10.000"
+                  type="number"
+                  min="0"
+                ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field
-                  v-model="birthDate"
-                  label="Doğum Tarihi"
-                  type="date"
-                ></v-text-field>
+                  v-model="date" label="Kuruluş Tarihi" type="date"></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
                   v-model="mail"
                   label="Email"
                   hint="örnek_mail@gmail.com"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -60,7 +49,6 @@
                   v-model="password"
                   label="Şifre"
                   type="password"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
@@ -69,7 +57,6 @@
                   label="Telefon Numarası"
                   type="number"
                   min="0"
-                  required
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
@@ -111,28 +98,7 @@
                   v-model="web"
                   label="Website"
                   hint="örnek.com"
-                  required
                 ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-autocomplete
-                  v-model="selectedLangs"
-                  :items="languages"
-                  item-text="Name"
-                  item-value="ID"
-                  label="Dil"
-                  multiple
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-autocomplete
-                  v-model="selectedSkills"
-                  :items="skills"
-                  item-text="Name"
-                  item-value="ID"
-                  label="Yetenekler"
-                  multiple
-                ></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
@@ -159,9 +125,9 @@
 export default {
   props: [
     'name',
-    'surname',
-    'branş',
-    'birthDate',
+    'sector',
+    'employee',
+    'date',
     'mail',
     'phone',
     'linkedin',
@@ -175,36 +141,28 @@ export default {
   data() {
     return {
       loading: true,
-      unis: [],
-      languages: [],
-      skills: [],
       dialog: false,
       i: 0,
       password: '',
-      selectedUni: '',
-      selectedLangs: [],
-      selectedSkills: [],
     }
-  },
-  mounted() {
-    this.getAllUni(), this.getAllLang(), this.getAllSkills()
   },
   methods: {
     async submit() {
       let data = {
         Mail: this.mail,
         Password: this.password,
-        Mentors: [
+        Companies: [
           {
-            Major: this.branş,
+            Title: this.name,
+            Description: this.about,
+            Sector: this.sector,
+            PersonalCount: parseFloat(this.employee),
+            SinceDate: this.date,
+
           },
         ],
         UserProfiles: [
           {
-            Name: this.name,
-            Surname: this.surname,
-            Biography: this.about,
-            BirthDate: this.birthDate,
             PhoneNumber: this.phone,
             City: this.city,
           },
@@ -218,43 +176,11 @@ export default {
             GitHub: this.github,
           },
         ],
-        Universities: [
-          {
-            UniversityCatalogID: this.selectedUni,
-          },
-        ],
-      }
-      let s = {
-        Skillids: this.selectedSkills,
-      }
-      let l = {
-        Langids: this.selectedLangs,
       }
       await this.$axios.$post('/api/Profile', data).then((response) => {
         this.$emit('loading', this.loading)
         this.loading = true
         console.log(response)
-      })
-      await this.$axios.$post('/api/UpdateSkill/', s).then((response) => {
-        console.log(response)
-      })
-      await this.$axios.$post('/api/UpdateLang/', l).then((response) => {
-        console.log(response)
-      })
-    },
-    async getAllUni() {
-      return await this.$axios.$get('/api/GetUniversities').then((response) => {
-        this.unis = response
-      })
-    },
-    async getAllLang() {
-      return await this.$axios.$get('/api/GetLanguages/').then((response) => {
-        this.languages = response
-      })
-    },
-    async getAllSkills() {
-      return await this.$axios.$get('/api/GetSkills').then((response) => {
-        this.skills = response
       })
     },
   },

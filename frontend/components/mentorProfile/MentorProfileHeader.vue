@@ -67,7 +67,21 @@
               prepend-icon="mdi-image-edit"
               class="ma-0 pa-0 pl-1"
             ></v-file-input>
-            <MentorProfileEdit :company_id="companyId" />
+            <MentorProfileEdit
+            :name="name"
+            :surname="surname"
+            :branş="major"
+            :birthDate="birthDate"
+            :mail="mail"
+            :phone="phoneNumber"
+            :linkedin="linkedin"
+            :github="github"
+            :facebook="facebook"
+            :twitter="twitter"
+            :web="website"
+            :city="city"
+            :about="biography"
+            @loading="getLoading" />
           </v-layout>
         </v-col>
       </v-row>
@@ -80,6 +94,7 @@ export default {
   data() {
     return {
       photo: 'https://www.w3schools.com/howto/img_avatar.png',
+      loading: true
     }
   },
   props: [
@@ -97,10 +112,14 @@ export default {
     'twitter',
     'website',
     'companyId',
-    'profilePhoto'
+    'profilePhoto',
+    'biography'
   ],
   methods: {
-    updatePhoto(file) {
+    async getLoading(e){
+      this.$emit('loading', e)
+    },
+    async updatePhoto(file) {
       return new Promise((resolve) => {
         const reader = new FileReader()
         if (file) {
@@ -111,7 +130,9 @@ export default {
           let p = {
               Image: this.photo,
           }
-          await this.$axios.$post('/api/ProfileImg/', p)
+          await this.$axios.$post('/api/ProfileImg/', p).then(()=>{
+            this.$emit('loading', this.loading)
+          })
         }
       })
     },

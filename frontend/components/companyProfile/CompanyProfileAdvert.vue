@@ -7,17 +7,10 @@
 
           <v-list-item-subtitle class="pl-1 pb-1">
             <v-icon class="pa-1" size="20"> mdi-calendar-range </v-icon>
-            28.27.2020 / 28.07.2024</v-list-item-subtitle
+            {{this.advert.Advert?.StartDate}} / {{this.advert.Advert?.EndDate}}</v-list-item-subtitle
           >
           <v-list-item-action-text class="pr-3 pb-3 pl-3"
-            >Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Mollitia blanditiis quo error facilis nemo ipsam neque iure
-            laboriosam accusamus, odit reiciendis saepe itaque inventore minus
-            rerum impedit! Corporis, illum quibusdam. ipsum dolor sit amet
-            consectetur adipisicing elit. Distinctio modi at iure voluptatibus
-            dolorem ut neque illum iste minima nostrum illo ab provident magnam
-            delectus exercitationem tempora quasi, ipsa
-            laudantium?</v-list-item-action-text
+            >{{this.advert.Advert?.Description}}</v-list-item-action-text
           >
         </v-list-item-content>
       </v-list-item>
@@ -26,7 +19,29 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      advert: [],
+    }
+  },
+  props: [
+    'advertID'
+  ],
+
+  mounted(){
+    this.createAdvert()
+  },
+
+  methods: {
+    async  createAdvert() {
+      return await this.$axios.$get("/api/GetAdvertSolo/" + this.advertID).then((response) => {
+        this.advert = response
+        console.log(response)
+      })
+    },
+  },
+}
 </script>
 
 <style>

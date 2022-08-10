@@ -10,10 +10,7 @@
         <v-col cols="12" sm="10" md="10">
           <v-list-item class="pa-5">
             <v-list-item-avatar class="ml-2" size="100">
-              <img
-                src="https://i.pinimg.com/originals/99/7b/e0/997be08fea707cddda41d010e04d6a3e.png"
-                alt="John"
-              />
+              <img v-if="profilePhoto" :src="`${profilePhoto}`" alt="John" />
             </v-list-item-avatar>
 
             <v-list-item-content>
@@ -22,9 +19,7 @@
                   {{ title }}
                 </v-list-item-title>
 
-                <v-list-item-subtitle>
-                  {{ sector }}</v-list-item-subtitle
-                >
+                <v-list-item-subtitle> {{ sector }}</v-list-item-subtitle>
                 <v-list-item-subtitle>
                   <v-icon class="pa-1" size="20">mdi-account-supervisor</v-icon>
                   {{ personalCount }}+</v-list-item-subtitle
@@ -68,109 +63,29 @@
             <v-btn icon :href="`https://${website}`"
               ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
             >
-
-            <v-dialog v-model="dialog" persistent max-width="600px">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
-                  <v-icon class="pa-1" size="20"> mdi-pencil </v-icon>
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">Profil Düzenleme</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-text-field label="Şirket Adı" required></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="6">
-                        <v-text-field
-                          label="Sektör"
-                          hint="Yazılım"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field
-                          label="Çalışan Sayısı"
-                          hint="10.000"
-                          type="number"
-                          min="0"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-text-field
-                          label="Kuruluş Tarihi"
-                          type="date"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Email*"
-                          hint="örnek_mail@gmail.com"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Password*"
-                          type="password"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="3">
-                        <v-text-field
-                          label="Linkedin"
-                          hint="linkedin.com"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="2">
-                        <v-text-field
-                          label="Github"
-                          hint="github.com"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="3">
-                        <v-text-field
-                          label="Facebook"
-                          hint="facebook.com"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="2">
-                        <v-text-field
-                          label="Twitter"
-                          hint="twitter.com"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="2">
-                        <v-text-field
-                          label="Website"
-                          hint="örnek.com"
-                          required
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                  <small>*Doldurulması zorunlu alanlar</small>
-                </v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="dialog = false">
-                    Kapat
-                  </v-btn>
-                  <v-btn color="blue darken-1" text @click="dialog = false">
-                    Kaydet
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+            <v-file-input
+              hide-input
+              type="file"
+              @change="updatePhoto"
+              prepend-icon="mdi-image-edit"
+              class="ma-0 pa-0 pl-1"
+            ></v-file-input>
+            <CompanyProfileEdit
+              :name="title"
+              :sector="sector"
+              :employee="personalCount"
+              :date="sinceDate"
+              :mail="mail"
+              :phone="phoneNumber"
+              :linkedin="linkedin"
+              :github="github"
+              :facebook="facebook"
+              :twitter="twitter"
+              :web="website"
+              :city="city"
+              :about="description"
+              @loading="getLoading"
+            />
           </v-layout>
         </v-col>
       </v-row>
@@ -182,7 +97,8 @@
 export default {
   data() {
     return {
-      dialog: false,
+      photo: 'https://www.w3schools.com/howto/img_avatar.png',
+      loading: true,
     }
   },
   props: [
@@ -198,6 +114,30 @@ export default {
     'facebook',
     'twitter',
     'website',
+    'profilePhoto',
+    'description',
   ],
+  methods: {
+    async getLoading(e) {
+      this.$emit('loading', e)
+    },
+    async updatePhoto(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader()
+        if (file) {
+          reader.readAsDataURL(file)
+        }
+        reader.onload = async () => {
+          resolve((this.photo = reader.result))
+          let p = {
+            Image: this.photo,
+          }
+          await this.$axios.$post('/api/ProfileImg/', p).then(() => {
+            this.$emit('loading', this.loading)
+          })
+        }
+      })
+    },
+  },
 }
 </script>
