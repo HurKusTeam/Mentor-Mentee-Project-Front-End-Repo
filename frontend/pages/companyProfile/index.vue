@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       users: [],
+      companyid: this.$route.params.companyid,
     }
   },
 
@@ -33,13 +34,30 @@ export default {
   },
 
   methods: {
-    async createUser() {
-      return await this.$axios.$get('/api/Profile').then((response) => {
+   
+
+   async createUser() {
+      if(this.companyid!=null){
+        return await this.$axios.$get('/api/Profile/' + this.companyid).then((response) => {
+
+        this.users = response
+        this.users = response
+        this.uni = this.users.Universities
+        console.log(this.companyid)
+        
+      })
+      }
+      else{
+        return await this.$axios.$get('/api/Profile').then((response) => {
         this.users = response
         this.uni = this.users.Universities
         console.log(response)
+        
       })
+      }
     },
-  },
+
+    
+  }
 }
 </script>

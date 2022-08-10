@@ -60,14 +60,15 @@
             <v-btn icon :href="`https://${website}`"
               ><v-icon class="pa-1" size="20"> mdi-web </v-icon></v-btn
             >
-            <v-file-input
+            <v-file-input v-if="mentorid==null"
               hide-input
               type="file"
               @change="updatePhoto"
               prepend-icon="mdi-image-edit"
               class="ma-0 pa-0 pl-1"
             ></v-file-input>
-            <MentorProfileEdit :company_id="companyId" />
+           
+            <MentorProfileEdit v-if="mentorid==null" :company_id="companyId" />
           </v-layout>
         </v-col>
       </v-row>
@@ -80,7 +81,11 @@ export default {
   data() {
     return {
       photo: 'https://www.w3schools.com/howto/img_avatar.png',
+      mentorid: this.$route.params.mentorid,
     }
+  },
+  mounted(){
+    console.log(this.mentorid)
   },
   props: [
     'name',

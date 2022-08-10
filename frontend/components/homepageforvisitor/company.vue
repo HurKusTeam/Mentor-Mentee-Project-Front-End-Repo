@@ -9,7 +9,7 @@
                                 <img src="https://i.pinimg.com/originals/99/7b/e0/997be08fea707cddda41d010e04d6a3e.png"
                                     alt="Aselsan" />
                             </v-list-item-avatar>
-                            <v-list-item-title class="pt-3"> {{user.Company.Title}} </v-list-item-title>
+                            <v-list-item-title class="pt-3"> <a class="item-link" v-on:click="sendConfirm(user.Company.ID)"> {{user.Company.Title}}   </a> </v-list-item-title>
                             <v-list-item-subtitle> {{ user.Company.Sector }} </v-list-item-subtitle>
                             <v-list-item-subtitle class="pt-2">
                                 <v-icon size="20"> mdi-email </v-icon>
@@ -62,10 +62,18 @@ export default {
         async company() {
             return await this.$axios.$get('/api/GetAdvertsAll').then((response) => {
                 this.company1 = response
-
                 console.log(response)
             })
         },
+       sendConfirm(id) {
+      
+      console.log(id)
+
+      this.$router.push({
+        name: 'companyProfile',
+        params: { companyid: id },
+      })
+    },
     },
 
     mounted() {
