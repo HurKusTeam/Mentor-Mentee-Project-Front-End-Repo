@@ -1,15 +1,15 @@
 <template>
   <v-main>
-      <v-flex justify-center xs10 class="mx-auto">
-        <v-progress-circular
-      v-if="reload"
-      :size="100"
-      :width="10"
-      color="#c1b3fd"
-      style="text-align: center; !important"
-      indeterminate
-    ></v-progress-circular>
-      </v-flex>
+    <v-flex justify-center xs10 class="mx-auto">
+      <v-progress-circular
+        v-if="reload"
+        :size="100"
+        :width="10"
+        color="#c1b3fd"
+        style="text-align: center; !important"
+        indeterminate
+      ></v-progress-circular>
+    </v-flex>
     <MentorProfileHeader
       v-if="!reload"
       :name="this.users.Name"
@@ -34,6 +34,7 @@
       v-if="this.users.IsIndividual == false && !reload"
       :title="this.users.Title"
       :sector="this.users.Sector"
+      :image="this.users.CompanyImg"
       :personal="this.users.PersonalCount"
       :sinceDate="this.users.SinceDate"
       :desctiption="this.users.Description"
@@ -42,9 +43,7 @@
       v-if="this.users.IsIndividual && !reload"
       :advertID="this.users.AdvertID"
     />
-    <MentorProfileInfo
-      v-if="!reload"
-      :biography="this.users.Biography" />
+    <MentorProfileInfo v-if="!reload" :biography="this.users.Biography" />
     <MentorProfileSkills
       v-if="!reload"
       :languages="this.users.Languages"
@@ -76,7 +75,7 @@ export default {
         this.$axios.$get('/api/Profile').then((response) => {
           this.users = response
           this.reload = false
-          
+
           console.log(response)
         })
       }
@@ -104,5 +103,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
