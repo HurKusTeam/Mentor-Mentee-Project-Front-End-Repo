@@ -17,7 +17,7 @@
                         >Hesabınıza giriş yapın.</div>
                         <div
                           class="text-center white--text "
-                        ><br>Usta-Çırak hesabınızla giriş yapın.</div>
+                        ><br>Usta-Çırak-Şirket hesabınızla giriş yapın.</div>
                         <v-row align="center" justify="center">
                           <v-col cols="12" sm="8">
                            
@@ -37,7 +37,7 @@
                             :type="showPassword ? 'text' : 'password'" 
                             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                             @click:append="showPassword = !showPassword"
-                            
+                            required
                             outlined
                             dense
                             color="white"
@@ -56,7 +56,7 @@
                       > </v-checkbox>
                               </v-col>
                               <v-col cols="12" sm="5">
-                                <span class="white--text">Şifremi Unuttum</span>
+                                <span class="white--text" >Şifremi Unuttum</span>
                               </v-col>
                             </v-row>
 
