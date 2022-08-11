@@ -3,27 +3,12 @@
     <div class="toolbar--container">
       <a
         href="/"
-        class="
-          item--link
-          text--logo text-4xl text-gradient
-          bg-gradient-to-r
-          from-blue-600
-          via-indigo-400
-          to-purple-300
-        "
+        class="item--link text--logo text-4xl text-gradient bg-gradient-to-r from-blue-600 via-indigo-400 to-purple-300"
       >
         HÜRKUŞ
       </a>
       <div
-        class="
-          relative
-          z-10
-          inline-flex
-          items-center
-          space-x-3
-          md:ml-5
-          lg:justify-end
-        "
+        class="relative z-10 inline-flex items-center space-x-3 md:ml-5 lg:justify-end"
       >
         <nav class="hidden md:block">
           <div class="flex items-baseline space-x-10">
@@ -58,7 +43,7 @@
                     <v-btn text @click="goProfile"> Profilim </v-btn>
                   </v-list-item>
                   <v-list-item>
-                    <v-btn text @click="goTodo">
+                    <v-btn text @click="goTodo(user.MentorID)">
                       Görevler / Görüşmelerim
                     </v-btn>
                   </v-list-item>
@@ -68,13 +53,10 @@
                     </v-btn>
                   </v-list-item>
                   <v-list-item>
-                    <addAdvertComp 
-                    :userId="user.UserID" />
+                    <addAdvertComp :userId="user.UserID" />
                   </v-list-item>
                   <v-list-item>
-                    <v-btn text @click="myAdvert">
-                      İlanım
-                    </v-btn>
+                    <v-btn text @click="myAdvert"> İlanım </v-btn>
                   </v-list-item>
                   <v-list-item>
                     <v-btn text v-on:click="logout"> Çıkış </v-btn>
@@ -111,9 +93,10 @@ export default {
         name: 'mentorProfile',
       })
     },
-    goTodo() {
+    goTodo(id) {
       this.$router.push({
         name: 'mentorsMentees',
+        params: { mentorid: id },
       })
     },
     goMyApplicants(id, usId) {
@@ -123,7 +106,7 @@ export default {
       })
       console.log(id)
     },
-    myAdvert(){
+    myAdvert() {
       this.advertId = localStorage.getItem('advertId')
       this.$router.push({
         name: 'advertDetail',

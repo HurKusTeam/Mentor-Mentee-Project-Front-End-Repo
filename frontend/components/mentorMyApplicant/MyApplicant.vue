@@ -119,9 +119,12 @@ export default {
     sendConfirm(advertId, userId, companyId) {
           console.log("comp", companyId)
       return this.$axios
-        .$get('/api/AcceptApplication/' + advertId + '/' + userId + '/' + companyId)
+        .$get(
+          '/api/AcceptApplication/' + advertId + '/' + userId + '/' + companyId
+        )
         .then((response) => {
           console.log('response', response)
+          this.getUserData()
         })
     },
     sendDeny(advertId, userId) {
@@ -129,6 +132,7 @@ export default {
         .$get('/api/RejectApplication/' + advertId + '/' + userId)
         .then((response) => {
           console.log('response', response)
+          this.getUserData()
         })
     },
     fullName(name, surName) {

@@ -60,11 +60,14 @@
             :desc="todo.Description"
             :id="todo.ID"
             :endDate="todo.EndDate"
+            @reload="reload"
+            :role="store.Role"
           ></todo-item>
         </draggable>
 
         <v-form class="mt-3" ref="form">
           <v-text-field
+            v-if="store.Role === 0"
             v-model="title"
             counter="20"
             :rules="inputRules"
@@ -72,6 +75,7 @@
             label="Eklemek istediğiniz iş"
           ></v-text-field>
           <v-btn
+            v-if="store.Role === 0"
             v-on:click="submit(allTodos.Mentee.ID, allTodos.Mentee.MentorID)"
             color="green"
             ><v-icon>mdi-plus</v-icon></v-btn
@@ -95,6 +99,8 @@
             :desc="todo.Description"
             :id="todo.ID"
             :endDate="todo.EndDate"
+            @reload="reload"
+            :role="store.Role"
           ></todo-item>
         </draggable>
       </todo-list>
@@ -115,6 +121,8 @@
             :desc="todo.Description"
             :id="todo.ID"
             :endDate="todo.EndDate"
+            @reload="reload"
+            :role="store.Role"
           ></todo-item>
         </draggable>
       </todo-list>
@@ -135,6 +143,8 @@
             :desc="todo.Description"
             :endDate="todo.EndDate"
             class="mb-2"
+            @reload="reload"
+            :role="store.Role"
           >
           </todo-item>
         </draggable>
@@ -150,6 +160,9 @@ import draggable from 'vuedraggable'
 export default {
   data() {
     return {
+      store: '',
+      menteeId: this.$route.params.menteeId,
+      mentorId: this.$route.params.mentorId,
       ActionDate: '',
       checkMove: function (evt) {
         console.log(evt.draggedContext)
@@ -159,32 +172,26 @@ export default {
       ],
       title: '',
       thisMentee: false,
-
-      mentees: [
-        {
-          id: 2,
-          name: 'Ayşe',
-        },
-        {
-          id: 1,
-          name: 'Ali',
-        },
-      ],
-
       allTodos: [],
     }
   },
   components: { TodoList, TodoItem, draggable },
   mounted() {
     this.getUserTodo()
+    this.store = JSON.parse(localStorage.getItem('key'))
   },
 
   methods: {
+    async reload(e) {
+      this.getUserTodo()
+    },
     getUserTodo() {
-      return this.$axios.$get('/api/GetTodo/40/139').then((response) => {
-        this.allTodos = response
-        console.log(response)
-      })
+      return this.$axios
+        .$get('/api/GetTodo/' + this.menteeId + '/' + this.mentorId)
+        .then((response) => {
+          this.allTodos = response
+          console.log(response)
+        })
     },
 
     submit(Menteeid, Mentorid) {
@@ -198,7 +205,7 @@ export default {
         return this.$axios.$post('/api/AddTodo', todo).then((response) => {
           console.log(response)
           console.log(todo)
-          window.location.reload(true)
+          this.getUserTodo()
         })
       }
     },
@@ -229,6 +236,7 @@ export default {
     },
     onAdd3: function (evt) {
       this.getComponentData(evt, 3)
+      this.getUserTodo()
     },
   },
 }
