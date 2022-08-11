@@ -1,8 +1,9 @@
 <template>
-  <section class="py-20 bg-gray-50 shadow-inner">
+<div class="lang">
+<section class="py-20 bg-gray-50 shadow-inner">
     <div class="px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold tracking-tight text-accent sm:text-4xl md:text-5xl xl:text-6xl">
-        EN İYİ PROGRAM
+        A'DAN Z'YE HER ALANDA MENTORLUK BURADA
       </h2>
     </div>
 
@@ -18,7 +19,7 @@
             </svg>
           </div>
           <h4 class="text-xl font-medium text-accent">
-            HIZLI
+            GÜVEN
           </h4>
           <p class="text-base text-center text-gray-500">
 
@@ -34,7 +35,7 @@
             </svg>
           </div>
           <h4 class="text-xl font-medium text-accent">
-            EN İYİ
+            TECRÜBELİ
           </h4>
           <p class="text-base text-center text-gray-500">
 
@@ -58,6 +59,8 @@
       </div>
     </div>
   </section>
+</div>
+  
 
 </template>
 
@@ -68,4 +71,11 @@ export default {
 </script>
 
 <style>
+.lang {
+  margin-left: -40%;
+  
+  width: 2050px;
+  background: white !important;
+  background-color: white !important
+}
 </style>

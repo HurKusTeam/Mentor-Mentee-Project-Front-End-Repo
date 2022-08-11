@@ -98,6 +98,7 @@ export default {
   data() {
     return {
       photo: 'https://www.w3schools.com/howto/img_avatar.png',
+      companyid: this.$route.params.companyid,
       loading: true,
     }
   },
