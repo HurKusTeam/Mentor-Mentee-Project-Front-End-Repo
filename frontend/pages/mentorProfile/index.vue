@@ -1,6 +1,7 @@
 <template>
   <v-main>
-    <v-progress-circular
+      <v-flex justify-center xs10 class="mx-auto">
+        <v-progress-circular
       v-if="reload"
       :size="100"
       :width="10"
@@ -8,6 +9,7 @@
       style="text-align: center; !important"
       indeterminate
     ></v-progress-circular>
+      </v-flex>
     <MentorProfileHeader
       v-if="!reload"
       :name="this.users.Name"
