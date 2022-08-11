@@ -96,7 +96,7 @@
                 </p>
                 <v-btn
                   class="mb-3 mt-3"
-                  v-on:click="sendConfirm(user.ID)"
+                  v-on:click="sendConfirm(user.Mentee.UserID, user.Mentorid)"
                   color="green"
                 >
                   <v-icon>mdi-account-multiple-check</v-icon></v-btn
@@ -136,12 +136,14 @@ export default {
           console.log(response)
         })
     },
-    sendConfirm(id) {
+    sendConfirm(id, mId) {
       return this.$axios
-        .$get('/api/ConfirmMenteeMentor/' + id + this.mentorId)
+        .$get('/api/ConfirmMenteeMentor/' + id + '/'+ mId)
         .then((response) => {
-          this.users = response
           console.log(response)
+          console.log("menteeid", id)
+          console.log("mentorid", mId)
+          this.getUserData()
         })
     },
 

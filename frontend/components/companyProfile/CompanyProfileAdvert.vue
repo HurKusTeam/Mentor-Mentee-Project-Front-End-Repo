@@ -3,7 +3,9 @@
     <v-card class="mx-auto" max-width="1000" tile>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title pa-3 pb-2">İLAN</v-list-item-title>
+          <v-btn text class="ml-0 pl-0" style="text-align:left;" @click="goAdvert(advertID)">
+            <v-list-item-title class="title pa-3 pb-2">İLAN</v-list-item-title>
+          </v-btn>
 
           <v-list-item-subtitle class="pl-1 pb-1">
             <v-icon class="pa-1" size="20"> mdi-calendar-range </v-icon>
@@ -40,6 +42,13 @@ export default {
         console.log(response)
       })
     },
+    goAdvert(id){
+      console.log(id)
+      this.$router.push({
+        name: 'advertDetail',
+        params: { mentorid: id },
+      })
+    }
   },
 }
 </script>

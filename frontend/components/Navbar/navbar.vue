@@ -92,11 +92,6 @@
                     </v-btn>
                   </v-list-item>
                   <v-list-item>
-                    <v-btn text @click="goMyApplicants(user.MentorID, user.UserID)">
-                      Başvurularım
-                    </v-btn>
-                  </v-list-item>
-                  <v-list-item>
                     <v-btn text v-on:click="logout"> Çıkış </v-btn>
                   </v-list-item>
                 </v-list>
@@ -121,7 +116,7 @@
                     <v-btn text @click="goProfile"> Profilim </v-btn>
                   </v-list-item>
                   <v-list-item>
-                    <v-btn text @click="goMyApplicants(user.MentorID, user.UserID)">
+                    <v-btn text @click="goMyApplicants(user.CompanyID, user.UserID)">
                       Başvuruları Görüntüle
                     </v-btn>
                   </v-list-item>
@@ -129,10 +124,13 @@
                     <addAdvertComp :userId="user.UserID" />
                   </v-list-item>
                   <v-list-item>
+                    <v-btn text @click="myAdvert"> İlanım </v-btn>
+                  </v-list-item>
+                  <v-list-item>
                     <v-btn text @click="menteeAsign"> Çırak Atama </v-btn>
                   </v-list-item>
                   <v-list-item>
-                    <v-btn text @click="myAdvert"> İlanım </v-btn>
+                    <addCompanyMentor />
                   </v-list-item>
                   <v-list-item>
                     <v-btn text v-on:click="logout"> Çıkış </v-btn>
@@ -152,91 +150,98 @@
 
 <script>
 export default {
-  data() {
-    return {
-      user: '',
-      advertId: '',
-    }
-  },
-  mounted() {
-    if (process.client) {
-      this.user = JSON.parse(localStorage.getItem('key'))
-      this.advertId = localStorage.getItem('advertId')
-      console.log(this.user)
-    }
-  },
-  methods: {
-    goProfile() {
-      if(this.user.Role == 0){
-      this.$router.push({
-        name: 'mentorProfile',
-      })
-      }else if(this.user.Role == 1){
-      this.$router.push({
-        name: 'menteeProfile',
-      })
-      }else if(this.user.Role == 2){
-      this.$router.push({
-        name: 'companyProfile',
-      })
-      }
+    data() {
+        return {
+            user: "",
+            advertId: "",
+        };
     },
-    menteeAsign(){
-        this.$router.push({
-        name: 'companyApplicants',
-      })
-    },
-    goTodo(id) {
-      this.$router.push({
-        name: 'mentorsMentees',
-        params: { mentorid: id },
-      })
-    },
-    goMyApplicants(id, usId) {
-      if(this.user.Role == 0){
-      this.$router.push({
-        name: 'myApplicants',
-        params: { mentorid: id, userId: usId },
-      })
-      }else if(this.user.Role == 1){
-        console.log("girdi", usId)
-      this.$router.push({
-        name: 'myApplications',
-        params: { userId: usId }
-      })
-      }
-    },
-    myAdvert() {
-      this.advertId = localStorage.getItem('advertId')
-      this.$router.push({
-        name: 'advertDetail',
-        params: { mentorid: this.advertId },
-      })
-    },
-    goTodoMentee(mentorId, menteeId){
-      this.$router.push({
-        name: 'todoList',
-        params: { mentorId: mentorId, menteeId: menteeId },
-      })
-    },
-    goMetingsMentee(){
-      this.$router.push({
-        name: 'meetings'
-      })
-    },
-    logout() {
-      window.localStorage.clear()
-      this.$router.push(
-        {
-          path: '/login',
-          force: true,
-        },
-        () => {
-          window.location.reload(true)
+    mounted() {
+        if (process.client) {
+            this.user = JSON.parse(localStorage.getItem("key"));
+            this.advertId = localStorage.getItem("advertId");
+            console.log(this.user);
         }
-      )
     },
-  },
+    methods: {
+        goProfile() {
+            if (this.user.Role == 0) {
+                this.$router.push({
+                    name: "mentorProfile",
+                });
+            }
+            else if (this.user.Role == 1) {
+                this.$router.push({
+                    name: "menteeProfile",
+                });
+            }
+            else if (this.user.Role == 2) {
+                this.$router.push({
+                    name: "companyProfile",
+                });
+            }
+        },
+        menteeAsign() {
+            this.$router.push({
+                name: "companyApplicants",
+            });
+        },
+        goTodo(id) {
+            this.$router.push({
+                name: "mentorsMentees",
+                params: { mentorid: id },
+            });
+        },
+        goMyApplicants(id, usId) {
+            if (this.user.Role == 0) {
+                this.$router.push({
+                    name: "myApplicants",
+                    params: { mentorid: id, userId: usId },
+                });
+            }
+            else if (this.user.Role == 1) {
+                console.log("girdi", usId);
+                this.$router.push({
+                    name: "myApplications",
+                    params: { userId: usId }
+                });
+            }
+            else if (this.user.Role == 2) {
+                console.log("girdi", usId);
+                this.$router.push({
+                    name: "myApplicants",
+                    params: { mentorid: id, userId: usId }
+                });
+            }
+        },
+        myAdvert() {
+            this.advertId = localStorage.getItem("advertId");
+            this.$router.push({
+                name: "advertDetail",
+                params: { mentorid: this.advertId },
+            });
+        },
+        goTodoMentee(mentorId, menteeId) {
+            this.$router.push({
+                name: "todoList",
+                params: { mentorId: mentorId, menteeId: menteeId },
+            });
+        },
+        goMetingsMentee() {
+            this.$router.push({
+                name: "meetings"
+            });
+        },
+        logout() {
+            window.localStorage.clear();
+            this.$router.push({
+                path: "/login",
+                force: true,
+            }, () => {
+                window.location.reload(true);
+            });
+        },
+    },
 }
 </script>
 
