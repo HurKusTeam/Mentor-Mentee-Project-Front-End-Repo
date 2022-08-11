@@ -388,6 +388,20 @@ export default {
               }
             )
           }
+          else if (response.Role == 2) {
+            this.$router.push(
+              {
+                path: '/companyProfile',
+                force: true,
+              },
+              () => {
+
+                window.location.reload(true)
+                this.loading=false
+
+              }
+            )
+          }
 
 
           console.log(response)

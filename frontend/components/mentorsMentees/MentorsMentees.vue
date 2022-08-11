@@ -9,7 +9,7 @@
     >
       <v-list-item class="pa-5">
         <v-list-item-avatar class="ml-2" size="100">
-          <v-btn size="100" fab v-on:click="toProfile(user.MenteeID)">
+          <v-btn size="100" fab v-on:click="toProfile(user.UserID)">
             <v-img
               height="100"
               width="100"

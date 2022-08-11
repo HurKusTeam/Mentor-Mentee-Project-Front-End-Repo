@@ -118,21 +118,7 @@ export default {
       tweened: 0,
       mentorId: this.$route.params.mentorId,
       userDatas: [],
-      users: [
-        {
-          id: 1,
-          UserName: '',
-          surName: '',
-          department: '',
-          Universities: '',
-          gpa: 2.54,
-          location: '',
-          linkedin: '',
-          gitHub: '',
-          skills: ['c'],
-          Percent: 95,
-        },
-      ],
+      users: [],
     }
   },
 

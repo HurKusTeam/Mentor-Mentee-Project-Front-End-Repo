@@ -76,7 +76,6 @@ export default {
         this.$axios.$get('/api/Profile').then((response) => {
           this.users = response
           this.reload = false
-          
           console.log(response)
         })
       }

@@ -32,7 +32,7 @@
                   <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
                     <v-list-item-avatar class="ml-2" size="50">
                       <img
-                        src="https://www.w3schools.com/howto/img_avatar.png"
+                        :src='`${user.ProfilIMG}`'
                         alt="John"
                       />
                     </v-list-item-avatar>
@@ -71,7 +71,7 @@
                   <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
                     <v-list-item-avatar class="ml-2" size="50">
                       <img
-                        src="https://www.w3schools.com/howto/img_avatar.png"
+                        :src='`${user.ProfilIMG}`'
                         alt="John"
                       />
                     </v-list-item-avatar>
@@ -102,6 +102,46 @@
                 </v-list>
               </v-menu>
             </div>
+
+            
+            <div class="text-center" v-if="user != null && user.Role == 2">
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
+                    <v-list-item-avatar class="ml-2" size="50">
+                      <img
+                        :src='`${user.ProfilIMG}`'
+                        alt="John"
+                      />
+                    </v-list-item-avatar>
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item>
+                    <v-btn text @click="goProfile"> Profilim </v-btn>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-btn text @click="goMyApplicants(user.MentorID, user.UserID)">
+                      Başvuruları Görüntüle
+                    </v-btn>
+                  </v-list-item>
+                  <v-list-item>
+                    <addAdvertComp :userId="user.UserID" />
+                  </v-list-item>
+                  <v-list-item>
+                    <v-btn text @click="menteeAsign"> Çırak Atama </v-btn>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-btn text @click="myAdvert"> İlanım </v-btn>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-btn text v-on:click="logout"> Çıkış </v-btn>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </div>
+
+            
           </div>
         </nav>
       </div>
@@ -135,8 +175,16 @@ export default {
       this.$router.push({
         name: 'menteeProfile',
       })
-
+      }else if(this.user.Role == 2){
+      this.$router.push({
+        name: 'companyProfile',
+      })
       }
+    },
+    menteeAsign(){
+        this.$router.push({
+        name: 'companyApplicants',
+      })
     },
     goTodo(id) {
       this.$router.push({
