@@ -137,11 +137,14 @@ export default {
         })
     },
     sendConfirm(id) {
-      return console.log(id)
+      return this.$axios
+        .$get('/api/ConfirmMenteeMentor/' + id + this.mentorId)
+        .then((response) => {
+          this.users = response
+          console.log(response)
+        })
     },
-    sendDeny(id) {
-      return console.log(id)
-    },
+
     fullName(name, surName) {
       return name + ' ' + surName
     },
