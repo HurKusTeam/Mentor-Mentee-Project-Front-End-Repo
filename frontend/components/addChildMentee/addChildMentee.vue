@@ -45,7 +45,7 @@
                 md="12"
               >
                 <v-text-field v-model="email"
-                  label="Usta emailini girin"
+                  label="Usta e postasını girin"
                   :rules="emailRules"
                   required
                 ></v-text-field>
@@ -53,7 +53,7 @@
               
                 <v-col cols="12">
                 <v-text-field v-model="password"
-                    label="Password*"
+                    label="Şifre*"
                   
                     :type="showPassword ? 'text' : 'password'" 
                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
