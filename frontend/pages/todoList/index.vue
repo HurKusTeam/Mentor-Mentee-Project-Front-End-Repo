@@ -150,6 +150,8 @@ import draggable from 'vuedraggable'
 export default {
   data() {
     return {
+      menteeId: this.$route.params.menteeId,
+      mentorId: this.$route.params.mentorId,
       ActionDate: '',
       checkMove: function (evt) {
         console.log(evt.draggedContext)
@@ -159,18 +161,6 @@ export default {
       ],
       title: '',
       thisMentee: false,
-
-      mentees: [
-        {
-          id: 2,
-          name: 'Ayşe',
-        },
-        {
-          id: 1,
-          name: 'Ali',
-        },
-      ],
-
       allTodos: [],
     }
   },
@@ -181,10 +171,12 @@ export default {
 
   methods: {
     getUserTodo() {
-      return this.$axios.$get('/api/GetTodo/40/139').then((response) => {
-        this.allTodos = response
-        console.log(response)
-      })
+      return this.$axios
+        .$get('/api/GetTodo/' + this.menteeId + '/' + this.mentorId)
+        .then((response) => {
+          this.allTodos = response
+          console.log(response)
+        })
     },
 
     submit(Menteeid, Mentorid) {

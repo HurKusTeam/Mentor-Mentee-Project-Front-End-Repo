@@ -30,11 +30,11 @@
             >
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-phone </v-icon>
-              {{user.PhoneNumber}}</v-list-item-subtitle
+              {{ user.PhoneNumber }}</v-list-item-subtitle
             >
             <v-list-item-subtitle>
               <v-icon class="pa-1" size="20"> mdi-email </v-icon>
-              {{user.Mail}}</v-list-item-subtitle
+              {{ user.Mail }}</v-list-item-subtitle
             >
           </v-list-item-content>
         </v-col>
@@ -63,6 +63,13 @@
           >
             <v-icon>mdi-clipboard-account</v-icon>
           </v-btn>
+          <v-btn
+            class="mb-3 mt-3"
+            color="green"
+            v-on:click="sendConfirmTodo(user.MenteeID, mentorId)"
+          >
+            <v-icon>mdi-calendar-clock</v-icon>
+          </v-btn>
         </v-col>
       </v-list-item>
     </v-card>
@@ -73,6 +80,7 @@
 export default {
   data() {
     return {
+      mentorId: this.$route.params.mentorid,
       users: [],
     }
   },
@@ -90,6 +98,13 @@ export default {
       this.$router.push({
         name: 'meetings',
         params: { menteeId: id },
+      })
+    },
+    sendConfirmTodo(id, mentorId) {
+      console.log(id, mentorId)
+      this.$router.push({
+        name: 'todoList',
+        params: { menteeId: id, mentorId: mentorId },
       })
     },
   },
