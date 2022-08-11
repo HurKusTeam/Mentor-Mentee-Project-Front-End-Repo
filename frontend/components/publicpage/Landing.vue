@@ -1,25 +1,31 @@
-<template>
-  <section class="hero md:px-0" >
-    <div class="hero--container " >
-      <h1 class="hero--headings">
-        <span class="block">USTA ÇIRAK <span class="block text-gradient bg-gradient-to-r from-blue-600 via-indigo-400 to-purple-300 lg:inline lg:mt-0 mt-1">PROGRAMI</span></span>
-      </h1>
-      <p class="hero--description">
-        ....
-      </p>
-      <div class="hero--actions md:space-x-4">
-        <a href="/login" class="btn btn--primary">
-          BAŞLA
-        </a>
-        <a href="#" class="btn btn--default">
-          Daha Fazla
-        </a>
+<template >
+  <div class="lang ">
+    <section class="hero md:px-0">
+      <div class="hero--container ">
+        <h1 class="hero--headings">
+          <span> HÜRKUŞ</span>
+          <span class="block">USTA ÇIRAK <span
+              class="block text-gradient bg-gradient-to-r from-blue-600 via-indigo-400 to-purple-300 lg:inline lg:mt-0 mt-1">PROGRAMI</span></span>
+        </h1>
+        <p class="hero--description">
+          Sektördeki en iyi usta ve çırakları buluşturan platform.
+        </p>
+        <div class="hero--actions md:space-x-4">
+
+          <v-btn depressed color="primary" href="/login">
+            BAŞLA
+          </v-btn>
+          <v-btn depressed disabled>
+            Daha Fazla
+          </v-btn>
+        </div>
       </div>
-    </div>
-    <div class="hero--img-container">
-      <img src="~/assets/images/Mentorship.jpg" alt="">
-    </div>
-  </section>
+      <div class="hero--img-container">
+        <img src="~/assets/images/Mentorship.jpg" alt="">
+      </div>
+    </section>
+  </div>
+
 </template>
 
 <script>
@@ -29,6 +35,18 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+.lang {
+  margin-left: -40%;
+
+  width: 2050px;
+  background: white !important;
+  background-color: white !important
+}
+
+element.style {
+  background: white;
+}
+
 .hero {
   @apply px-2 pt-32 pb-10 bg-white;
 }
