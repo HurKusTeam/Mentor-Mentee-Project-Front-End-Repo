@@ -122,7 +122,7 @@ export default {
         )
         .then((response) => {
           console.log('response', response)
-          window.location.reload(true)
+          this.getUserData()
         })
     },
     sendDeny(advertId, userId) {
@@ -130,7 +130,7 @@ export default {
         .$get('/api/RejectApplication/' + advertId + '/' + userId)
         .then((response) => {
           console.log('response', response)
-          window.location.reload(true)
+          this.getUserData()
         })
     },
     fullName(name, surName) {

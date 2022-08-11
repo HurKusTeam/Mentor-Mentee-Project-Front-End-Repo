@@ -190,7 +190,7 @@ export default {
         return this.$axios.$post('/api/AddTodo', todo).then((response) => {
           console.log(response)
           console.log(todo)
-          window.location.reload(true)
+          this.getUserTodo()
         })
       }
     },
