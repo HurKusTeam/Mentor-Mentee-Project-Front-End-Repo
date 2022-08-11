@@ -71,11 +71,5 @@ export default {
 </script>
 
 <style>
-.lang {
-  margin-left: -40%;
-  
-  width: 2050px;
-  background: white !important;
-  background-color: white !important
-}
+
 </style>
