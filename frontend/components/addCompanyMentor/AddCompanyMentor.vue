@@ -26,7 +26,7 @@
               <v-col cols="12" sm="6" md="12">
                 <v-text-field
                   v-model="email"
-                  label="E-mail"
+                  label="E posta"
                   :rules="emailRules"
                   required
                 ></v-text-field>
