@@ -72,7 +72,7 @@
           <v-flex ml-12>
             <v-btn
               class="mb-3"
-              v-on:click="sendConfirm(user.Advertidmodel, user.User?.ID, mentorid)"
+              v-on:click="sendConfirm(user.Advertidmodel, user.User?.ID, userId)"
               color="green"
             >
               <v-icon>mdi-check</v-icon></v-btn
@@ -95,12 +95,15 @@ export default {
   data() {
     return {
       mentorid: this.$route.params.mentorid,
+      userId: this.$route.params.userId,
       userDatas: [],
       users: [],
     }
   },
   mounted() {
     this.getUserData()
+          console.log("this.userid", this.userId)
+          console.log("this.mentorid", this.mentorid)
   },
 
   methods: {
@@ -114,6 +117,7 @@ export default {
         })
     },
     sendConfirm(advertId, userId, companyId) {
+          console.log("comp", companyId)
       return this.$axios
         .$get('/api/AcceptApplication/' + advertId + '/' + userId + '/' + companyId)
         .then((response) => {

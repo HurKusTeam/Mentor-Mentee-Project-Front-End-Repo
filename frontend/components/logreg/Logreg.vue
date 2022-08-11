@@ -1,6 +1,13 @@
 <template>
   <v-container class="text-center">
-    <v-row align="center" class="text-center">
+    <v-progress-circular
+      v-if="loading"
+      :size="70"
+      :width="7"
+      color="#c1b3fd"
+      indeterminate
+    ></v-progress-circular>    
+    <v-row  v-if="!loading" class="text-center">
       <v-col cols="12" sm="12" class="text-center">
         <v-card class="elevation-0 mt-10">
           <v-window v-model="onboarding" class="blue accent-3 text-center">
@@ -80,11 +87,12 @@
                             mb-20
                           "
                         >
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="red ">mdi-google</v-icon>
-                          </v-btn>
+                       
                           <v-btn depressed outlined color="grey">
                             <v-icon color="blue">mdi-facebook</v-icon>
+                          </v-btn>
+                             <v-btn depressed outlined color="grey">
+                            <v-icon color="red ">mdi-google</v-icon>
                           </v-btn>
                           <v-btn depressed outlined color="grey" class="">
                             <v-icon color="light-blue lighten-3"
@@ -284,6 +292,7 @@ export default {
     ropti: null,
     rname: null,
     alert: false,
+    loading:false,
     emailRules: [
       (v) => !!v || 'E-mail is required',
       (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -335,6 +344,7 @@ export default {
     },
 
     async loginUser() {
+      this.loading=true
       let MailPW = {
         Mail: this.email,
         Password: this.password,
@@ -343,12 +353,13 @@ export default {
       return await this.$axios
         .$post('/api/Login', MailPW)
         .then((response) => {
+
           this.alert = false
           if (process.client) {
             localStorage.setItem('key', JSON.stringify(response))
             window.localStorage.setItem('advertId', response.AdvertID)
           }
-          
+
           if (response.Role == 0) {
             this.$router.push(
               {
@@ -356,10 +367,14 @@ export default {
                 force: true,
               },
               () => {
+
                 window.location.reload(true)
+                this.loading=false
+
               }
             )
           }
+
 
           console.log(response)
         })
@@ -388,3 +403,18 @@ export default {
 }
 </script>
 
+<style scoped>
+.v-application .light-blue.accent-2{
+background-color: #c1b3fd !important;
+
+}
+.v-application .blue {
+  background-color: #9b9cfa !important;
+}
+.mdi-twitter::before {
+    color: darkblue;
+}
+.mdi-facebook::before {
+    color: darkblue;
+}
+</style>>

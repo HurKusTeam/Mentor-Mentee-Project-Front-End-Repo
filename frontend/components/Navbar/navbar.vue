@@ -63,7 +63,7 @@
                     </v-btn>
                   </v-list-item>
                   <v-list-item>
-                    <v-btn text @click="goMyApplicants(user.MentorID)">
+                    <v-btn text @click="goMyApplicants(user.MentorID, user.UserID)">
                       Başvuruları Görüntüle
                     </v-btn>
                   </v-list-item>
@@ -116,10 +116,10 @@ export default {
         name: 'mentorsMentees',
       })
     },
-    goMyApplicants(id) {
+    goMyApplicants(id, usId) {
       this.$router.push({
         name: 'myApplicants',
-        params: { mentorid: id },
+        params: { mentorid: id, userId: usId },
       })
       console.log(id)
     },
