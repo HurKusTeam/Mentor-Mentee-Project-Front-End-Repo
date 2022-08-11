@@ -1,6 +1,17 @@
 <template>
   <v-main>
+      <v-flex justify-center xs10 class="mx-auto">
+        <v-progress-circular
+      v-if="reload"
+      :size="100"
+      :width="10"
+      color="#c1b3fd"
+      style="text-align: center; !important"
+      indeterminate
+    ></v-progress-circular>
+      </v-flex>
     <MenteeProfileHeader
+      v-if="!reload"
       :name="this.users.Name"
       :surname="this.users.Surname"
       :major="this.users.Department"
@@ -19,8 +30,9 @@
       :about="this.users.Biography"
       @loading="getLoading"
     />
-    <MenteeProfileInfo :biography="this.users.Biography" />
+    <MenteeProfileInfo v-if="!reload" :biography="this.users.Biography" />
     <MenteeProfileSkills
+      v-if="!reload"
       :languages="this.users.Languages"
       :skills="this.users.Skills"
       @loading="getLoading"
@@ -34,6 +46,7 @@ export default {
     return {
       users: [],
       loading: true,
+      reload: false
     }
   },
 
@@ -43,17 +56,21 @@ export default {
 
   methods: {
     async getLoading(e) {
+      this.reload = true
       this.loading = e
       if (this.loading) {
         await this.$axios.$get('/api/Profile').then((response) => {
           this.users = response
+          this.reload = false
           console.log(this.loading)
         })
       }
     },
     async createUser() {
+      this.reload = true
       return await this.$axios.$get('/api/Profile').then((response) => {
         this.users = response
+          this.reload = false
         console.log(response)
       })
     },
