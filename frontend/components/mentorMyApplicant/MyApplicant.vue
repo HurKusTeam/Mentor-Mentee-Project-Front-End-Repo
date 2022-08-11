@@ -87,6 +87,7 @@
 export default {
   data() {
     return {
+      mentorid: this.$route.params.mentorid,
       userDatas: [],
       users: [
         {
@@ -111,7 +112,7 @@ export default {
   methods: {
     getUserData() {
       return this.$axios
-        .$get('/api/ReceivedApplications/15')
+        .$get('/api/ReceivedApplications/' + this.mentorid)
         .then((response) => {
           this.users = response
 

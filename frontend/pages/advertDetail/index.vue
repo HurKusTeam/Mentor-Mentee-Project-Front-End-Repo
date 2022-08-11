@@ -32,6 +32,7 @@ export default {
       advert: [],
       name: "",
       sector: "",
+      mentorid: this.$route.params.mentorid,
     }
   },
 
@@ -41,7 +42,8 @@ export default {
 
   methods: {
     async  createUser() {
-      return await this.$axios.$get("/api/GetAdvertSolo/12").then((response) => {
+      return await this.$axios.$get("/api/GetAdvertSolo/"+this.mentorid).then((response) => {
+        console.log(this.mentorid)
         this.advert = response
         console.log(response)
       })

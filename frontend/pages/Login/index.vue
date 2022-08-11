@@ -2,11 +2,8 @@
   <v-main>
     <Logreg/>
   </v-main>
-
 </template>
 
 <script>
-export default {
-  name: 'IndexPage',
-}
+export default {}
 </script>
