@@ -62,29 +62,18 @@ export default {
   data() {
     return {
       userDatas: [],
-      users: [
-        {
-          id: 1,
-          UserName: 'Semih',
-          surName: 'Gür',
-          department: 'Yazılım',
-          Universities: 'Çankaya Üniversitesi',
-          gpa: 2.54,
-          location: 'Ankara',
-          linkedin: 'semihgur',
-          gitHub: 'github',
-          skills: ['c', 'go'],
-        },
-      ],
+      props:['userId'],
+      users: [],
     }
   },
   mounted() {
     this.getUserData()
+    console.log("page", this.userId)
   },
 
   methods: {
     getUserData() {
-      return this.$axios.$get('/api/MyApplications/145').then((response) => {
+      return this.$axios.$get('/api/MyApplications/'+ this.userId).then((response) => {
         this.users = response
 
         console.log('response', response)

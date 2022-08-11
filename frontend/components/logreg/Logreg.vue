@@ -374,6 +374,20 @@ export default {
               }
             )
           }
+          else if (response.Role == 1) {
+            this.$router.push(
+              {
+                path: '/menteeProfile',
+                force: true,
+              },
+              () => {
+
+                window.location.reload(true)
+                this.loading=false
+
+              }
+            )
+          }
 
 
           console.log(response)
