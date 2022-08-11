@@ -6,7 +6,7 @@
                     <v-list-item>
                         <v-list-item-content>
                             <v-list-item-avatar size="100" left="true">
-                                <img src="https://i.pinimg.com/originals/99/7b/e0/997be08fea707cddda41d010e04d6a3e.png"
+                                <img :src="`${user.Profile?.ProfileImage}`"
                                     alt="Aselsan" />
                             </v-list-item-avatar>
                             <v-list-item-title class="pt-3"> <a class="item-link"
