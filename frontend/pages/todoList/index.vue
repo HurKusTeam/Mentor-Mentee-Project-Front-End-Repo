@@ -19,7 +19,7 @@
           <v-col cols="6" align-self="center">
             <p>
               <v-icon>mdi-phone</v-icon
-              >{{ allTodos.UserProfMentee?.PhoneNumber }}05435391856
+              >{{ allTodos.UserProfMentee?.PhoneNumber }}
             </p>
             <p>
               <v-icon>mdi-email</v-icon>

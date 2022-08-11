@@ -127,6 +127,7 @@ export default {
       inputRule: [(v) => v.length >= 1 || 'Boş bırakılamaz'],
       dialog: false,
       meetings: [],
+      store: '',
       link: '',
       title: '',
       clr: null,
@@ -137,15 +138,26 @@ export default {
 
   mounted() {
     this.createUser()
+    if (process.client) {
+      this.store = JSON.parse(localStorage.getItem('key'))
+    }
   },
 
   methods: {
     async createUser() {
+      if(this.store.Role == 0){
       return await this.$axios.$get('/api/Meetings/' + this.menteeId).then((response) => {
         this.meetings = response
         console.log(response)
         console.log(this.menteeId)
       })
+      }
+      else if(this.store.Role == 1){
+      return await this.$axios.$get('/api/Meetings').then((response) => {
+        this.meetings = response
+        console.log(response)
+      })
+      }
     },
     saveColor() {
       this.color = this.clr.hexa
