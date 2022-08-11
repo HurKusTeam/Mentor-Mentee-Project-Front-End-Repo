@@ -108,7 +108,7 @@ export default {
     }
   },
   mounted(){
-    console.log(this.mentorid)
+    console.log("header",this.mentorid)
   },
   props: [
     'name',

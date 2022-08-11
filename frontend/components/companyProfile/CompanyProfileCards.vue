@@ -3,29 +3,28 @@
     <v-card class="mx-auto" max-width="1000" tile>
       <v-sheet class="mx-auto" elevation="8">
         <v-slide-group class="pa-4" active-class="success" show-arrows>
-          <v-slide-item v-for="n in 8" :key="n">
+          <v-slide-item v-for="(mentor, i) in mentors" :key="i">
             <v-card class="ma-4" height="250" width="300">
               <v-list-item>
                 <v-list-item-content style="text-align: center">
                   <v-list-item-avatar size="100">
-                    <img
-                      src="https://www.w3schools.com/howto/img_avatar.png"
-                      alt="John"
-                    />
+                    <img :src="`${mentor.Profile.ProfileImage}`" alt="John" />
                   </v-list-item-avatar>
-                  <v-list-item-title class="pt-3">
-                    Ömer Furkan Berber
-                  </v-list-item-title>
+                  <v-btn text @click="goMentor(mentor.Mentor.UserID)">
+                    <v-list-item-title class="pt-3">
+                      {{ mentor.Profile.Name }} {{ mentor.Profile.Surname }}
+                    </v-list-item-title>
+                  </v-btn>
                   <v-list-item-subtitle>
-                    Software Engineer
+                    {{ mentor.Mentor.Major }}
                   </v-list-item-subtitle>
                   <v-list-item-subtitle class="pt-2">
                     <v-icon size="20"> mdi-email </v-icon>
-                    furkan_berber@gmail.com</v-list-item-subtitle
+                    {{ mentor.User.Mail }}</v-list-item-subtitle
                   >
                   <v-list-item-subtitle>
                     <v-icon size="20"> mdi-phone </v-icon>
-                    05553216549</v-list-item-subtitle
+                    {{ mentor.Profile.PhoneNumber }}</v-list-item-subtitle
                   >
                 </v-list-item-content>
               </v-list-item>
@@ -38,7 +37,32 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      mentors: [],
+    }
+  },
+  mounted() {
+    this.getMentors()
+  },
+
+  methods: {
+    async getMentors() {
+      return this.$axios.$get('/api/MyMentors').then((response) => {
+        this.mentors = response
+        console.log(response)
+      })
+    },
+    goMentor(id) {
+      console.log(id)
+      this.$router.push({
+        name: 'mentorProfile',
+        params: { mentorid: id },
+      })
+    },
+  },
+}
 </script>
 
 <style>
