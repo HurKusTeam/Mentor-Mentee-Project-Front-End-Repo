@@ -1,6 +1,15 @@
 <template>
   <v-main>
+    <v-progress-circular
+      v-if="reload"
+      :size="100"
+      :width="10"
+      color="#c1b3fd"
+      style="text-align: center; !important"
+      indeterminate
+    ></v-progress-circular>
     <MentorProfileHeader
+      v-if="!reload"
       :name="this.users.Name"
       :surname="this.users.Surname"
       :major="this.users.Major"
@@ -20,7 +29,7 @@
       @loading="getLoading"
     />
     <MentorProfileCompanie
-      v-if="this.users.IsIndividual == false"
+      v-if="this.users.IsIndividual == false && !reload"
       :title="this.users.Title"
       :sector="this.users.Sector"
       :personal="this.users.PersonalCount"
@@ -28,11 +37,14 @@
       :desctiption="this.users.Description"
     />
     <MentorProfileAdvert
-      v-if="this.users.IsIndividual"
+      v-if="this.users.IsIndividual && !reload"
       :advertID="this.users.AdvertID"
     />
-    <MentorProfileInfo :biography="this.users.Biography" />
+    <MentorProfileInfo
+      v-if="!reload"
+      :biography="this.users.Biography" />
     <MentorProfileSkills
+      v-if="!reload"
       :languages="this.users.Languages"
       :skills="this.users.Skills"
       @loading="getLoading"
@@ -46,6 +58,7 @@ export default {
     return {
       users: [],
       loading: true,
+      reload: false,
       mentorid: this.$route.params.mentorid,
     }
   },
@@ -56,25 +69,31 @@ export default {
   methods: {
     async getLoading(e) {
       this.loading = e
+      this.reload = true
       if (this.loading) {
         this.$axios.$get('/api/Profile').then((response) => {
           this.users = response
+          this.reload = false
+          
           console.log(response)
         })
       }
     },
     async createUser() {
+      this.reload = true
       if (this.mentorid != null) {
         return await this.$axios
           .$get('/api/Profile/' + this.mentorid)
           .then((response) => {
             this.users = response
+            this.reload = false
             console.log(response)
             console.log(this.mentorid)
           })
       } else {
         return await this.$axios.$get('/api/Profile').then((response) => {
           this.users = response
+          this.reload = false
           console.log(response)
         })
       }

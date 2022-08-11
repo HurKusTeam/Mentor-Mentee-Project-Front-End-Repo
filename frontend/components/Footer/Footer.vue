@@ -1,5 +1,5 @@
 <template>
-  <v-footer max-height="200" class="clr mb-0" padless>
+  <v-footer class="clr mb-0" padless>
     <v-container>
       <v-row no gutters>
         <v-col>
@@ -55,7 +55,9 @@ export default {
 
 <style scoped>
 .clr {
-  background-color: #3b82f680 !important;
+  background-color: #9b9cfa47 !important;
+  position: inherit;
+
 }
 .test {
   background-color: rgba(59, 130, 246, 0);

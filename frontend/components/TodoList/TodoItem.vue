@@ -27,7 +27,11 @@
               </v-textarea>
             </v-row>
             <v-row justify="center">
-              <v-date-picker class="mr-5" v-model="picker"></v-date-picker>
+              <v-date-picker
+                v-if="role == 0"
+                class="mr-5"
+                v-model="picker"
+              ></v-date-picker>
               <v-col>
                 <v-row><p class="text-3xl">Bitiş Tarihi</p></v-row>
                 <v-row class="red--text text-3xl Black text.">{{
@@ -81,9 +85,10 @@
 
 <script>
 export default {
-  props: ['item', 'id', 'desc', 'endDate'],
+  props: ['item', 'id', 'desc', 'endDate', 'role'],
   data() {
     return {
+      reload: true,
       date: '',
       commentUser: '',
       todoDescription: this.desc,
@@ -116,6 +121,7 @@ export default {
       return this.$axios.$post('/api/AddComment', comment).then((response) => {
         console.log(response)
         console.log(comment)
+        this.getTodoComments()
       })
     },
 
@@ -134,10 +140,10 @@ export default {
         .then((response) => {
           console.log(response)
 
+          this.$emit('reload', this.reload)
           console.log('date', this.date)
           //console.log(todo)
           //console.log('id', this.id)
-          window.location.reload(true)
         })
       //}
     },
