@@ -1,11 +1,10 @@
 <template>
     <v-main>
         <v-container>
-
             <div class="toolbar--container">
                 <v-row>
                     <v-col>
-                        <v-card-actions class="justify-center">
+                        <v-card-actions class="justify-center"  >
 
                             <a @click="show = true"
                                 class="item--link text--logo text-6xl text-gradient bg-gradient-to-r from-red-700 via-purple-400 to-blue-600 ma-8">
@@ -13,19 +12,17 @@
                             </a>
 
                         </v-card-actions>
-
                     </v-col>
                     <v-divider vertical inset width="10"></v-divider>
-                    <v-col>
-                        <v-card-actions class="justify-center">
-
-
-                            <a @click="show = false"
-                                class="item--link text--logo text-6xl text-gradient bg-gradient-to-r from-red-700 via-indigo-500 to-purple-600 ma-8 ">
-                                <span class="block">ŞİRKET İLANLARI</span>
-                            </a>
-                        </v-card-actions>
-
+                    <v-col  >
+                        <div>
+                            <v-card-actions class="justify-center " >
+                                <a @click="show = false" 
+                                    class="item--link text--logo text-6xl text-gradient bg-gradient-to-r from-red-700 via-indigo-500 to-purple-600 ma-8 ">
+                                    <span class="block">ŞİRKET İLANLARI</span>
+                                </a>
+                            </v-card-actions>
+                        </div>
                     </v-col>
                 </v-row>
             </div>
@@ -52,15 +49,15 @@ export default {
         indmentors,
         company,
     },
-
+   
     data() {
         return {
             show: true,
             users: [],
-
+            
+            
         }
     },
-
 }
 </script>
 
@@ -68,4 +65,13 @@ export default {
 .btn {
     @apply px-6 py-8 mb-5 text-lg rounded-md;
 }
+
+.white{
+background-color: rgb(221 214 254)
+}
+.blue{
+background-color: rgb(190 24 93);
+
+}
+
 </style>
