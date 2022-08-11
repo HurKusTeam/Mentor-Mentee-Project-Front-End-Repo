@@ -18,7 +18,7 @@
             <a href="#_" class="item--link">
               <span class="block">NEDEN HURKUS?</span>
             </a>
-            <a href="#_" class="item--link">
+            <a href="/hakkimizda" class="item--link">
               <span class="block">HAKKIMIZDA</span>
             </a>
 

@@ -15,7 +15,7 @@
           <v-btn depressed color="primary" href="/login">
             BAŞLA
           </v-btn>
-          <v-btn depressed disabled>
+          <v-btn depressed disabled href="/">
             Daha Fazla
           </v-btn>
         </div>
@@ -35,13 +35,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.lang {
-  margin-left: -40%;
 
-  width: 2050px;
-  background: white !important;
-  background-color: white !important
-}
 
 element.style {
   background: white;

@@ -9,12 +9,14 @@
     >
       <v-list-item class="pa-5">
         <v-list-item-avatar class="ml-2" size="100">
-          <v-img
-            height="100"
-            width="100"
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="John"
-          />
+          <v-btn size="100" fab v-on:click="toProfile(user.MenteeID)">
+            <v-img
+              height="100"
+              width="100"
+              :src="`${user.ProfilPhoto}`"
+              alt="John"
+            />
+          </v-btn>
         </v-list-item-avatar>
         <v-col cols="4">
           <v-list-item-content>
@@ -88,9 +90,17 @@ export default {
     this.getUserData()
   },
   methods: {
+    toProfile(menteeId) {
+      this.$router.push({
+        name: 'menteeProfile',
+        params: { menteeId: menteeId },
+      })
+    },
+
     getUserData() {
       return this.$axios.$get('/api/MenteeList').then((response) => {
         this.users = response
+        console.log(response)
       })
     },
     sendConfirm(id) {
