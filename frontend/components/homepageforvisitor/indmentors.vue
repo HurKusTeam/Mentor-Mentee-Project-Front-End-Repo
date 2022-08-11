@@ -7,12 +7,12 @@
         <v-col cols="12" sm="10" md="10">
           <v-list-item class="pa-5">
             <v-list-item-avatar class="ml-2" size="100">
-              <img src="https://www.w3schools.com/howto/img_avatar.png" alt="John" />
+              <img :src="`${user.ProfileImg}`" alt="John" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-col>
                 <v-list-item-title class="title">
-                  <a class="item-link" v-on:click="sendConfirm(user.ID)">
+                  <a  class="item-link" v-on:click="sendConfirm(user.ID)">
                     {{ user.Name }} {{ user.Surname }}
 
                   </a>
@@ -64,9 +64,12 @@
             </v-btn>
 
             <v-flex ml-12>
-              <v-btn class="mb-3" v-on:click="sendapp((user.AdID))" color="green">
+              <v-btn v-if="user.Applied===false" class="mb-3" v-on:click="sendapp((user.AdID))" color="green">
                başvur! <v-icon>mdi-check</v-icon>
-              </v-btn>             
+              </v-btn>  
+              <v-btn v-else class="mb-3" v-on:click="sendapp((user.AdID))" color="green">
+               başvurdun! <v-icon>mdi-check</v-icon>
+              </v-btn>           
             </v-flex>
 
           </v-layout>
@@ -82,6 +85,7 @@ export default {
     return {
       users: [],
       users1: [],
+      control:true,
 
     }
 
@@ -91,6 +95,7 @@ export default {
     async createUser() {
       return await this.$axios.$get('/api/IndividualMentors').then((response) => {
         this.users = response
+        
 
         console.log(response)
       })
@@ -109,6 +114,7 @@ export default {
         .$get('/api/MakeAnApplication/' + advertId)
         .then((response) => {
           console.log('response', response)
+          this.createUser()
         })
     },
     

@@ -37,6 +37,7 @@
                         <v-text-field
                           v-model="password"
                           label="Şifre"
+                          required
                           :type="showPassword ? 'text' : 'password'"
                           :append-icon="
                             showPassword ? 'mdi-eye' : 'mdi-eye-off'
@@ -53,7 +54,7 @@
                             <v-checkbox
                               label="Beni Hatırla"
                               class="mt-n1"
-                              color="white"
+                              color="black"
                             >
                             </v-checkbox>
                           </v-col>
@@ -125,7 +126,7 @@
                       </div>
                       <div class="text-center">
                         Hemen yeni bir hesap oluşturun.<br />
-                        Usta-Çırak olarak kayıt olun.
+                        Usta-Çırak-Şirket olarak kayıt olun.
                       </div>
                     </v-card-text>
                     <div class="text-center">
@@ -179,6 +180,7 @@
                             <v-text-field
                               v-model="rname"
                               :label="text1"
+                              required
                               outlined
                               dense
                               color="white"
@@ -186,50 +188,42 @@
                               class="mt-4"
                             />
                           </v-col>
-                        </v-row>
-                        <v-text-field
-                          v-model="remail"
-                          label="Email"
-                          :rules="emailRules"
-                          required
-                          outlined
-                          dense
-                          color="white"
-                          autocomplete="false"
-                        />
-                        <v-text-field
-                          v-model="rpassword"
-                          label="Şifre"
-                          outlined
-                          dense
-                          color="white"
-                          autocomplete="false"
-                          type="password"
-                        />
-                        <v-row>
+                          </v-row>
+                          <v-text-field
+                            v-model="remail"
+                            label="Email"
+                            :rules="emailRules"
+                            required
+                            outlined
+                            dense
+                            color="white"
+                            autocomplete="false"
+                          />
+                          <v-text-field
+                            v-model="rpassword"
+                            label="Şifre"
+                            required
+                            outlined
+                            dense
+                            color="white"
+                            autocomplete="false"
+                            type="password"
+                          />
+                          <v-row>
                           <v-col cols="12" sm="7">
                             <v-checkbox
                               label="Kabul Ediyorum."
                               class="mt-n1"
-                              color="white"
+                              color="black"
                             >
                             </v-checkbox>
                           </v-col>
-
-                          <!-- <v-col cols="12" sm="5" class="d-flex">
-                                <div  class="form-group  " >
-                                    <select  class="form-control blue white--text pa-1 secondary text-no-wrap " tile dense solo outlined name="make" id="make" v-model="ropti">
-                                        <option :value="null" selected:disabled>Kayıt Türü</option>
-                                        <option v-for="option in makes_options" :key="option.id" v-bind:value="option.id">{{option.text}}</option>
-                                    </select>
-                                </div>
-                              </v-col> -->
-
                           <v-col class="d-flex" cols="12" sm="4">
                             <v-select
                               v-model="ropti"
                               :items="makes_options"
                               label="Kayıt Türü"
+                              required
                               solo
                             ></v-select>
                           </v-col>
@@ -237,7 +231,15 @@
                         <v-btn color="blue" dark block tile @click="userReg"
                           >Kayıt Ol</v-btn
                         >
-
+                        <v-alert
+                          v-if="regalert"
+                          class="mt-2"
+                          dense
+                          outlined
+                          type="error"
+                        >
+                          Kayıt başarısız.<br>Lütfen bilgileri kontol edip, tekrar deneyin.
+                        </v-alert>
                         <div class="text-center white--text mt-4 mb-3">
                           Yada kayıt olmak için
                         </div>
@@ -252,10 +254,10 @@
                           "
                         >
                           <v-btn depressed outlined color="grey">
-                            <v-icon color="red ">mdi-google</v-icon>
+                            <v-icon color="blue">mdi-facebook</v-icon>
                           </v-btn>
                           <v-btn depressed outlined color="grey">
-                            <v-icon color="blue">mdi-facebook</v-icon>
+                            <v-icon color="red ">mdi-google</v-icon>
                           </v-btn>
                           <v-btn depressed outlined color="grey" class="">
                             <v-icon color="light-blue lighten-3"
@@ -292,10 +294,11 @@ export default {
     ropti: null,
     rname: null,
     alert: false,
+    regalert: false,
     loading:false,
     emailRules: [
-      (v) => !!v || 'E-mail is required',
-      (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      (v) => !!v || 'E-posta alanı boş bırakılamaz',
+      (v) => /.+@.+\..+/.test(v) || 'Geçerli bir e mail girin',
     ],
     makes_options: [
       {
@@ -424,8 +427,14 @@ export default {
       console.log(Reg),
         await this.$axios
           .$post('/api/Register', Reg)
-          .then((response) => console.log(response))
-      this.$router.push('/')
+          .then((response) => console.log(response)
+          ).catch((error) => {
+          if (error.response.status === 400) {
+            this.$router.push('/login')
+            this.regalert = true
+          }
+        })
+      this.$router.push('/login')
     },
   },
 }
