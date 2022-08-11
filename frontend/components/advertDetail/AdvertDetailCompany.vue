@@ -3,10 +3,7 @@
     <v-list-item>
       <v-list-item-content style="text-align: center">
         <v-list-item-avatar size="100">
-          <img
-            src="https://i.pinimg.com/originals/99/7b/e0/997be08fea707cddda41d010e04d6a3e.png"
-            alt="Aselsan"
-          />
+          <img :src="`${image}`" alt="Aselsan" />
         </v-list-item-avatar>
         <v-list-item-title class="pt-3"> {{ name }} </v-list-item-title>
         <v-list-item-subtitle> {{ sector }} </v-list-item-subtitle>
@@ -25,9 +22,11 @@
 
 <script>
 export default {
-  props: ['name', 'sector', 'mail', 'phone'],
+  props: ['name', 'sector', 'mail', 'phone', 'image'],
+  mounted() {
+    console.log(this.image)
+  },
 }
 </script>
 
-<style>
-</style>
+<style></style>

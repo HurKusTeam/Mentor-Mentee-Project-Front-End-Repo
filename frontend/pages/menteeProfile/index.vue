@@ -46,7 +46,8 @@ export default {
     return {
       users: [],
       loading: true,
-      reload: false
+      reload: false,
+      mentorid: this.$route.params.menteeId,
     }
   },
 
@@ -68,11 +69,23 @@ export default {
     },
     async createUser() {
       this.reload = true
-      return await this.$axios.$get('/api/Profile').then((response) => {
-        this.users = response
+      console.log("menteeid",this.mentorid)
+      if (this.mentorid != null) {
+        return await this.$axios
+          .$get('/api/Profile/' + this.mentorid)
+          .then((response) => {
+            this.users = response
+            this.reload = false
+            console.log(response)
+            console.log(this.mentorid)
+          })
+      } else {
+        return await this.$axios.$get('/api/Profile').then((response) => {
+          this.users = response
           this.reload = false
-        console.log(response)
-      })
+          console.log(response)
+        })
+      }
     },
   },
 }

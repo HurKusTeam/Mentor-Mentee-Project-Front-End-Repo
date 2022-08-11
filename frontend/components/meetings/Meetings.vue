@@ -6,7 +6,7 @@
           <template v-slot:icon>
             <span>M</span>
           </template>
-          <v-form ref="form">
+          <v-form v-if="this.store.Role == 0" ref="form">
             <v-row>
               <v-col class="pa-0 pl-1 pr-1">
                 <v-text-field
@@ -135,7 +135,13 @@ export default {
       menteeId: this.$route.params.menteeId,
     }
   },
-
+  created() {
+    this.$axios.$get('/api/Meetings/' + this.menteeId).then((response) => {
+      this.meetings = response
+      console.log(response)
+      console.log(this.menteeId)
+    })
+  },
   mounted() {
     this.createUser()
     if (process.client) {
@@ -145,18 +151,19 @@ export default {
 
   methods: {
     async createUser() {
-      if(this.store.Role == 0){
-      return await this.$axios.$get('/api/Meetings/' + this.menteeId).then((response) => {
-        this.meetings = response
-        console.log(response)
-        console.log(this.menteeId)
-      })
-      }
-      else if(this.store.Role == 1){
-      return await this.$axios.$get('/api/Meetings').then((response) => {
-        this.meetings = response
-        console.log(response)
-      })
+      if (this.store.Role == 0) {
+        return await this.$axios
+          .$get('/api/Meetings/' + this.menteeId)
+          .then((response) => {
+            this.meetings = response
+            console.log(response)
+            console.log(this.menteeId)
+          })
+      } else if (this.store.Role == 1) {
+        return await this.$axios.$get('/api/Meetings').then((response) => {
+          this.meetings = response
+          console.log(response)
+        })
       }
     },
     saveColor() {
@@ -167,13 +174,20 @@ export default {
         Title: this.title,
         Link: this.link,
         Date: new Date().toISOString().slice(0, 10),
-        Description: this.color
+        Description: this.color,
       }
       console.log(values)
       if (this.$refs.form.validate()) {
         await this.$axios
           .$post('/api/Meetings/' + this.menteeId, values)
           .then((response) => console.log(response))
+        await this.$axios
+          .$get('/api/Meetings/' + this.menteeId)
+          .then((response) => {
+            this.meetings = response
+            console.log(response)
+            console.log(this.menteeId)
+          })
       }
     },
   },
