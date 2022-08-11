@@ -70,10 +70,17 @@
         </v-col>
         <v-col>
           <v-flex ml-12>
-            <v-btn class="mb-3" v-on:click="sendConfirm()" color="green">
+            <v-btn
+              class="mb-3"
+              v-on:click="sendConfirm(user.Advertidmodel, user.User?.ID)"
+              color="green"
+            >
               <v-icon>mdi-check</v-icon></v-btn
             >
-            <v-btn v-on:click="sendDeny(user.ID)" color="red">
+            <v-btn
+              v-on:click="sendDeny(user.Advertidmodel, user.User?.ID)"
+              color="red"
+            >
               <v-icon>mdi-close</v-icon></v-btn
             >
           </v-flex>
@@ -118,11 +125,19 @@ export default {
           console.log('response', response)
         })
     },
-    sendConfirm(id) {
-      return console.log(id)
+    sendConfirm(advertId, userId, companyId) {
+      return this.$axios
+        .$get('/api/AcceptApplication/' + advertId + '/' + userId + '/' + '15')
+        .then((response) => {
+          console.log('response', response)
+        })
     },
-    sendDeny(id) {
-      return console.log(id)
+    sendDeny(advertId, userId) {
+      return this.$axios
+        .$get('/api/RejectApplication/' + advertId + '/' + userId)
+        .then((response) => {
+          console.log('response', response)
+        })
     },
     fullName(name, surName) {
       return name + ' ' + surName
