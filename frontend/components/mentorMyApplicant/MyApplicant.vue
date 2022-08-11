@@ -72,7 +72,9 @@
           <v-flex ml-12>
             <v-btn
               class="mb-3"
-              v-on:click="sendConfirm(user.Advertidmodel, user.User?.ID, mentorid)"
+              v-on:click="
+                sendConfirm(user.Advertidmodel, user.User?.ID, mentorid)
+              "
               color="green"
             >
               <v-icon>mdi-check</v-icon></v-btn
@@ -115,9 +117,12 @@ export default {
     },
     sendConfirm(advertId, userId, companyId) {
       return this.$axios
-        .$get('/api/AcceptApplication/' + advertId + '/' + userId + '/' + companyId)
+        .$get(
+          '/api/AcceptApplication/' + advertId + '/' + userId + '/' + companyId
+        )
         .then((response) => {
           console.log('response', response)
+          window.location.reload(true)
         })
     },
     sendDeny(advertId, userId) {
@@ -125,6 +130,7 @@ export default {
         .$get('/api/RejectApplication/' + advertId + '/' + userId)
         .then((response) => {
           console.log('response', response)
+          window.location.reload(true)
         })
     },
     fullName(name, surName) {
