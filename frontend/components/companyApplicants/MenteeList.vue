@@ -118,21 +118,7 @@ export default {
       tweened: 0,
       mentorId: this.$route.params.mentorId,
       userDatas: [],
-      users: [
-        {
-          id: 1,
-          UserName: '',
-          surName: '',
-          department: '',
-          Universities: '',
-          gpa: 2.54,
-          location: '',
-          linkedin: '',
-          gitHub: '',
-          skills: ['c'],
-          Percent: 95,
-        },
-      ],
+      users: [],
     }
   },
 
@@ -151,11 +137,14 @@ export default {
         })
     },
     sendConfirm(id) {
-      return console.log(id)
+      return this.$axios
+        .$get('/api/ConfirmMenteeMentor/' + id + this.mentorId)
+        .then((response) => {
+          this.users = response
+          console.log(response)
+        })
     },
-    sendDeny(id) {
-      return console.log(id)
-    },
+
     fullName(name, surName) {
       return name + ' ' + surName
     },

@@ -42,8 +42,11 @@
                 </v-col>
                 <v-col sm="2" md="2" class="pr-1">
                     <v-flex ml-0 mt-2>
-                        <v-btn class="mb-3" v-on:click="sendapp((user.Advert.ID))" color="green">
+                        <v-btn v-if="user.What===true" class="mb-3" v-on:click="sendapp((user.Advert.ID))" color="green">
                             başvur!<v-icon>mdi-check</v-icon>
+                        </v-btn>
+                        <v-btn v-else class="mb-3" v-on:click="sendapp((user.Advert.ID))" color="green">
+                            başvurdun!<v-icon>mdi-check</v-icon>
                         </v-btn>
                     </v-flex>
 
