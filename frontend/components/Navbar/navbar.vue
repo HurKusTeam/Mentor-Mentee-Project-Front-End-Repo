@@ -139,6 +139,31 @@
               </v-menu>
             </div>
 
+            <div class="text-center" v-if="user != null && user.Role == 3">
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn icon color="primary" dark v-bind="attrs" v-on="on">
+                    <v-list-item-avatar class="ml-2" size="50">
+                      <img
+                        :src='`${user.ProfilIMG}`'
+                        alt="John"
+                      />
+                    </v-list-item-avatar>
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item>
+                    <v-btn text @click="goProfile"> Profilim </v-btn>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-btn text v-on:click="advertSelect"> İlanlar </v-btn>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-btn text v-on:click="logout"> Çıkış </v-btn>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </div>
             
           </div>
         </nav>
@@ -180,6 +205,16 @@ export default {
                     name: "companyProfile",
                 });
             }
+            else if (this.user.Role == 3) {
+                this.$router.push({
+                    name: "menteeProfile",
+                });
+            }
+        },
+        advertSelect(){
+            this.$router.push({
+                name: "homepage.vue",
+            });
         },
         menteeAsign() {
             this.$router.push({
