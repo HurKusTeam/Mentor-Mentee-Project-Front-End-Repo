@@ -92,6 +92,9 @@
                     </v-btn>
                   </v-list-item>
                   <v-list-item>
+                    <addChildMentee />
+                  </v-list-item>
+                  <v-list-item>
                     <v-btn text v-on:click="logout"> Çıkış </v-btn>
                   </v-list-item>
                 </v-list>

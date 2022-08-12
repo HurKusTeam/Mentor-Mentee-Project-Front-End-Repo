@@ -1,26 +1,23 @@
 <template>
-  <v-row justify="center">
+  
     <v-dialog
       v-model="dialog"
       persistent
       max-width="600px"
-      class="mt-10"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
-            class="mt-10"
-          color="primary"
-          dark
           v-bind="attrs"
           v-on="on"
+          text
         >
-          Şirkete usta ekle
+          Davet et
         </v-btn>
       </template>
 
       <v-card>
         <v-card-title>
-          <span class="text-h5">Şirketinize ait usta bilgilerini girin.</span>
+          <span class="text-h5">Davet edeceğiniz kişinin bilgilerini girin.</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -65,7 +62,7 @@
 
             </v-row>
           </v-container>
-          <small>Şirketinize eklenecek ustanın bilgilerini girin.</small>
+          <small>Davet edeceğiniz çırağın bilgilerini eksiksiz girin.</small>
         </v-card-text>
 
         <v-card-actions>
@@ -87,7 +84,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
 </template>
 
 <script>
